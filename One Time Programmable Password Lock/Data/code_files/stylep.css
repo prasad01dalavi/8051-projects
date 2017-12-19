@@ -1,0 +1,48 @@
+/* #cboxOverlay,#colorbox
+    {display:none!important;}*/
+    #cst-overlay
+    {
+        float:left;width:100%;position: fixed;background:#fff;height:100%;opacity: 1;z-index: 12;display:none;	
+    }
+    #cst-overlay-content
+    {
+       float: left;
+    width: 70%;
+    /*position: absolute;*/
+	position:fixed;
+    background: white;
+    border-radius: 5px;
+    z-index: 13;
+    left: 0px;
+    padding: 11px 0px;
+    display: none; 
+    right: 0px;
+    margin: 2% auto;
+    }
+    .cst-overlay-region
+    {
+        /*margin-left: 20px;width: 95%;*/
+    }
+
+    .timer-box
+    {
+        float:left;
+        width:100%;
+        /*text-align:center;*/	
+        position:relative;
+        z-index:999999;
+		background:#e8e8e8;
+		padding:3px;
+		font-size:14px;
+    }
+
+    .closebox
+    {
+        POSITION: absolute;
+        float: right;
+       /* width: 119px;*/
+        right: 0px;
+        z-index: 99999999;
+		padding:3px;
+		font-size:14px;
+    }

@@ -1,0 +1,141 @@
+BL51 BANKED LINKER/LOCATER V6.11                                                        03/02/2016  19:15:31  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.11, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE LF.obj TO LF
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  LF.obj (LF)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  LF (LF)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     00DDH     UNIT         ?PR?MAIN?LF
+            CODE    08DDH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   LF (LF)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?LF
+
+
+
+SYMBOL TABLE OF MODULE:  LF (LF)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        LF
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:00B0H.0       PUBLIC        m1
+  B:00B0H.1       PUBLIC        m2
+  B:00B0H.2       PUBLIC        m3
+  B:00B0H.3       PUBLIC        m4
+  B:0090H.0       PUBLIC        s0
+  B:0090H.1       PUBLIC        s1
+  B:0090H.2       PUBLIC        s2
+  B:0090H.3       PUBLIC        s3
+BL51 BANKED LINKER/LOCATER V6.11                                                      03/02/2016  19:15:31  PAGE 2
+
+
+  C:0800H         PUBLIC        main
+  B:0090H.4       PUBLIC        s4
+  -------         PROC          MAIN
+  C:0800H         LINE#         16
+  C:0800H         LINE#         17
+  C:0800H         LINE#         18
+  C:0803H         LINE#         19
+  C:0806H         LINE#         21
+  C:0806H         LINE#         22
+  C:0806H         LINE#         24
+  C:0815H         LINE#         25
+  C:0815H         LINE#         26
+  C:0817H         LINE#         27
+  C:0819H         LINE#         28
+  C:081BH         LINE#         29
+  C:081DH         LINE#         30
+  C:081FH         LINE#         32
+  C:082EH         LINE#         33
+  C:082EH         LINE#         34
+  C:0830H         LINE#         35
+  C:0832H         LINE#         36
+  C:0834H         LINE#         37
+  C:0836H         LINE#         38
+  C:0838H         LINE#         40
+  C:0847H         LINE#         41
+  C:0847H         LINE#         42
+  C:0849H         LINE#         43
+  C:084BH         LINE#         44
+  C:084DH         LINE#         45
+  C:084FH         LINE#         46
+  C:0851H         LINE#         48
+  C:0860H         LINE#         49
+  C:0860H         LINE#         50
+  C:0862H         LINE#         51
+  C:0864H         LINE#         52
+  C:0866H         LINE#         53
+  C:0868H         LINE#         54
+  C:086AH         LINE#         56
+  C:0879H         LINE#         57
+  C:0879H         LINE#         58
+  C:087BH         LINE#         59
+  C:087DH         LINE#         60
+  C:087FH         LINE#         61
+  C:0881H         LINE#         62
+  C:0883H         LINE#         64
+  C:0892H         LINE#         65
+  C:0892H         LINE#         66
+  C:0894H         LINE#         67
+  C:0896H         LINE#         68
+  C:0898H         LINE#         69
+  C:089AH         LINE#         70
+  C:089CH         LINE#         72
+  C:08ABH         LINE#         73
+  C:08ABH         LINE#         74
+  C:08ADH         LINE#         75
+  C:08AFH         LINE#         76
+  C:08B1H         LINE#         77
+BL51 BANKED LINKER/LOCATER V6.11                                                      03/02/2016  19:15:31  PAGE 3
+
+
+  C:08B3H         LINE#         78
+  C:08B5H         LINE#         80
+  C:08D3H         LINE#         81
+  C:08D3H         LINE#         82
+  C:08D5H         LINE#         83
+  C:08D7H         LINE#         84
+  C:08D9H         LINE#         85
+  C:08DBH         LINE#         86
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        LF
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00DDH BYTE (10%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=236
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

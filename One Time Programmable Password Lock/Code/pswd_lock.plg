@@ -1,0 +1,33 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+D:\Projects\8051 Projects\New folder\New folder\pswd_lock.uv2
+Project File Date:  05/10/2016
+
+<h2>Output:</h2>
+compiling pswd_lock.c...
+pswd_lock.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=47.0 xdata=0 code=1728
+"pswd_lock" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling pswd_lock.c...
+linking...
+Program Size: data=47.0 xdata=0 code=1728
+"pswd_lock" - 0 Error(s), 0 Warning(s).
+compiling pswd_lock.c...
+pswd_lock.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=47.0 xdata=0 code=1728
+creating hex file from "pswd_lock"...
+"pswd_lock" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling pswd_lock.c...
+linking...
+Program Size: data=47.0 xdata=0 code=1728
+creating hex file from "pswd_lock"...
+"pswd_lock" - 0 Error(s), 0 Warning(s).

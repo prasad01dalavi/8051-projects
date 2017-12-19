@@ -1,0 +1,433 @@
+C51 COMPILER V8.12   DTMF_HOME                                                             06/02/2016 14:46:31 PAGE 1   
+
+
+C51 COMPILER V8.12, COMPILATION OF MODULE DTMF_HOME
+OBJECT MODULE PLACED IN dtmf_home.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE dtmf_home.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1           #include<reg51.h>
+   2           #define lcd P2
+   3           #define dtmf P3
+   4          
+   5           //functions' declaration
+   6           void init();
+   7           void delay(int);
+   8           void character(unsigned char);
+   9           void cmd(unsigned char);
+  10           void string(unsigned char *);
+  11           void number(int);
+  12          
+  13           sbit rs=P0^0;
+  14           sbit en=P0^1;
+  15          
+  16           sbit s0=P3^0;
+  17           sbit s1=P3^1;
+  18           sbit s2=P3^2;
+  19           sbit s3=P3^3;
+  20          
+  21           sbit BULB1=P1^0;
+  22           sbit BULB2=P1^1;
+  23           sbit fan=P1^2;
+  24           
+  25          
+  26           unsigned char m=3;
+  27                                                                                                                     
+  28          void main()
+  29          {
+  30   1              lcd=0x00;
+  31   1              rs=0;
+  32   1              en=0;
+  33   1      
+  34   1              BULB1=0;
+  35   1              BULB2=0;
+  36   1              fan=0;
+  37   1      
+  38   1              init();
+  39   1      
+  40   1              cmd(0x01);      
+  41   1              string("   Welcome In");
+  42   1              cmd(0xc0);
+  43   1              string("   Smart Home");
+  44   1              delay(1000);
+  45   1              cmd(0x01);
+  46   1              string("System is Ready");
+  47   1              
+  48   1              
+  49   1              while(1)
+  50   1              {
+  51   2                      while(s3==0 && s2==0 && s1==0 && s0==1)
+  52   2                      {
+  53   3                              BULB1=1;
+  54   3      
+  55   3                              if(BULB1==1 && BULB2==0 && fan==0)
+C51 COMPILER V8.12   DTMF_HOME                                                             06/02/2016 14:46:31 PAGE 2   
+
+  56   3                              {
+  57   4                                      cmd(0x01);
+  58   4                                      cmd(0x80);
+  59   4                                      string("BULB1 ON");
+  60   4                                      cmd(0xc0);
+  61   4                                      string("BULB2 OFF,FAN OFF");
+  62   4                                      delay(1000);
+  63   4                              }
+  64   3                                      
+  65   3                              if(BULB1==1 && BULB2==0 && fan==1)
+  66   3                              {
+  67   4                                      cmd(0x01);
+  68   4                                      cmd(0x80);
+  69   4                                      string("BULB1 ON");
+  70   4                                      cmd(0xc0);
+  71   4                                      string("BULB2 OFF,FAN ON");
+  72   4                                      delay(1000);
+  73   4                              }
+  74   3      
+  75   3                              if(BULB1==1 && BULB2==1 && fan==0)
+  76   3                              {
+  77   4                                      cmd(0x01);
+  78   4                                      cmd(0x80);
+  79   4                                      string("BULB1 ON");
+  80   4                                      cmd(0xc0);
+  81   4                                      string("BULB2 ON,FAN OFF");
+  82   4                                      delay(1000);
+  83   4                              }  
+  84   3      
+  85   3                              if(BULB1==1 && BULB2==1 && fan==1)
+  86   3                              {
+  87   4                                      cmd(0x01);
+  88   4                                      cmd(0x80);
+  89   4                                      string("BULB1 ON");
+  90   4                                      cmd(0xc0);
+  91   4                                      string("BULB2 ON,FAN ON");
+  92   4                                      delay(1000);
+  93   4                              }
+  94   3                      }
+  95   2      
+  96   2                      while(s3==0 && s2==0 && s1==1 && s0==0)
+  97   2                      {
+  98   3                              BULB1=0;
+  99   3      
+ 100   3                              if(BULB1==0 && BULB2==0 && fan==0)
+ 101   3                              {
+ 102   4                                      cmd(0x01);
+ 103   4                                      cmd(0x80);
+ 104   4                                      string("BULB1 OFF");
+ 105   4                                      cmd(0xc0);
+ 106   4                                      string("BULB2 OFF,FAN OFF");
+ 107   4                                      delay(1000);
+ 108   4                              }
+ 109   3                                      
+ 110   3                              if(BULB1==0 && BULB2==0 && fan==1)
+ 111   3                              {
+ 112   4                                      cmd(0x01);
+ 113   4                                      cmd(0x80);
+ 114   4                                      string("BULB1 OFF");
+ 115   4                                      cmd(0xc0);
+ 116   4                                      string("BULB2 OFF,FAN ON");
+ 117   4                                      delay(1000);
+C51 COMPILER V8.12   DTMF_HOME                                                             06/02/2016 14:46:31 PAGE 3   
+
+ 118   4                              }
+ 119   3      
+ 120   3                              if(BULB1==0 && BULB2==1 && fan==0)
+ 121   3                              {
+ 122   4                                      cmd(0x01);
+ 123   4                                      cmd(0x80);
+ 124   4                                      string("BULB1 OFF");
+ 125   4                                      cmd(0xc0);
+ 126   4                                      string("BULB2 ON,FAN OFF");
+ 127   4                                      delay(1000);
+ 128   4                              }  
+ 129   3      
+ 130   3                              if(BULB1==0 && BULB2==1 && fan==1)
+ 131   3                              {
+ 132   4                                      cmd(0x01);
+ 133   4                                      cmd(0x80);
+ 134   4                                      string("BULB1 OFF");
+ 135   4                                      cmd(0xc0);
+ 136   4                                      string("BULB2 ON,FAN ON");
+ 137   4                                      delay(1000);
+ 138   4                              }
+ 139   3                      }
+ 140   2      
+ 141   2                      while(s3==0 && s2==0 && s1==1 && s0==1)
+ 142   2                      {
+ 143   3                              BULB2=1;
+ 144   3      
+ 145   3                              if(BULB1==0 && BULB2==1 && fan==0)
+ 146   3                              {
+ 147   4                                      cmd(0x01);
+ 148   4                                      cmd(0x80);
+ 149   4                                      string("BULB1 OFF");
+ 150   4                                      cmd(0xc0);
+ 151   4                                      string("BULB2 ON,FAN OFF");
+ 152   4                                      delay(1000);
+ 153   4                              }
+ 154   3                                      
+ 155   3                              if(BULB1==0 && BULB2==1 && fan==1)
+ 156   3                              {
+ 157   4                                      cmd(0x01);
+ 158   4                                      cmd(0x80);
+ 159   4                                      string("BULB1 OFF");
+ 160   4                                      cmd(0xc0);
+ 161   4                                      string("BULB2 ON,FAN ON");
+ 162   4                                      delay(1000);
+ 163   4                              }
+ 164   3      
+ 165   3                              if(BULB1==1 && BULB2==1 && fan==0)
+ 166   3                              {
+ 167   4                                      cmd(0x01);
+ 168   4                                      cmd(0x80);
+ 169   4                                      string("BULB1 ON");
+ 170   4                                      cmd(0xc0);
+ 171   4                                      string("BULB2 ON,FAN OFF");
+ 172   4                                      delay(1000);
+ 173   4                              }  
+ 174   3      
+ 175   3                              if(BULB1==1 && BULB2==1 && fan==1)
+ 176   3                              {
+ 177   4                                      cmd(0x01);
+ 178   4                                      cmd(0x80);
+ 179   4                                      string("BULB1 ON");
+C51 COMPILER V8.12   DTMF_HOME                                                             06/02/2016 14:46:31 PAGE 4   
+
+ 180   4                                      cmd(0xc0);
+ 181   4                                      string("BULB2 ON,FAN ON");
+ 182   4                                      delay(1000);
+ 183   4                              }                                  
+ 184   3                      }
+ 185   2      
+ 186   2                      while(s3==0 && s2==1 && s1==0 && s0==0)
+ 187   2                      {
+ 188   3                              BULB2=0;
+ 189   3      
+ 190   3                              if(BULB1==0 && BULB2==0 && fan==0)
+ 191   3                              {
+ 192   4                                      cmd(0x01);
+ 193   4                                      cmd(0x80);
+ 194   4                                      string("BULB1 OFF");
+ 195   4                                      cmd(0xc0);
+ 196   4                                      string("BULB2 OFF,FAN OFF");
+ 197   4                                      delay(1000);
+ 198   4                              }
+ 199   3                                      
+ 200   3                              if(BULB1==0 && BULB2==0 && fan==1)
+ 201   3                              {
+ 202   4                                      cmd(0x01);
+ 203   4                                      cmd(0x80);
+ 204   4                                      string("BULB1 OFF");
+ 205   4                                      cmd(0xc0);
+ 206   4                                      string("BULB2 OFF,FAN ON");
+ 207   4                                      delay(1000);
+ 208   4                              }
+ 209   3      
+ 210   3                              if(BULB1==1 && BULB2==0 && fan==0)
+ 211   3                              {
+ 212   4                                      cmd(0x01);
+ 213   4                                      cmd(0x80);
+ 214   4                                      string("BULB1 ON");
+ 215   4                                      cmd(0xc0);
+ 216   4                                      string("BULB2 OFF,FAN OFF");
+ 217   4                                      delay(1000);
+ 218   4                              }  
+ 219   3      
+ 220   3                              if(BULB1==1 && BULB2==0 && fan==1)
+ 221   3                              {
+ 222   4                                      cmd(0x01);
+ 223   4                                      cmd(0x80);
+ 224   4                                      string("BULB1 ON");
+ 225   4                                      cmd(0xc0);
+ 226   4                                      string("BULB2 OFF,FAN ON");
+ 227   4                                      delay(1000);
+ 228   4                              }
+ 229   3      
+ 230   3                      }
+ 231   2      
+ 232   2                      while(s3==0 && s2==1 && s1==0 && s0==1)
+ 233   2                      {
+ 234   3                              fan=1;
+ 235   3                              
+ 236   3                              if(BULB1==0 && BULB2==0 && fan==1)
+ 237   3                              {
+ 238   4                                      cmd(0x01);
+ 239   4                                      cmd(0x80);
+ 240   4                                      string("BULB1 OFF");
+ 241   4                                      cmd(0xc0);
+C51 COMPILER V8.12   DTMF_HOME                                                             06/02/2016 14:46:31 PAGE 5   
+
+ 242   4                                      string("BULB2 OFF,FAN ON");
+ 243   4                                      delay(1000);
+ 244   4                              }
+ 245   3                                      
+ 246   3                              if(BULB1==0 && BULB2==1 && fan==1)
+ 247   3                              {
+ 248   4                                      cmd(0x01);
+ 249   4                                      cmd(0x80);
+ 250   4                                      string("BULB1 OFF");
+ 251   4                                      cmd(0xc0);
+ 252   4                                      string("BULB2 ON,FAN ON");
+ 253   4                                      delay(1000);
+ 254   4                              }
+ 255   3      
+ 256   3                              if(BULB1==1 && BULB2==0 && fan==1)
+ 257   3                              {
+ 258   4                                      cmd(0x01);
+ 259   4                                      cmd(0x80);
+ 260   4                                      string("BULB1 ON");
+ 261   4                                      cmd(0xc0);
+ 262   4                                      string("BULB2 OFF,FAN ON");
+ 263   4                                      delay(1000);
+ 264   4                              }  
+ 265   3      
+ 266   3                              if(BULB1==1 && BULB2==1 && fan==1)
+ 267   3                              {
+ 268   4                                      cmd(0x01);
+ 269   4                                      cmd(0x80);
+ 270   4                                      string("BULB1 ON");
+ 271   4                                      cmd(0xc0);
+ 272   4                                      string("BULB2 ON,FAN ON");
+ 273   4                                      delay(1000);
+ 274   4                              }
+ 275   3      
+ 276   3                      }
+ 277   2      
+ 278   2                      while(s3==0 && s2==1 && s1==1 && s0==0)
+ 279   2                      {
+ 280   3                              fan=0;
+ 281   3      
+ 282   3                              if(BULB1==0 && BULB2==0 && fan==0)
+ 283   3                              {
+ 284   4                                      cmd(0x01);
+ 285   4                                      cmd(0x80);
+ 286   4                                      string("BULB1 OFF");
+ 287   4                                      cmd(0xc0);
+ 288   4                                      string("BULB2 OFF,FAN OFF");
+ 289   4                                      delay(1000);
+ 290   4                              }
+ 291   3                                      
+ 292   3                              if(BULB1==0 && BULB2==1 && fan==0)
+ 293   3                              {
+ 294   4                                      cmd(0x01);
+ 295   4                                      cmd(0x80);
+ 296   4                                      string("BULB1 OFF");
+ 297   4                                      cmd(0xc0);
+ 298   4                                      string("BULB2 ON,FAN OFF");
+ 299   4                                      delay(1000);
+ 300   4                              }
+ 301   3      
+ 302   3                              if(BULB1==1 && BULB2==0 && fan==0)
+ 303   3                              {
+C51 COMPILER V8.12   DTMF_HOME                                                             06/02/2016 14:46:31 PAGE 6   
+
+ 304   4                                      cmd(0x01);
+ 305   4                                      cmd(0x80);
+ 306   4                                      string("BULB1 ON");
+ 307   4                                      cmd(0xc0);
+ 308   4                                      string("BULB2 OFF,FAN OFF");
+ 309   4                                      delay(1000);
+ 310   4                              }  
+ 311   3      
+ 312   3                              if(BULB1==1 && BULB2==1 && fan==0)
+ 313   3                              {
+ 314   4                                      cmd(0x01);
+ 315   4                                      cmd(0x80);
+ 316   4                                      string("BULB1 ON");
+ 317   4                                      cmd(0xc0);
+ 318   4                                      string("BULB2 ON,FAN OFF");
+ 319   4                                      delay(1000);
+ 320   4                              }
+ 321   3                      }
+ 322   2              }       
+ 323   1      }
+ 324          
+ 325          void init()
+ 326          {
+ 327   1      //      cmd(0x20);
+ 328   1      //      cmd(0x28);
+ 329   1      //      cmd(0x30);
+ 330   1              cmd(0x01);         //clear the screen c
+ 331   1      
+ 332   1              cmd(0x38);         //8-bit mode with 5*7 matrix
+ 333   1              cmd(0x0c);         //display on with cursor =>(0ch=curson off; 0fh=cursor blinking; 0eh=curson on)
+ 334   1              
+ 335   1              
+ 336   1              cmd(0x06);         //shift cursor =>(06h right--> ; 04h <---left; default=right--->)
+ 337   1              cmd(0x80);         //position =>(80=1st row 1st position; c0=2nd row 1st position)
+ 338   1      }
+ 339          
+ 340          void cmd(unsigned char ch)
+ 341          {
+ 342   1              lcd=ch;
+ 343   1              rs=0;
+ 344   1              en=1;
+ 345   1              delay(2);
+ 346   1              en=0;
+ 347   1      }
+ 348          
+ 349          void character(unsigned char ch)
+ 350          {
+ 351   1              lcd=ch;
+ 352   1              rs=1;
+ 353   1              en=1;
+ 354   1              delay(2);
+ 355   1              en=0;
+ 356   1      }
+ 357          
+ 358          void string(unsigned char *p)
+ 359          {
+ 360   1              while(*p)
+ 361   1              character(*p++);
+ 362   1      }
+ 363          
+ 364          void number(int n)
+ 365          {       
+C51 COMPILER V8.12   DTMF_HOME                                                             06/02/2016 14:46:31 PAGE 7   
+
+ 366   1              unsigned char i=1,arr[5];
+ 367   1      
+ 368   1              if(n<0)
+ 369   1              {
+ 370   2                      character('-');           //signed representation for negative number
+ 371   2                      n=-n;                             //taking magnitude 
+ 372   2              }
+ 373   1              if(n==0)
+ 374   1                      character('0');
+ 375   1              while(n>0)
+ 376   1              {
+ 377   2                      arr[i]=(n%10)+48;
+ 378   2                      n=n/10;
+ 379   2                      i++;
+ 380   2              }
+ 381   1              
+ 382   1              for(--i;i>0;i--)                 //problem with >=; remedy=> initialize i=1 and stop at i>0
+ 383   1              {
+ 384   2              character(arr[i]);
+ 385   2              }
+ 386   1      }
+ 387          
+ 388          void delay(int d)
+ 389          {
+ 390   1              unsigned char i;
+ 391   1              for(;d>0;d--)
+ 392   1              {
+ 393   2                      for(i=250;i>0;i--);             //500usec
+ 394   2                      for(i=250;i>0;i--);             //500usec
+ 395   2              }
+ 396   1      }
+ 397          
+ 398          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1549    ----
+   CONSTANT SIZE    =    131    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1      11
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

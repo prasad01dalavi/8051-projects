@@ -1,0 +1,610 @@
+C51 COMPILER V8.12   PSWD_LOCK                                                             05/10/2016 11:51:28 PAGE 1   
+
+
+C51 COMPILER V8.12, COMPILATION OF MODULE PSWD_LOCK
+OBJECT MODULE PLACED IN pswd_lock.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE pswd_lock.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1                                   #include <reg51.h>
+   2          
+   3          #include <string.h>
+   4          
+   5          sbit rs = P2^7;                   // rs pin of LCD
+   6          
+   7          sbit en = P2^6;                   // en pin of LCD
+   8          
+   9          sbit led1 = P2^0;
+  10          
+  11          sbit led2 = P2^1;
+  12          
+  13          sbit led3 = P2^2;
+  14          
+  15          sbit rely = P2^4;
+  16          
+  17          sbit led4 = P2^3;
+  18          
+  19          sbit buz = P2^5;
+  20          
+  21          char str1[5] = "12345";           // default password
+  22          
+  23          char str2[5];
+  24          
+  25          int j;
+  26          
+  27           
+  28          
+  29          void writecmd(unsigned char a);   // function initializations
+  30          
+  31          void writedata(unsigned char b);
+  32          
+  33          void busy(void);
+  34          
+  35          void writestr(unsigned char *s);
+  36          
+  37          void wait_for_2sec()
+  38          
+  39            {
+  40   1      
+  41   1      int y,z;
+  42   1      
+  43   1              for(y=0;y<50;y++)
+  44   1      
+  45   1                for(z=0;z<10000;z++);
+  46   1      
+  47   1        }   
+  48          
+  49          void writecmd(unsigned char a)
+  50          
+  51           {
+  52   1      
+  53   1             busy();
+  54   1      
+  55   1             rs = 0;      
+C51 COMPILER V8.12   PSWD_LOCK                                                             05/10/2016 11:51:28 PAGE 2   
+
+  56   1      
+  57   1             P0 = a;      
+  58   1      
+  59   1             en = 1;
+  60   1      
+  61   1             en = 0;
+  62   1      
+  63   1       }
+  64          
+  65          void writedata(unsigned char b)
+  66          
+  67           {
+  68   1      
+  69   1             busy();
+  70   1      
+  71   1             rs = 1;      
+  72   1      
+  73   1             P0 = b;      
+  74   1      
+  75   1             en = 1;
+  76   1      
+  77   1             en = 0;      
+  78   1      
+  79   1       }
+  80          
+  81          void busy()
+  82          
+  83          {
+  84   1      
+  85   1             int k;
+  86   1      
+  87   1             for(k=0;k<1500;k++);
+  88   1      
+  89   1      }
+  90          
+  91          void writestr(unsigned char *s)
+  92          
+  93          {
+  94   1      
+  95   1             unsigned char l,z;
+  96   1      
+  97   1             l = strlen(s);
+  98   1      
+  99   1             for(z=0;z<l;z++)
+ 100   1      
+ 101   1             {
+ 102   2      
+ 103   2               writedata(*s);
+ 104   2      
+ 105   2               s++;       
+ 106   2      
+ 107   2             }
+ 108   1      
+ 109   1      }
+ 110          
+ 111          void keydly()
+ 112          
+ 113            {
+ 114   1      
+ 115   1          int x,y;
+ 116   1      
+ 117   1             for(x=0;x<100;x++)
+C51 COMPILER V8.12   PSWD_LOCK                                                             05/10/2016 11:51:28 PAGE 3   
+
+ 118   1      
+ 119   1               for(y=0;y<1000;y++);
+ 120   1      
+ 121   1         }
+ 122          
+ 123           void sound_buzzer(unsigned int t) // produce beep sound
+ 124          
+ 125            {
+ 126   1      
+ 127   1              unsigned int p;
+ 128   1      
+ 129   1              for(p=0;p<t;p++)                 // beep sound once or twice
+ 130   1      
+ 131   1                {
+ 132   2      
+ 133   2                     buz = 1;
+ 134   2      
+ 135   2                     keydly();
+ 136   2      
+ 137   2                     buz=0;
+ 138   2      
+ 139   2                     keydly();
+ 140   2      
+ 141   2              }
+ 142   1      
+ 143   1        }                 
+ 144          
+ 145          void main()
+ 146          
+ 147            {
+ 148   1      
+ 149   1             int t=0,i,p=0,f=0,r,y,c=0,l=0,s=0,a=0;
+ 150   1      
+ 151   1             P3=0x00;                                 // ports P3 and P2 output ports
+ 152   1      
+ 153   1             P2=0x00;     
+ 154   1      
+ 155   1             writecmd(0x3C);                          // configure LCD
+ 156   1      
+ 157   1             writecmd(0x0E);
+ 158   1      
+ 159   1      next:  r=0;i=0;                            
+ 160   1      
+ 161   1             writecmd(0x01);
+ 162   1      
+ 163   1             if(l==0) writestr("To Lock System");     // display message
+ 164   1      
+ 165   1             else writestr("To UnLock System");
+ 166   1      
+ 167   1             writecmd(0xC0);     
+ 168   1      
+ 169   1             writestr("Enter Password");
+ 170   1      
+ 171   1             wait_for_2sec();                         // after 2 second                
+ 172   1      
+ 173   1             writecmd(0xC6);
+ 174   1      
+ 175   1             writestr("________");                    // show space to enter password  
+ 176   1      
+ 177   1             writecmd(0xC6);     
+ 178   1      
+ 179   1      loop:  P1=0xF0;
+C51 COMPILER V8.12   PSWD_LOCK                                                             05/10/2016 11:51:28 PAGE 4   
+
+ 180   1      
+ 181   1             while(P1==0xF0);    
+ 182   1      
+ 183   1             while(P1!=0xF0)
+ 184   1      
+ 185   1               {
+ 186   2      
+ 187   2                    P1=0xFE;
+ 188   2      
+ 189   2                    if(P1==0xEE)
+ 190   2      
+ 191   2                      {
+ 192   3      
+ 193   3                           if(f==0)
+ 194   3      
+ 195   3                             {
+ 196   4      
+ 197   4                                 writedata(0x2A);
+ 198   4      
+ 199   4                                 str2[i]=0x31;
+ 200   4      
+ 201   4                             }
+ 202   3      
+ 203   3                           else
+ 204   3      
+ 205   3                             {
+ 206   4      
+ 207   4                                 writedata(0x31);
+ 208   4      
+ 209   4                                 str1[i]=0x31;
+ 210   4      
+ 211   4                              }
+ 212   3      
+ 213   3                           t=1;
+ 214   3      
+ 215   3                      }
+ 216   2      
+ 217   2                    else if(P1==0xDE)
+ 218   2      
+ 219   2                      {
+ 220   3      
+ 221   3                           if(f==0)
+ 222   3      
+ 223   3                             {
+ 224   4      
+ 225   4                                  writedata(0x2A);
+ 226   4      
+ 227   4                                 str2[i]=0x34;
+ 228   4      
+ 229   4                             }
+ 230   3      
+ 231   3                           else
+ 232   3      
+ 233   3                             {
+ 234   4      
+ 235   4                                 writedata(0x34);
+ 236   4      
+ 237   4                                 str1[i]=0x34;
+ 238   4      
+ 239   4                             }
+ 240   3      
+ 241   3                           t=1;
+C51 COMPILER V8.12   PSWD_LOCK                                                             05/10/2016 11:51:28 PAGE 5   
+
+ 242   3      
+ 243   3                        }
+ 244   2      
+ 245   2                    else if(P1==0xBE)
+ 246   2      
+ 247   2                      {
+ 248   3      
+ 249   3                           if(f==0)
+ 250   3      
+ 251   3                             {
+ 252   4      
+ 253   4                                 writedata(0x2A);
+ 254   4      
+ 255   4                                 str2[i]=0x37;
+ 256   4      
+ 257   4                             }
+ 258   3      
+ 259   3                           else
+ 260   3      
+ 261   3                             {
+ 262   4      
+ 263   4                                 writedata(0x37);
+ 264   4      
+ 265   4                                 str1[i]=0x37;
+ 266   4      
+ 267   4                             }
+ 268   3      
+ 269   3                           t=1;
+ 270   3      
+ 271   3                        }
+ 272   2      
+ 273   2                    else if(P1==0x7E)
+ 274   2      
+ 275   2                      {
+ 276   3      
+ 277   3                           writecmd(0x01);
+ 278   3      
+ 279   3                           if(f==1)
+ 280   3      
+ 281   3                             {
+ 282   4      
+ 283   4                                  writestr("new password is");
+ 284   4      
+ 285   4                                  writecmd(0xC0);
+ 286   4      
+ 287   4                                 for(y=0;y<5;y++) writedata(str1[y]);                  
+ 288   4      
+ 289   4                                 f=0;
+ 290   4      
+ 291   4                             }
+ 292   3      
+ 293   3                           else
+ 294   3      
+ 295   3                            {
+ 296   4      
+ 297   4                             if(i==5)
+ 298   4      
+ 299   4                               {
+ 300   5      
+ 301   5                                  for(j=0;j<5;j++)
+ 302   5      
+ 303   5                                   {
+C51 COMPILER V8.12   PSWD_LOCK                                                             05/10/2016 11:51:28 PAGE 6   
+
+ 304   6      
+ 305   6                                        if(str1[j]==str2[j]) p++;                      
+ 306   6      
+ 307   6                                        else
+ 308   6      
+ 309   6                                          {
+ 310   7      
+ 311   7                                               led1=0;
+ 312   7      
+ 313   7                                               led4=1;
+ 314   7      
+ 315   7                                               writestr("wrong password");
+ 316   7      
+ 317   7                                               sound_buzzer(2);
+ 318   7      
+ 319   7                                               a++;
+ 320   7      
+ 321   7                                               break;
+ 322   7      
+ 323   7                                          }
+ 324   6      
+ 325   6                                   }
+ 326   5      
+ 327   5                                  if(p==5)
+ 328   5      
+ 329   5                                    {
+ 330   6      
+ 331   6                                         c++;
+ 332   6      
+ 333   6                                         if((c%2)==1)
+ 334   6      
+ 335   6                                          {
+ 336   7      
+ 337   7                                               l=1;
+ 338   7      
+ 339   7                                               rely=1;
+ 340   7      
+ 341   7                                               led2=0;
+ 342   7      
+ 343   7                                               led3=1;
+ 344   7      
+ 345   7                                               writestr("System Locked");
+ 346   7      
+ 347   7                                          }
+ 348   6      
+ 349   6                                         else
+ 350   6      
+ 351   6                                          {
+ 352   7      
+ 353   7                                               l=0;
+ 354   7      
+ 355   7                                               rely=0;
+ 356   7      
+ 357   7                                               led3=0;
+ 358   7      
+ 359   7                                               led2=1;
+ 360   7      
+ 361   7                                               writestr("System Unlocked");
+ 362   7      
+ 363   7                                          }
+ 364   6      
+ 365   6                                          led1=1;
+C51 COMPILER V8.12   PSWD_LOCK                                                             05/10/2016 11:51:28 PAGE 7   
+
+ 366   6      
+ 367   6                                          led4=0;
+ 368   6      
+ 369   6                                          sound_buzzer(1);
+ 370   6      
+ 371   6                                      }
+ 372   5      
+ 373   5                                    }
+ 374   4      
+ 375   4                                  else 
+ 376   4      
+ 377   4                                   {
+ 378   5      
+ 379   5                                         led1=0;
+ 380   5      
+ 381   5                                        led4=1;
+ 382   5      
+ 383   5                                        writestr("wrong password");
+ 384   5      
+ 385   5                                        sound_buzzer(2);
+ 386   5      
+ 387   5                                        a++;
+ 388   5      
+ 389   5                                   }
+ 390   4      
+ 391   4                                  }     
+ 392   3      
+ 393   3                                  if(a==3)
+ 394   3      
+ 395   3                                   {
+ 396   4      
+ 397   4                                        writecmd(0x80);
+ 398   4      
+ 399   4                                        writestr("System HANG!!..");
+ 400   4      
+ 401   4                                        writecmd(0xC0);
+ 402   4      
+ 403   4                                        writestr(" * Press RESET *");
+ 404   4      
+ 405   4                                        sound_buzzer(1);
+ 406   4      
+ 407   4                                   }
+ 408   3      
+ 409   3                           r=1;
+ 410   3      
+ 411   3                           t=1;         
+ 412   3      
+ 413   3                           p=0;                
+ 414   3      
+ 415   3                      }                                                                   
+ 416   2      
+ 417   2                    if(t==1) break;
+ 418   2      
+ 419   2                    P1=0xFD;
+ 420   2      
+ 421   2                    if(P1==0xED)
+ 422   2      
+ 423   2                      {
+ 424   3      
+ 425   3                           if(f==0) {writedata(0x2A);str2[i]=0x32;}
+ 426   3      
+ 427   3                           else {writedata(0x32);str1[i]=0x32;}
+C51 COMPILER V8.12   PSWD_LOCK                                                             05/10/2016 11:51:28 PAGE 8   
+
+ 428   3      
+ 429   3                           t=1;
+ 430   3      
+ 431   3                      }
+ 432   2      
+ 433   2                    else if(P1==0xDD)
+ 434   2      
+ 435   2                      {
+ 436   3      
+ 437   3                           if(f==0) {writedata(0x2A);str2[i]=0x35;}
+ 438   3      
+ 439   3                           else {writedata(0x35);str1[i]=0x35;}
+ 440   3      
+ 441   3                           t=1;
+ 442   3      
+ 443   3                      }
+ 444   2      
+ 445   2                    else if(P1==0xBD)
+ 446   2      
+ 447   2                      {
+ 448   3      
+ 449   3                           if(f==0) {writedata(0x2A);str2[i]=0x38;}
+ 450   3      
+ 451   3                           else {writedata(0x38);str1[i]=0x38;}
+ 452   3      
+ 453   3                           t=1;
+ 454   3      
+ 455   3                      }                         
+ 456   2      
+ 457   2                    else if(P1==0x7D)
+ 458   2      
+ 459   2                      {
+ 460   3      
+ 461   3                           if(f==0) {writedata(0x2A);str2[i]=0x30;}
+ 462   3      
+ 463   3                           else {writedata(0x30);str1[i]=0x30;}
+ 464   3      
+ 465   3                           t=1;
+ 466   3      
+ 467   3                      }                 
+ 468   2      
+ 469   2       
+ 470   2      
+ 471   2                    if(t==1) break;
+ 472   2      
+ 473   2                    P1=0xFB;
+ 474   2      
+ 475   2                    if(P1==0xEB)
+ 476   2      
+ 477   2                      {
+ 478   3      
+ 479   3                           if(f==0) {writedata(0x2A);str2[i]=0x33;}
+ 480   3      
+ 481   3                           else {writedata(0x33);str1[i]=0x33;}
+ 482   3      
+ 483   3                           t=1;
+ 484   3      
+ 485   3                       }
+ 486   2      
+ 487   2                    else if(P1==0xDB)
+ 488   2      
+ 489   2                      {
+C51 COMPILER V8.12   PSWD_LOCK                                                             05/10/2016 11:51:28 PAGE 9   
+
+ 490   3      
+ 491   3                           if(f==0) {writedata(0x2A);str2[i]=0x36;}
+ 492   3      
+ 493   3                           else {writedata(0x36);str1[i]=0x36;}
+ 494   3      
+ 495   3                           t=1;
+ 496   3      
+ 497   3                      }
+ 498   2      
+ 499   2                    else if(P1==0xBB)
+ 500   2      
+ 501   2                      {
+ 502   3      
+ 503   3                           if(f==0) {writedata(0x2A);str2[i]=0x39;}
+ 504   3      
+ 505   3                           else {writedata(0x39);str1[i]=0x39;}
+ 506   3      
+ 507   3                           t=1;
+ 508   3      
+ 509   3                      }
+ 510   2      
+ 511   2                    else if(P1==0x7B)
+ 512   2      
+ 513   2                      {   
+ 514   3      
+ 515   3                        writecmd(0x01);
+ 516   3      
+ 517   3                           if(s==0)
+ 518   3      
+ 519   3                             {
+ 520   4      
+ 521   4                                 writestr("set new password");
+ 522   4      
+ 523   4                                 writecmd(0xC0);
+ 524   4      
+ 525   4                                 writestr("(5 digit):");
+ 526   4      
+ 527   4                                 f=1;                      
+ 528   4      
+ 529   4                                 i=-1;
+ 530   4      
+ 531   4                                 s++;
+ 532   4      
+ 533   4                             }
+ 534   3      
+ 535   3                           else
+ 536   3      
+ 537   3              {
+ 538   4      
+ 539   4                writestr("password can be set");
+ 540   4      
+ 541   4                writecmd(0xC3);
+ 542   4      
+ 543   4                writestr("only once");
+ 544   4      
+ 545   4                r=1;
+ 546   4      
+ 547   4              }
+ 548   3      
+ 549   3                           t=1;                      
+ 550   3      
+ 551   3                       }                
+C51 COMPILER V8.12   PSWD_LOCK                                                             05/10/2016 11:51:28 PAGE 10  
+
+ 552   2      
+ 553   2                    if(t==1) break;
+ 554   2      
+ 555   2              }
+ 556   1      
+ 557   1              keydly();     
+ 558   1      
+ 559   1              i++;     
+ 560   1      
+ 561   1         t=0;
+ 562   1      
+ 563   1              if(a==3) while(1);
+ 564   1      
+ 565   1         if (r==0) goto loop;
+ 566   1      
+ 567   1         else goto next;
+ 568   1      
+ 569   1        }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1184    ----
+   CONSTANT SIZE    =    208    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     12      27
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

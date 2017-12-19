@@ -1,0 +1,191 @@
+C51 COMPILER V8.12   TEMPERATURE_CONTROLLER                                                05/16/2016 22:35:42 PAGE 1   
+
+
+C51 COMPILER V8.12, COMPILATION OF MODULE TEMPERATURE_CONTROLLER
+OBJECT MODULE PLACED IN temperature_controller.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE temperature_controller.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1           #include<reg51.h>
+   2           #define lcd P2
+   3          
+   4           //functions' declaration
+   5           void init();
+   6           void delay(int);
+   7           void character(unsigned char);
+   8           void cmd(unsigned char);
+   9           void string(unsigned char *);
+  10           void number(int);
+  11          
+  12           unsigned char read();
+  13          
+  14           sbit rs=P3^0;
+  15           sbit en=P3^1;
+  16          
+  17           sbit wr=P3^2;
+  18           sbit intr=P3^3;
+  19           sbit rd=P3^4;
+  20          
+  21           sbit ac=P3^5;
+  22          
+  23           unsigned char v,c=0;
+  24                                                                                                                     
+  25          void main()
+  26          {
+  27   1              unsigned char m=3;
+  28   1              lcd=0x00;
+  29   1              rs=0;
+  30   1              en=0;
+  31   1              ac=0;
+  32   1              init();
+  33   1              cmd(0x01);
+  34   1              string("Temperature ");
+  35   1              cmd(0xc0);
+  36   1              string("Controller");
+  37   1              delay(2000);
+  38   1              
+  39   1              while(1)
+  40   1              {
+  41   2                      cmd(0x01);
+  42   2                      string("Temperature:");
+  43   2                      cmd(0x8c);
+  44   2                      v=read();                
+  45   2                      number(v);
+  46   2                      string("C");
+  47   2                      delay(3000);
+  48   2                      while(v>38)
+  49   2                      {
+  50   3                              c=1;
+  51   3                              cmd(0x01);
+  52   3                              cmd(0x80);
+  53   3                              string("Cooling System");
+  54   3                              cmd(0xc0);
+  55   3                              string("is on.");
+C51 COMPILER V8.12   TEMPERATURE_CONTROLLER                                                05/16/2016 22:35:42 PAGE 2   
+
+  56   3                              ac=1;
+  57   3                              string(" Temp:");
+  58   3                              v=read();                
+  59   3                              number(v);
+  60   3                              string("C");
+  61   3                              delay(3000);
+  62   3                      }
+  63   2                      ac=0;
+  64   2              }
+  65   1      
+  66   1       }
+  67          
+  68          //--------------------------LCD Code-------------------//
+  69          void init()
+  70          {
+  71   1      //      cmd(0x20);
+  72   1      //      cmd(0x28);
+  73   1      //      cmd(0x30);
+  74   1              cmd(0x01);         //clear the screen c
+  75   1      
+  76   1              cmd(0x38);         //8-bit mode with 5*7 matrix
+  77   1              cmd(0x0c);         //display on with cursor =>(0ch=curson off; 0fh=cursor blinking; 0eh=curson on)
+  78   1              
+  79   1              
+  80   1              cmd(0x06);         //shift cursor =>(06h right--> ; 04h <---left; default=right--->)
+  81   1              cmd(0x80);         //position =>(80=1st row 1st position; c0=2nd row 1st position)
+  82   1      }
+  83          
+  84          void cmd(unsigned char ch)
+  85          {
+  86   1              lcd=ch;
+  87   1              rs=0;
+  88   1              en=1;
+  89   1              delay(2);
+  90   1              en=0;
+  91   1      }
+  92          
+  93          void character(unsigned char ch)
+  94          {
+  95   1              lcd=ch;
+  96   1              rs=1;
+  97   1              en=1;
+  98   1              delay(2);
+  99   1              en=0;
+ 100   1      }
+ 101          
+ 102          void string(unsigned char *p)
+ 103          {
+ 104   1              while(*p)
+ 105   1              character(*p++);
+ 106   1      }
+ 107          
+ 108          void number(int n)
+ 109          {       
+ 110   1              unsigned char i=1,arr[5];
+ 111   1      
+ 112   1              if(n<0)
+ 113   1              {
+ 114   2                      character('-');           //signed representation for negative number
+ 115   2                      n=-n;                             //taking magnitude 
+ 116   2              }
+ 117   1              if(n==0)
+C51 COMPILER V8.12   TEMPERATURE_CONTROLLER                                                05/16/2016 22:35:42 PAGE 3   
+
+ 118   1                      character('0');
+ 119   1              while(n>0)
+ 120   1              {
+ 121   2                      arr[i]=(n%10)+48;
+ 122   2                      n=n/10;
+ 123   2                      i++;
+ 124   2              }
+ 125   1              
+ 126   1              for(--i;i>0;i--)                 //problem with >=; remedy=> initialize i=1 and stop at i>0
+ 127   1              {
+ 128   2              character(arr[i]);
+ 129   2              }
+ 130   1      }
+ 131          //-----------------------End of LCD Code------------------------// 
+ 132          
+ 133          //----------------------ADC 0804 Code-------------------------//
+ 134          unsigned char read()
+ 135          {
+ 136   1              unsigned char value;
+ 137   1              wr=0;
+ 138   1              rd=1;
+ 139   1              delay(2);
+ 140   1              wr=1;                      //Low to High Pulse to start conversion
+ 141   1              while(intr==1);    //wait till the conversion is done
+ 142   1              rd=0;                      //take (or read) the data by making rd=0
+ 143   1              delay(2);
+ 144   1              value=P1;                  
+ 145   1              return value;
+ 146   1      
+ 147   1      }
+ 148          //---------------End of ADC 0804 Code-----------------------//
+ 149          
+ 150          //--------------delay function-------------------------//
+ 151          void delay(int d)
+ 152          {
+ 153   1              unsigned char i;
+ 154   1              for(;d>0;d--)
+ 155   1              {
+ 156   2                      for(i=250;i>0;i--);             //500usec
+ 157   2                      for(i=250;i>0;i--);             //500usec
+ 158   2              }
+ 159   1      }
+ 160          //-----------------End  of delay function---------------------//
+ 161          
+ 162          
+ 163          
+ 164          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    413    ----
+   CONSTANT SIZE    =     68    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

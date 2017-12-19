@@ -1,0 +1,266 @@
+C51 COMPILER V8.12   BURGLAR_ALARM                                                         05/15/2016 22:21:44 PAGE 1   
+
+
+C51 COMPILER V8.12, COMPILATION OF MODULE BURGLAR_ALARM
+OBJECT MODULE PLACED IN burglar_alarm.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE burglar_alarm.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #define lcd P2
+   3          
+   4           //functions' declaration
+   5           void lcd_init();
+   6           void uc_init();
+   7           void character(unsigned char);
+   8           void cmd(unsigned char);
+   9           void string(unsigned char *);
+  10           void number(int);
+  11          
+  12           void uart_init();
+  13           void gstring(unsigned char *p);
+  14           void Tx(unsigned char ch);
+  15           void intruder_msg();
+  16          
+  17           void delay(int); 
+  18           void buzzer(unsigned char b);
+  19          
+  20           sbit rs=P3^3;
+  21           sbit en=P3^4;
+  22          
+  23           sbit buz=P3^5;
+  24          
+  25           unsigned char t=0;
+  26          
+  27          //---------------ISR----------------//
+  28           void ext1() interrupt 0
+  29           {      
+  30   1               cmd(0x01);
+  31   1               cmd(0x80);
+  32   1               string("Be alert!");
+  33   1               delay(2000);
+  34   1               cmd(0x80);
+  35   1               string("Intruder at");
+  36   1               cmd(0xc0);
+  37   1               string("The Gate!");
+  38   1               buzzer(2);
+  39   1      
+  40   1               if(t==0)
+  41   1               intruder_msg();
+  42   1      
+  43   1               cmd(0x01);
+  44   1               cmd(0x80);
+  45   1               string("Intruder at");
+  46   1               cmd(0xc0);
+  47   1               string("The Gate!");
+  48   1      
+  49   1               while(1)
+  50   1                      buzzer(1);
+  51   1       }
+  52          //----------End of ISR-------------//
+  53          
+  54          void main()
+  55          {
+C51 COMPILER V8.12   BURGLAR_ALARM                                                         05/15/2016 22:21:44 PAGE 2   
+
+  56   1              uc_init();
+  57   1              lcd_init();
+  58   1              uart_init();
+  59   1      
+  60   1              string(" Burlglar Alarm ");
+  61   1              delay(2000);
+  62   1      
+  63   1              while(1);
+  64   1      }
+  65          
+  66          //---------------microcontroller initialzation-----------//
+  67          void uc_init()
+  68          {
+  69   1              lcd=0x00;
+  70   1              rs=0;
+  71   1              en=0;
+  72   1              buz=0;
+  73   1      //configuring interrupts
+  74   1              EA=1;
+  75   1              EX0=1;
+  76   1      }
+  77          //-----------------microcontroller has been initialized-----------//
+  78          
+  79          //--------------------------LCD Code-------------------//
+  80          void lcd_init()
+  81          {
+  82   1      //      cmd(0x20);
+  83   1      //      cmd(0x28);
+  84   1      //      cmd(0x30);
+  85   1              cmd(0x01);         //clear the screen c
+  86   1      
+  87   1              cmd(0x38);         //8-bit mode with 5*7 matrix
+  88   1              cmd(0x0c);         //display on with cursor =>(0ch=curson off; 0fh=cursor blinking; 0eh=curson on)
+  89   1              
+  90   1              
+  91   1              cmd(0x06);         //shift cursor =>(06h right--> ; 04h <---left; default=right--->)
+  92   1              cmd(0x80);         //position =>(80=1st row 1st position; c0=2nd row 1st position)
+  93   1      }
+  94          
+  95          void cmd(unsigned char ch)
+  96          {
+  97   1              lcd=ch;
+  98   1              rs=0;
+  99   1              en=1;
+ 100   1              delay(2);
+ 101   1              en=0;
+ 102   1      }
+ 103          
+ 104          void character(unsigned char ch)
+ 105          {
+ 106   1              lcd=ch;
+ 107   1              rs=1;
+ 108   1              en=1;
+ 109   1              delay(2);
+ 110   1              en=0;
+ 111   1      }
+ 112          
+ 113          void string(unsigned char *p)
+ 114          {
+ 115   1              while(*p)
+ 116   1              character(*p++);
+ 117   1      }
+C51 COMPILER V8.12   BURGLAR_ALARM                                                         05/15/2016 22:21:44 PAGE 3   
+
+ 118          
+ 119          void number(int n)
+ 120          {       
+ 121   1              unsigned char i=1,arr[5];
+ 122   1      
+ 123   1              if(n<0)
+ 124   1              {
+ 125   2                      character('-');           //signed representation for negative number
+ 126   2                      n=-n;                             //taking magnitude 
+ 127   2              }
+ 128   1              if(n==0)
+ 129   1                      character('0');
+ 130   1              while(n>0)
+ 131   1              {
+ 132   2                      arr[i]=(n%10)+48;
+ 133   2                      n=n/10;
+ 134   2                      i++;
+ 135   2              }
+ 136   1              
+ 137   1              for(--i;i>0;i--)                 //problem with >=; remedy=> initialize i=1 and stop at i>0
+ 138   1              {
+ 139   2              character(arr[i]);
+ 140   2              }
+ 141   1      }
+ 142          //-----------------------End of LCD Code------------------------// 
+ 143          
+ 144          //----------------------GSM Code-----------------------//
+ 145          void uart_init()
+ 146          {
+ 147   1              TMOD=0x20;
+ 148   1              TH1=0xFD;
+ 149   1              SCON=0x50;
+ 150   1              TR1=1;
+ 151   1      }
+ 152          
+ 153          void gstring(unsigned char *p)
+ 154          {
+ 155   1              while(*p)
+ 156   1              Tx(*p++);       
+ 157   1      }
+ 158          
+ 159          void Tx(unsigned char ch)
+ 160          {
+ 161   1              SBUF=ch;
+ 162   1              while(TI==0);
+ 163   1              TI=0;
+ 164   1      }
+ 165          
+ 166          void intruder_msg()
+ 167          {
+ 168   1              t=1;
+ 169   1              buzzer(2);                                                                              //to send the message once
+ 170   1              gstring("AT");
+ 171   1              delay(2000);
+ 172   1              Tx(0x0d);
+ 173   1              
+ 174   1              gstring("AT+CMGF=1");                                           //Configuring as text mode i.e.
+ 175   1              delay(2000);                                                            //if '0'=>PDU and if '1'=>text mode 
+ 176   1              Tx(0x0d);                                                                       //0x0d or 13d =>Enter i.e. Enter key
+ 177   1              delay(2000);
+ 178   1      
+ 179   1              cmd(0x01);
+C51 COMPILER V8.12   BURGLAR_ALARM                                                         05/15/2016 22:21:44 PAGE 4   
+
+ 180   1              string("Sending");
+ 181   1              cmd(0xc0);
+ 182   1              string("Message...");
+ 183   1              
+ 184   1              gstring("AT+CMGS=");                                    //'s' for sending message
+ 185   1              Tx('"');
+ 186   1              gstring("8007817602");                  
+ 187   1              Tx('"');
+ 188   1              delay(2000);
+ 189   1      
+ 190   1              Tx(0x0d);
+ 191   1              delay(2000);
+ 192   1              
+ 193   1              gstring("Intruder Outside");
+ 194   1              Tx(0x1a);                                                                               //To send the message
+ 195   1              delay(2000);
+ 196   1              Tx(0x0d);
+ 197   1              
+ 198   1              cmd(0x01);
+ 199   1              string("Message Sent!");
+ 200   1              delay(2000);
+ 201   1      
+ 202   1              cmd(0x01);
+ 203   1              string("Message has been");
+ 204   1              cmd(0xc0);
+ 205   1              string("Sent to Owner");
+ 206   1              delay(2000);
+ 207   1      }
+ 208          //--------------------End of GSM Code------------------//
+ 209          
+ 210          //--------------delay function-------------------------//
+ 211          void delay(int d)
+ 212          {
+ 213   1              unsigned char i;
+ 214   1              for(;d>0;d--)
+ 215   1              {
+ 216   2                      for(i=250;i>0;i--);             //500usec
+ 217   2                      for(i=250;i>0;i--);             //500usec
+ 218   2              }
+ 219   1      }
+ 220          //-----------------End  of delay function---------------------//
+ 221          
+ 222          
+ 223          //------------------------alarm system-----------------------//
+ 224          void buzzer(unsigned char b)
+ 225          {
+ 226   1              for(;b>0;b--)
+ 227   1              {
+ 228   2                      buz=1;
+ 229   2                      delay(500);
+ 230   2                      buz=0;
+ 231   2                      delay(500);
+ 232   2              }
+ 233   1      }
+ 234          //---------------End of alarm system-------------------//
+ 235          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    670    ----
+   CONSTANT SIZE    =    163    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V8.12   BURGLAR_ALARM                                                         05/15/2016 22:21:44 PAGE 5   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1      14
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

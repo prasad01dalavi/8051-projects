@@ -1,0 +1,171 @@
+C51 COMPILER V8.12   0804                                                                  05/10/2016 14:31:45 PAGE 1   
+
+
+C51 COMPILER V8.12, COMPILATION OF MODULE 0804
+OBJECT MODULE PLACED IN 0804.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE 0804.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1           #include<reg51.h>
+   2           #define lcd P2
+   3          
+   4           //functions' declaration
+   5           void init();
+   6           void delay(int);
+   7           void character(unsigned char);
+   8           void cmd(unsigned char);
+   9           void string(unsigned char *);
+  10           void number(int);
+  11          
+  12           unsigned char read();
+  13          
+  14           sbit rs=P3^0;
+  15           sbit en=P3^1;
+  16          
+  17           sbit wr=P3^2;
+  18           sbit intr=P3^3;
+  19           sbit rd=P3^4;
+  20          
+  21           unsigned char v;
+  22                                                                                                                     
+  23          void main()
+  24          {
+  25   1              unsigned char m=3;
+  26   1              lcd=0x00;
+  27   1              rs=0;
+  28   1              en=0;
+  29   1              init();
+  30   1              cmd(0x01);
+  31   1              string("     DIGITAL  ");
+  32   1              cmd(0xc0);
+  33   1              string("   THERMOMETER");
+  34   1              delay(2000);
+  35   1              cmd(0x01);
+  36   1              string("Temperature:");
+  37   1              while(1)
+  38   1              {
+  39   2                      cmd(0x8c);
+  40   2                      v=read();                
+  41   2                      number(v);
+  42   2                      string("C");
+  43   2      
+  44   2              }
+  45   1      
+  46   1       }
+  47          
+  48          //--------------------------LCD Code-------------------//
+  49          void init()
+  50          {
+  51   1      //      cmd(0x20);
+  52   1      //      cmd(0x28);
+  53   1      //      cmd(0x30);
+  54   1              cmd(0x01);         //clear the screen c
+  55   1      
+C51 COMPILER V8.12   0804                                                                  05/10/2016 14:31:45 PAGE 2   
+
+  56   1              cmd(0x38);         //8-bit mode with 5*7 matrix
+  57   1              cmd(0x0c);         //display on with cursor =>(0ch=curson off; 0fh=cursor blinking; 0eh=curson on)
+  58   1              
+  59   1              
+  60   1              cmd(0x06);         //shift cursor =>(06h right--> ; 04h <---left; default=right--->)
+  61   1              cmd(0x80);         //position =>(80=1st row 1st position; c0=2nd row 1st position)
+  62   1      }
+  63          
+  64          void cmd(unsigned char ch)
+  65          {
+  66   1              lcd=ch;
+  67   1              rs=0;
+  68   1              en=1;
+  69   1              delay(2);
+  70   1              en=0;
+  71   1      }
+  72          
+  73          void character(unsigned char ch)
+  74          {
+  75   1              lcd=ch;
+  76   1              rs=1;
+  77   1              en=1;
+  78   1              delay(2);
+  79   1              en=0;
+  80   1      }
+  81          
+  82          void string(unsigned char *p)
+  83          {
+  84   1              while(*p)
+  85   1              character(*p++);
+  86   1      }
+  87          
+  88          void number(int n)
+  89          {       
+  90   1              unsigned char i=1,arr[5];
+  91   1      
+  92   1              if(n<0)
+  93   1              {
+  94   2                      character('-');           //signed representation for negative number
+  95   2                      n=-n;                             //taking magnitude 
+  96   2              }
+  97   1              if(n==0)
+  98   1                      character('0');
+  99   1              while(n>0)
+ 100   1              {
+ 101   2                      arr[i]=(n%10)+48;
+ 102   2                      n=n/10;
+ 103   2                      i++;
+ 104   2              }
+ 105   1              
+ 106   1              for(--i;i>0;i--)                 //problem with >=; remedy=> initialize i=1 and stop at i>0
+ 107   1              {
+ 108   2              character(arr[i]);
+ 109   2              }
+ 110   1      }
+ 111          //-----------------------End of LCD Code------------------------// 
+ 112          
+ 113          //----------------------ADC 0804 Code-------------------------//
+ 114          unsigned char read()
+ 115          {
+ 116   1              unsigned char value;
+ 117   1              wr=0;
+C51 COMPILER V8.12   0804                                                                  05/10/2016 14:31:45 PAGE 3   
+
+ 118   1              rd=1;
+ 119   1              delay(2);
+ 120   1              wr=1;                      //Low to High Pulse to start conversion
+ 121   1              while(intr==1);    //wait till the conversion is done
+ 122   1              rd=0;                      //take (or read) the data by making rd=0
+ 123   1              delay(2);
+ 124   1              value=P1;                  
+ 125   1              return value;
+ 126   1      
+ 127   1      }
+ 128          //---------------End of ADC 0804 Code-----------------------//
+ 129          
+ 130          //--------------delay function-------------------------//
+ 131          void delay(int d)
+ 132          {
+ 133   1              unsigned char i;
+ 134   1              for(;d>0;d--)
+ 135   1              {
+ 136   2                      for(i=250;i>0;i--);             //500usec
+ 137   2                      for(i=250;i>0;i--);             //500usec
+ 138   2              }
+ 139   1      }
+ 140          //-----------------End  of delay function---------------------//
+ 141          
+ 142          
+ 143          
+ 144          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    344    ----
+   CONSTANT SIZE    =     45    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,94 @@
+BL51 BANKED LINKER/LOCATER V6.11                                                        11/12/2016  11:51:51  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.11, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE arcg2.obj TO Auto_Railway_Crossing_Gate
+
+
+INPUT MODULES INCLUDED:
+  arcg2.obj (ARCG2)
+
+
+LINK MAP OF MODULE:  Auto_Railway_Crossing_Gate (ARCG2)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     023AH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  Auto_Railway_Crossing_Gate (ARCG2)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ARCG2
+  C:0233H         SYMBOL        AGAIN
+  C:0231H         SYMBOL        DELAY
+  B:00A8H.7       SYMBOL        EA
+  B:00A8H.0       SYMBOL        EX0
+  B:00A8H.2       SYMBOL        EX1
+  B:00A0H.2       SYMBOL        GREENLED1
+  B:00A0H.3       SYMBOL        GREENLED2
+  C:0200H         SYMBOL        MAIN
+  D:0090H         SYMBOL        P1
+  D:00A0H         SYMBOL        P2
+  B:00A0H.0       SYMBOL        REDLED1
+  B:00A0H.1       SYMBOL        REDLED2
+  D:0090H         SYMBOL        SMOTOR
+  C:0222H         SYMBOL        STEPPER_ANTICLOCK
+  C:0213H         SYMBOL        STEPPER_CLOCK
+  C:0000H         LINE#         11
+  C:0200H         LINE#         16
+  C:0202H         LINE#         17
+  C:0204H         LINE#         18
+  C:0206H         LINE#         19
+  C:0208H         LINE#         20
+  C:020BH         LINE#         23
+  C:020DH         LINE#         24
+  C:020FH         LINE#         25
+  C:0211H         LINE#         26
+  C:0213H         LINE#         29
+  C:0216H         LINE#         30
+  C:0218H         LINE#         31
+  C:021AH         LINE#         32
+  C:021DH         LINE#         33
+BL51 BANKED LINKER/LOCATER V6.11                                                      11/12/2016  11:51:51  PAGE 2
+
+
+  C:021FH         LINE#         34
+  C:0221H         LINE#         35
+  C:0222H         LINE#         37
+  C:0225H         LINE#         38
+  C:0227H         LINE#         39
+  C:0229H         LINE#         40
+  C:022CH         LINE#         41
+  C:022EH         LINE#         42
+  C:0230H         LINE#         43
+  C:0231H         LINE#         45
+  C:0233H         LINE#         46
+  C:0235H         LINE#         47
+  C:0237H         LINE#         48
+  C:0239H         LINE#         49
+  C:0003H         LINE#         56
+  C:0005H         LINE#         57
+  C:0007H         LINE#         59
+  C:0009H         LINE#         60
+  C:000BH         LINE#         62
+  C:000EH         LINE#         63
+  C:0013H         LINE#         67
+  C:0015H         LINE#         68
+  C:0017H         LINE#         70
+  C:0019H         LINE#         71
+  C:001BH         LINE#         73
+  C:001EH         LINE#         74
+  -------         ENDMOD        ARCG2
+
+Program Size: data=8.0 xdata=0 code=570
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

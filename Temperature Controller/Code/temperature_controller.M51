@@ -1,0 +1,287 @@
+BL51 BANKED LINKER/LOCATER V6.11                                                        05/16/2016  22:35:42  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.11, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE temperature_controller.obj TO temperature_controller
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  temperature_controller.obj (TEMPERATURE_CONTROLLER)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  temperature_controller (TEMPERATURE_CONTROLLER)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0009H     UNIT         _DATA_GROUP_
+            DATA    0011H     0002H     UNIT         ?DT?TEMPERATURE_CONTROLLER
+            IDATA   0013H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     00A4H     UNIT         ?C?LIB_CODE
+            CODE    00A7H     009DH     UNIT         ?PR?MAIN?TEMPERATURE_CONTROLLER
+            CODE    0144H     008CH     UNIT         ?C_C51STARTUP
+            CODE    01D0H     0079H     UNIT         ?PR?_NUMBER?TEMPERATURE_CONTROLLER
+            CODE    0249H     0044H     UNIT         ?CO?TEMPERATURE_CONTROLLER
+            CODE    028DH     0025H     UNIT         ?PR?_STRING?TEMPERATURE_CONTROLLER
+            CODE    02B2H     0021H     UNIT         ?PR?_DELAY?TEMPERATURE_CONTROLLER
+            CODE    02D3H     0019H     UNIT         ?PR?INIT?TEMPERATURE_CONTROLLER
+            CODE    02ECH     0014H     UNIT         ?PR?READ?TEMPERATURE_CONTROLLER
+            CODE    0300H     000AH     UNIT         ?PR?_CMD?TEMPERATURE_CONTROLLER
+            CODE    030AH     000AH     UNIT         ?PR?_CHARACTER?TEMPERATURE_CONTROLLER
+            CODE    0314H     0004H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   temperature_controller (TEMPERATURE_CONTROLLER)
+
+
+SEGMENT                                         DATA_GROUP 
+  +--> CALLED SEGMENT                         START    LENGTH
+-------------------------------------------------------------
+?C_C51STARTUP                                 -----    -----
+  +--> ?PR?MAIN?TEMPERATURE_CONTROLLER
+  +--> ?C_INITSEG
+
+?PR?MAIN?TEMPERATURE_CONTROLLER               0008H    0001H
+  +--> ?PR?INIT?TEMPERATURE_CONTROLLER
+  +--> ?PR?_CMD?TEMPERATURE_CONTROLLER
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/16/2016  22:35:42  PAGE 2
+
+
+  +--> ?CO?TEMPERATURE_CONTROLLER
+  +--> ?PR?_STRING?TEMPERATURE_CONTROLLER
+  +--> ?PR?_DELAY?TEMPERATURE_CONTROLLER
+  +--> ?PR?READ?TEMPERATURE_CONTROLLER
+  +--> ?PR?_NUMBER?TEMPERATURE_CONTROLLER
+
+?PR?INIT?TEMPERATURE_CONTROLLER               -----    -----
+  +--> ?PR?_CMD?TEMPERATURE_CONTROLLER
+
+?PR?_CMD?TEMPERATURE_CONTROLLER               -----    -----
+  +--> ?PR?_DELAY?TEMPERATURE_CONTROLLER
+
+?PR?_STRING?TEMPERATURE_CONTROLLER            0009H    0003H
+  +--> ?PR?_CHARACTER?TEMPERATURE_CONTROLLER
+
+?PR?_CHARACTER?TEMPERATURE_CONTROLLER         -----    -----
+  +--> ?PR?_DELAY?TEMPERATURE_CONTROLLER
+
+?PR?READ?TEMPERATURE_CONTROLLER               -----    -----
+  +--> ?PR?_DELAY?TEMPERATURE_CONTROLLER
+
+?PR?_NUMBER?TEMPERATURE_CONTROLLER            0009H    0008H
+  +--> ?PR?_CHARACTER?TEMPERATURE_CONTROLLER
+
+
+
+SYMBOL TABLE OF MODULE:  temperature_controller (TEMPERATURE_CONTROLLER)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TEMPERATURE_CONTROLLER
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:01D0H         PUBLIC        _number
+  C:02B8H         PUBLIC        _delay
+  C:028DH         PUBLIC        _string
+  C:02ECH         PUBLIC        read
+  C:00A7H         PUBLIC        main
+  C:030AH         PUBLIC        _character
+  C:0300H         PUBLIC        _cmd
+  C:02D3H         PUBLIC        init
+  B:00B0H.3       PUBLIC        intr
+  B:00B0H.5       PUBLIC        ac
+  B:00B0H.1       PUBLIC        en
+  B:00B0H.4       PUBLIC        rd
+  D:0011H         PUBLIC        c
+  B:00B0H.0       PUBLIC        rs
+  B:00B0H.2       PUBLIC        wr
+  D:0012H         PUBLIC        v
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        m
+  -------         ENDDO         
+  C:00A7H         LINE#         25
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/16/2016  22:35:42  PAGE 3
+
+
+  C:00A7H         LINE#         26
+  C:00A7H         LINE#         27
+  C:00AAH         LINE#         28
+  C:00ADH         LINE#         29
+  C:00AFH         LINE#         30
+  C:00B1H         LINE#         31
+  C:00B3H         LINE#         32
+  C:00B6H         LINE#         33
+  C:00BBH         LINE#         34
+  C:00C4H         LINE#         35
+  C:00C9H         LINE#         36
+  C:00D2H         LINE#         37
+  C:00D9H         LINE#         39
+  C:00D9H         LINE#         40
+  C:00D9H         LINE#         41
+  C:00DEH         LINE#         42
+  C:00E7H         LINE#         43
+  C:00ECH         LINE#         44
+  C:00ECH         LINE#         45
+  C:00ECH         LINE#         46
+  C:00ECH         LINE#         47
+  C:00EEH         LINE#         48
+  C:00F5H         LINE#         49
+  C:00F5H         LINE#         50
+  C:00F8H         LINE#         51
+  C:00FDH         LINE#         52
+  C:0102H         LINE#         53
+  C:010BH         LINE#         54
+  C:0110H         LINE#         55
+  C:0119H         LINE#         56
+  C:011BH         LINE#         57
+  C:0124H         LINE#         58
+  C:0129H         LINE#         59
+  C:012EH         LINE#         60
+  C:0137H         LINE#         61
+  C:013EH         LINE#         62
+  C:0140H         LINE#         63
+  C:0142H         LINE#         64
+  -------         ENDPROC       MAIN
+  -------         PROC          INIT
+  C:02D3H         LINE#         69
+  C:02D3H         LINE#         70
+  C:02D3H         LINE#         74
+  C:02D8H         LINE#         76
+  C:02DDH         LINE#         77
+  C:02E2H         LINE#         80
+  C:02E7H         LINE#         81
+  -------         ENDPROC       INIT
+  -------         PROC          _CMD
+  D:0007H         SYMBOL        ch
+  C:0300H         LINE#         84
+  C:0300H         LINE#         85
+  C:0300H         LINE#         86
+  C:0302H         LINE#         87
+  C:0304H         LINE#         88
+  C:0304H         LINE#         89
+  C:0307H         LINE#         90
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/16/2016  22:35:42  PAGE 4
+
+
+  C:0309H         LINE#         91
+  -------         ENDPROC       _CMD
+  -------         PROC          _CHARACTER
+  D:0007H         SYMBOL        ch
+  C:030AH         LINE#         93
+  C:030AH         LINE#         94
+  C:030AH         LINE#         95
+  C:030CH         LINE#         96
+  C:030EH         LINE#         97
+  C:030EH         LINE#         98
+  C:0311H         LINE#         99
+  C:0313H         LINE#         100
+  -------         ENDPROC       _CHARACTER
+  -------         PROC          _STRING
+  D:0009H         SYMBOL        p
+  C:028DH         LINE#         102
+  C:0293H         LINE#         103
+  C:0293H         LINE#         104
+  C:029EH         LINE#         105
+  C:02B1H         LINE#         106
+  -------         ENDPROC       _STRING
+  -------         PROC          _NUMBER
+  D:0009H         SYMBOL        n
+  -------         DO            
+  D:000BH         SYMBOL        i
+  D:000CH         SYMBOL        arr
+  -------         ENDDO         
+  C:01D0H         LINE#         108
+  C:01D4H         LINE#         109
+  C:01D4H         LINE#         110
+  C:01D7H         LINE#         112
+  C:01E0H         LINE#         113
+  C:01E0H         LINE#         114
+  C:01E5H         LINE#         115
+  C:01F0H         LINE#         116
+  C:01F0H         LINE#         117
+  C:01F6H         LINE#         118
+  C:01FBH         LINE#         119
+  C:0208H         LINE#         120
+  C:0208H         LINE#         121
+  C:021EH         LINE#         122
+  C:022DH         LINE#         123
+  C:022FH         LINE#         124
+  C:0231H         LINE#         126
+  C:023AH         LINE#         127
+  C:023AH         LINE#         128
+  C:0244H         LINE#         129
+  C:0248H         LINE#         130
+  -------         ENDPROC       _NUMBER
+  -------         PROC          READ
+  -------         DO            
+  D:0007H         SYMBOL        value
+  -------         ENDDO         
+  C:02ECH         LINE#         134
+  C:02ECH         LINE#         135
+  C:02ECH         LINE#         137
+  C:02EEH         LINE#         138
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/16/2016  22:35:42  PAGE 5
+
+
+  C:02F0H         LINE#         139
+  C:02F3H         LINE#         140
+  C:02F5H         LINE#         141
+  C:02F8H         LINE#         142
+  C:02FAH         LINE#         143
+  C:02FDH         LINE#         144
+  C:02FFH         LINE#         145
+  C:02FFH         LINE#         147
+  -------         ENDPROC       READ
+  C:02B4H         SYMBOL        L?0037
+  -------         PROC          L?0036
+  -------         ENDPROC       L?0036
+  C:02B4H         SYMBOL        L?0037
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        d
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:02B8H         LINE#         151
+  C:02B8H         LINE#         152
+  C:02B8H         LINE#         154
+  C:02C3H         LINE#         155
+  C:02C3H         LINE#         156
+  C:02C7H         LINE#         157
+  C:02CBH         LINE#         158
+  C:02D2H         LINE#         159
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        TEMPERATURE_CONTROLLER
+
+  -------         MODULE        ?C?CLDPTR
+  C:0003H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?SIDIV
+  C:001CH         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:0052H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=20.0 xdata=0 code=792
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

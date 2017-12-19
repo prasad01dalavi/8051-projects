@@ -1,0 +1,101 @@
+C51 COMPILER V8.12   ARCG                                                                  11/11/2016 22:02:42 PAGE 1   
+
+
+C51 COMPILER V8.12, COMPILATION OF MODULE ARCG
+OBJECT MODULE PLACED IN arcg.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE arcg.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #define smotor P1
+   3          //function declaration or function prototype
+   4          void stepper_clock();
+   5          void stepper_antiClock();       
+   6          void delay(unsigned int d);             
+   7          
+   8          
+   9          sbit redLed1 = P2^0;
+  10          sbit redLed2 = P2^1;
+  11          
+  12          sbit greenLed1 = P2^2;
+  13          sbit greenLed2 = P2^3;
+  14          
+  15          //----------------ISR----------------------//
+  16          
+  17          void sensor1() interrupt 0      //INT0 
+  18          {
+  19   1              //when sensor 1 is detected red leds should be turned on and gate should be closed by rotating the motor 
+             -in clockwise direction
+  20   1              greenLed1 = greenLed2 = 0; //first turn off the green leds
+  21   1              redLed1 = redLed2 = 1; //turned on the red leds to close the gate
+  22   1              stepper_clock();   //calling a function to close the gate i.e. stepper motor will be rotated clockwise fo
+             -r 90
+  23   1      }
+  24          
+  25          void sensor2() interrupt 2      //INT1
+  26          {
+  27   1              //when sensor 2 is detected the green leds should be on and gate should also be opened by rotating motor 
+             -in anti clockwise direction
+  28   1              redLed1 = redLed2 = 0;  //first turn off the red leds
+  29   1              greenLed1 = greenLed2 = 1;      //turned on the green leds to open the gate
+  30   1          stepper_antiClock();  //calling a function to open the gate i.e. stepper motor will be rotated anti-cl
+             -ockwise for 90
+  31   1      }
+  32          //--------------End of ISR -------------------//
+  33          
+  34          void main()
+  35          {
+  36   1              redLed1 = redLed2 = greenLed1 = greenLed2 = 0;  //making them as output port
+  37   1              smotor - 0x00;  //making stepper motor port as output
+*** WARNING C275 IN LINE 37 OF ARCG.C: expression with possibly no effect
+  38   1              //lets to interrupt setting because sensors are connected to INT0 and INT1
+  39   1              EA = 1; //Enable access to use the interrupts
+  40   1              EX0 = 1;  //enable interrupt for INT0 i.e. sensor 1
+  41   1              EX1 = 1;        //enable interrupt for INT1 i.e. sensor 2
+  42   1              //Interrupt setting is done here we can use our interruts now
+  43   1              while(1);
+  44   1      }
+  45          
+  46          void stepper_clock() //write your code to rotate the motor 90 clockwise
+  47          {
+  48   1                      smotor=0x09;
+  49   1                      delay(1000);
+  50   1                      smotor=0x0c;
+C51 COMPILER V8.12   ARCG                                                                  11/11/2016 22:02:42 PAGE 2   
+
+  51   1                      delay(1000);
+  52   1      }
+  53          
+  54          void stepper_antiClock()  //write your code to rotate the motor 90 anti-clockwise
+  55          {
+  56   1                      smotor=0x0c;
+  57   1                      delay(1000);
+  58   1                      smotor=0x09;
+  59   1                      delay(1000);    
+  60   1      }
+  61          
+  62          void delay(unsigned int d)        //function definition
+  63          {
+  64   1              unsigned char i;
+  65   1              for(;d>0;d--)
+  66   1              {
+  67   2               for(i=255;i>0;i--);
+  68   2               for(i=255;i>0;i--);
+  69   2              }
+  70   1      
+  71   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    215    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,120 @@
+BL51 BANKED LINKER/LOCATER V6.11                                                        06/08/2016  17:05:55  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.11, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE automatic_wiper.obj TO automatic_wiper
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  automatic_wiper.obj (AUTOMATIC_WIPER)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  automatic_wiper (AUTOMATIC_WIPER)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0023H     UNIT         ?PR?WIPER?AUTOMATIC_WIPER
+            CODE    0026H     0020H     UNIT         ?PR?_DELAY?AUTOMATIC_WIPER
+            CODE    0046H     000DH     UNIT         ?PR?MAIN?AUTOMATIC_WIPER
+            CODE    0053H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   automatic_wiper (AUTOMATIC_WIPER)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?AUTOMATIC_WIPER
+
+?PR?MAIN?AUTOMATIC_WIPER
+  +--> ?PR?WIPER?AUTOMATIC_WIPER
+
+?PR?WIPER?AUTOMATIC_WIPER
+  +--> ?PR?_DELAY?AUTOMATIC_WIPER
+
+
+
+SYMBOL TABLE OF MODULE:  automatic_wiper (AUTOMATIC_WIPER)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        AUTOMATIC_WIPER
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:002DH         PUBLIC        _delay
+BL51 BANKED LINKER/LOCATER V6.11                                                      06/08/2016  17:05:55  PAGE 2
+
+
+  C:0046H         PUBLIC        main
+  C:0003H         PUBLIC        wiper
+  B:0090H.0       PUBLIC        rain_sensor
+  -------         PROC          MAIN
+  C:0046H         LINE#         10
+  C:0046H         LINE#         11
+  C:0046H         LINE#         12
+  C:0048H         LINE#         13
+  C:004BH         LINE#         15
+  C:004BH         LINE#         16
+  C:004BH         LINE#         17
+  C:004EH         LINE#         18
+  C:0051H         LINE#         19
+  -------         ENDPROC       MAIN
+  -------         PROC          WIPER
+  C:0003H         LINE#         22
+  C:0003H         LINE#         23
+  C:0003H         LINE#         24
+  C:0003H         LINE#         25
+  C:0003H         LINE#         26
+  C:0003H         LINE#         27
+  C:0006H         LINE#         28
+  C:0009H         LINE#         29
+  C:000CH         LINE#         30
+  C:000FH         LINE#         31
+  C:0012H         LINE#         32
+  C:0015H         LINE#         39
+  C:0018H         LINE#         40
+  C:001BH         LINE#         41
+  C:001EH         LINE#         42
+  C:0021H         LINE#         43
+  C:0021H         LINE#         44
+  C:0024H         LINE#         45
+  -------         ENDPROC       WIPER
+  C:0029H         SYMBOL        L?0021
+  -------         PROC          L?0020
+  -------         ENDPROC       L?0020
+  C:0029H         SYMBOL        L?0021
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        d
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:002DH         LINE#         50
+  C:002DH         LINE#         51
+  C:002DH         LINE#         53
+  C:0036H         LINE#         54
+  C:0036H         LINE#         55
+  C:003AH         LINE#         56
+  C:003EH         LINE#         57
+  C:0045H         LINE#         59
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        AUTOMATIC_WIPER
+
+Program Size: data=9.0 xdata=0 code=95
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

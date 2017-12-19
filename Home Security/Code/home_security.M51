@@ -1,0 +1,625 @@
+BL51 BANKED LINKER/LOCATER V6.11                                                        05/15/2016  15:34:36  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.11, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE home_security.obj TO home_security
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  home_security.obj (HOME_SECURITY)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  home_security (HOME_SECURITY)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0009H     UNIT         _DATA_GROUP_
+            DATA    0011H     0008H     UNIT         ?DT?_NUMBER?HOME_SECURITY
+            DATA    0019H     0005H     UNIT         ?DT?HOME_SECURITY
+            IDATA   001EH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     000DH     UNIT         ?C_INITSEG
+            CODE    0013H     0003H     ABSOLUTE     
+            CODE    0016H     0120H     UNIT         ?CO?HOME_SECURITY
+            CODE    0136H     00AAH     UNIT         ?PR?MAIN?HOME_SECURITY
+            CODE    01E0H     00A4H     UNIT         ?C?LIB_CODE
+            CODE    0284H     0098H     UNIT         ?PR?FIRE_MSG?HOME_SECURITY
+            CODE    031CH     0098H     UNIT         ?PR?LPG_MSG?HOME_SECURITY
+            CODE    03B4H     0098H     UNIT         ?PR?INTRUDER_MSG?HOME_SECURITY
+            CODE    044CH     008CH     UNIT         ?C_C51STARTUP
+            CODE    04D8H     0079H     UNIT         ?PR?_NUMBER?HOME_SECURITY
+            CODE    0551H     0076H     UNIT         ?PR?EXT1?HOME_SECURITY
+            CODE    05C7H     0065H     UNIT         ?PR?EXT0?HOME_SECURITY
+            CODE    062CH     0030H     UNIT         ?PR?_GSTRING?HOME_SECURITY
+            CODE    065CH     002BH     UNIT         ?PR?_STRING?HOME_SECURITY
+            CODE    0687H     0024H     UNIT         ?PR?_DELAY?HOME_SECURITY
+            CODE    06ABH     001EH     UNIT         ?PR?_BUZZER?HOME_SECURITY
+            CODE    06C9H     001CH     UNIT         ?PR?READ?HOME_SECURITY
+            CODE    06E5H     0019H     UNIT         ?PR?LCD_INIT?HOME_SECURITY
+            CODE    06FEH     0017H     UNIT         ?PR?_CMD?HOME_SECURITY
+            CODE    0715H     0010H     UNIT         ?PR?UC_INIT?HOME_SECURITY
+            CODE    0725H     0010H     UNIT         ?PR?_CHARACTER?HOME_SECURITY
+            CODE    0735H     000CH     UNIT         ?PR?UART_INIT?HOME_SECURITY
+            CODE    0741H     0008H     UNIT         ?PR?_TX?HOME_SECURITY
+
+
+
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  15:34:36  PAGE 2
+
+
+OVERLAY MAP OF MODULE:   home_security (HOME_SECURITY)
+
+
+SEGMENT                                  DATA_GROUP 
+  +--> CALLED SEGMENT                  START    LENGTH
+------------------------------------------------------
+?PR?EXT0?HOME_SECURITY                 -----    -----
+  +--> ?PR?_CMD?HOME_SECURITY
+  +--> ?CO?HOME_SECURITY
+  +--> ?PR?_STRING?HOME_SECURITY
+  +--> ?PR?_BUZZER?HOME_SECURITY
+  +--> ?PR?LPG_MSG?HOME_SECURITY
+
+?PR?_CMD?HOME_SECURITY                 -----    -----
+  +--> ?PR?_TX?HOME_SECURITY
+  +--> ?PR?_DELAY?HOME_SECURITY
+
+?PR?_DELAY?HOME_SECURITY               -----    -----
+  +--> ?PR?_TX?HOME_SECURITY
+
+?PR?_STRING?HOME_SECURITY              000EH    0003H
+  +--> ?CO?HOME_SECURITY
+  +--> ?PR?_CHARACTER?HOME_SECURITY
+
+?PR?_CHARACTER?HOME_SECURITY           -----    -----
+  +--> ?PR?_DELAY?HOME_SECURITY
+
+?PR?_BUZZER?HOME_SECURITY              -----    -----
+  +--> ?PR?_DELAY?HOME_SECURITY
+
+?PR?LPG_MSG?HOME_SECURITY              -----    -----
+  +--> ?PR?_BUZZER?HOME_SECURITY
+  +--> ?CO?HOME_SECURITY
+  +--> ?PR?_GSTRING?HOME_SECURITY
+  +--> ?PR?_DELAY?HOME_SECURITY
+  +--> ?PR?_CMD?HOME_SECURITY
+  +--> ?PR?_STRING?HOME_SECURITY
+  +--> ?PR?_TX?HOME_SECURITY
+
+?PR?_GSTRING?HOME_SECURITY             000EH    0003H
+  +--> ?PR?_TX?HOME_SECURITY
+  +--> ?CO?HOME_SECURITY
+
+*** NEW ROOT ***************************************************
+
+?PR?EXT1?HOME_SECURITY                 -----    -----
+  +--> ?PR?_CMD?HOME_SECURITY
+  +--> ?CO?HOME_SECURITY
+  +--> ?PR?_STRING?HOME_SECURITY
+  +--> ?PR?_DELAY?HOME_SECURITY
+  +--> ?PR?_BUZZER?HOME_SECURITY
+  +--> ?PR?INTRUDER_MSG?HOME_SECURITY
+
+?PR?INTRUDER_MSG?HOME_SECURITY         -----    -----
+  +--> ?PR?_BUZZER?HOME_SECURITY
+  +--> ?CO?HOME_SECURITY
+  +--> ?PR?_GSTRING?HOME_SECURITY
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  15:34:36  PAGE 3
+
+
+  +--> ?PR?_DELAY?HOME_SECURITY
+  +--> ?PR?_CMD?HOME_SECURITY
+  +--> ?PR?_STRING?HOME_SECURITY
+  +--> ?PR?_TX?HOME_SECURITY
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                          -----    -----
+  +--> ?PR?MAIN?HOME_SECURITY
+  +--> ?C_INITSEG
+
+?PR?MAIN?HOME_SECURITY                 -----    -----
+  +--> ?PR?UC_INIT?HOME_SECURITY
+  +--> ?PR?LCD_INIT?HOME_SECURITY
+  +--> ?PR?UART_INIT?HOME_SECURITY
+  +--> ?PR?_CMD?HOME_SECURITY
+  +--> ?CO?HOME_SECURITY
+  +--> ?PR?_STRING?HOME_SECURITY
+  +--> ?PR?_DELAY?HOME_SECURITY
+  +--> ?PR?READ?HOME_SECURITY
+  +--> ?PR?FIRE_MSG?HOME_SECURITY
+
+?PR?LCD_INIT?HOME_SECURITY             -----    -----
+  +--> ?PR?_CMD?HOME_SECURITY
+
+?PR?READ?HOME_SECURITY                 -----    -----
+  +--> ?PR?_DELAY?HOME_SECURITY
+
+?PR?FIRE_MSG?HOME_SECURITY             -----    -----
+  +--> ?PR?_BUZZER?HOME_SECURITY
+  +--> ?CO?HOME_SECURITY
+  +--> ?PR?_GSTRING?HOME_SECURITY
+  +--> ?PR?_DELAY?HOME_SECURITY
+  +--> ?PR?_CMD?HOME_SECURITY
+  +--> ?PR?_STRING?HOME_SECURITY
+  +--> ?PR?_TX?HOME_SECURITY
+
+
+
+SYMBOL TABLE OF MODULE:  home_security (HOME_SECURITY)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        HOME_SECURITY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:05C7H         PUBLIC        ext0
+  C:0637H         PUBLIC        _gstring
+  D:00B0H         PUBLIC        P3
+  C:0551H         PUBLIC        ext1
+  B:00A8H.7       PUBLIC        EA
+  C:04D8H         PUBLIC        _number
+  C:0690H         PUBLIC        _delay
+  C:0662H         PUBLIC        _string
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  15:34:36  PAGE 4
+
+
+  C:03B4H         PUBLIC        intruder_msg
+  B:0098H.1       PUBLIC        TI
+  C:06C9H         PUBLIC        read
+  C:06ABH         PUBLIC        _buzzer
+  C:0136H         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  C:0725H         PUBLIC        _character
+  D:0098H         PUBLIC        SCON
+  C:0705H         PUBLIC        _cmd
+  D:0089H         PUBLIC        TMOD
+  B:00B0H.6       PUBLIC        intr
+  C:06E5H         PUBLIC        lcd_init
+  C:0741H         PUBLIC        _Tx
+  B:00A8H.0       PUBLIC        EX0
+  D:008DH         PUBLIC        TH1
+  B:00A8H.2       PUBLIC        EX1
+  C:0284H         PUBLIC        fire_msg
+  B:0080H.2       PUBLIC        buz
+  B:0080H.1       PUBLIC        en
+  C:0735H         PUBLIC        uart_init
+  B:00B0H.7       PUBLIC        rd
+  B:0088H.6       PUBLIC        TR1
+  D:0019H         PUBLIC        f
+  B:0080H.0       PUBLIC        rs
+  B:00B0H.5       PUBLIC        wr
+  D:001AH         PUBLIC        m
+  C:031CH         PUBLIC        lpg_msg
+  C:0715H         PUBLIC        uc_init
+  D:001BH         PUBLIC        s
+  D:001CH         PUBLIC        t
+  D:001DH         PUBLIC        v
+  -------         PROC          EXT0
+  C:05C7H         LINE#         37
+  C:05E4H         LINE#         39
+  C:05E9H         LINE#         40
+  C:05EEH         LINE#         41
+  C:05F7H         LINE#         42
+  C:05FCH         LINE#         43
+  C:0605H         LINE#         44
+  C:060AH         LINE#         45
+  C:060EH         LINE#         46
+  C:0611H         LINE#         47
+  -------         ENDPROC       EXT0
+  -------         PROC          EXT1
+  C:0551H         LINE#         49
+  C:056EH         LINE#         51
+  C:0573H         LINE#         52
+  C:0578H         LINE#         53
+  C:0581H         LINE#         54
+  C:0584H         LINE#         55
+  C:0589H         LINE#         56
+  C:0592H         LINE#         57
+  C:0597H         LINE#         58
+  C:05A0H         LINE#         59
+  C:05A5H         LINE#         61
+  C:05A9H         LINE#         62
+  C:05ACH         LINE#         63
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  15:34:36  PAGE 5
+
+
+  -------         ENDPROC       EXT1
+  -------         PROC          MAIN
+  C:0136H         LINE#         66
+  C:0136H         LINE#         67
+  C:0136H         LINE#         68
+  C:0139H         LINE#         69
+  C:013CH         LINE#         70
+  C:013FH         LINE#         71
+  C:0144H         LINE#         72
+  C:014DH         LINE#         73
+  C:0150H         LINE#         74
+  C:0155H         LINE#         75
+  C:0155H         LINE#         76
+  C:0155H         LINE#         77
+  C:015AH         LINE#         78
+  C:0169H         LINE#         79
+  C:0169H         LINE#         80
+  C:016EH         LINE#         81
+  C:0177H         LINE#         82
+  C:0179H         LINE#         84
+  C:0180H         LINE#         85
+  C:0180H         LINE#         86
+  C:0185H         LINE#         87
+  C:0188H         LINE#         88
+  C:018DH         LINE#         89
+  C:0196H         LINE#         91
+  C:019AH         LINE#         92
+  C:019DH         LINE#         93
+  C:01A0H         LINE#         94
+  C:01A0H         LINE#         96
+  C:01A5H         LINE#         97
+  C:01A5H         LINE#         98
+  C:01AAH         LINE#         99
+  C:01ADH         LINE#         100
+  C:01B2H         LINE#         101
+  C:01BBH         LINE#         102
+  C:01BEH         LINE#         103
+  C:01BEH         LINE#         105
+  C:01C4H         LINE#         106
+  C:01C4H         LINE#         107
+  C:01C9H         LINE#         108
+  C:01CCH         LINE#         109
+  C:01D1H         LINE#         110
+  C:01DAH         LINE#         111
+  C:01DDH         LINE#         112
+  C:01DDH         LINE#         113
+  -------         ENDPROC       MAIN
+  -------         PROC          UC_INIT
+  C:0715H         LINE#         117
+  C:0715H         LINE#         118
+  C:0715H         LINE#         119
+  C:0718H         LINE#         120
+  C:071AH         LINE#         121
+  C:071CH         LINE#         122
+  C:071EH         LINE#         124
+  C:0720H         LINE#         125
+  C:0722H         LINE#         126
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  15:34:36  PAGE 6
+
+
+  C:0724H         LINE#         127
+  -------         ENDPROC       UC_INIT
+  -------         PROC          LCD_INIT
+  C:06E5H         LINE#         130
+  C:06E5H         LINE#         131
+  C:06E5H         LINE#         135
+  C:06EAH         LINE#         137
+  C:06EFH         LINE#         138
+  C:06F4H         LINE#         141
+  C:06F9H         LINE#         142
+  -------         ENDPROC       LCD_INIT
+  C:06FEH         SYMBOL        L?0066
+  -------         PROC          L?0065
+  -------         ENDPROC       L?0065
+  C:06FEH         SYMBOL        L?0066
+  -------         PROC          _CMD
+  D:0007H         SYMBOL        ch
+  C:0705H         LINE#         145
+  C:0705H         LINE#         146
+  C:0705H         LINE#         147
+  C:0707H         LINE#         148
+  C:0709H         LINE#         149
+  C:070BH         LINE#         150
+  C:0712H         LINE#         151
+  C:0714H         LINE#         152
+  -------         ENDPROC       _CMD
+  -------         PROC          _CHARACTER
+  D:0007H         SYMBOL        ch
+  C:0725H         LINE#         154
+  C:0725H         LINE#         155
+  C:0725H         LINE#         156
+  C:0727H         LINE#         157
+  C:0729H         LINE#         158
+  C:072BH         LINE#         159
+  C:0732H         LINE#         160
+  C:0734H         LINE#         161
+  -------         ENDPROC       _CHARACTER
+  C:065CH         SYMBOL        L?0068
+  -------         PROC          L?0067
+  -------         ENDPROC       L?0067
+  C:065CH         SYMBOL        L?0068
+  -------         PROC          _STRING
+  D:000EH         SYMBOL        p
+  C:0662H         LINE#         163
+  C:0668H         LINE#         164
+  C:0668H         LINE#         165
+  C:0673H         LINE#         166
+  C:0686H         LINE#         167
+  -------         ENDPROC       _STRING
+  -------         PROC          _NUMBER
+  D:0011H         SYMBOL        n
+  -------         DO            
+  D:0013H         SYMBOL        i
+  D:0014H         SYMBOL        arr
+  -------         ENDDO         
+  C:04D8H         LINE#         169
+  C:04DCH         LINE#         170
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  15:34:36  PAGE 7
+
+
+  C:04DCH         LINE#         171
+  C:04DFH         LINE#         173
+  C:04E8H         LINE#         174
+  C:04E8H         LINE#         175
+  C:04EDH         LINE#         176
+  C:04F8H         LINE#         177
+  C:04F8H         LINE#         178
+  C:04FEH         LINE#         179
+  C:0503H         LINE#         180
+  C:0510H         LINE#         181
+  C:0510H         LINE#         182
+  C:0526H         LINE#         183
+  C:0535H         LINE#         184
+  C:0537H         LINE#         185
+  C:0539H         LINE#         187
+  C:0542H         LINE#         188
+  C:0542H         LINE#         189
+  C:054CH         LINE#         190
+  C:0550H         LINE#         191
+  -------         ENDPROC       _NUMBER
+  -------         PROC          READ
+  -------         DO            
+  D:0007H         SYMBOL        value
+  -------         ENDDO         
+  C:06C9H         LINE#         195
+  C:06C9H         LINE#         196
+  C:06C9H         LINE#         198
+  C:06CBH         LINE#         199
+  C:06CDH         LINE#         200
+  C:06D4H         LINE#         201
+  C:06D6H         LINE#         202
+  C:06D9H         LINE#         203
+  C:06DBH         LINE#         204
+  C:06E2H         LINE#         205
+  C:06E4H         LINE#         206
+  C:06E4H         LINE#         208
+  -------         ENDPROC       READ
+  -------         PROC          UART_INIT
+  C:0735H         LINE#         212
+  C:0735H         LINE#         213
+  C:0735H         LINE#         214
+  C:0738H         LINE#         215
+  C:073BH         LINE#         216
+  C:073EH         LINE#         217
+  C:0740H         LINE#         218
+  -------         ENDPROC       UART_INIT
+  C:062CH         SYMBOL        L?0064
+  -------         PROC          L?0063
+  -------         ENDPROC       L?0063
+  C:062CH         SYMBOL        L?0064
+  -------         PROC          _GSTRING
+  D:000EH         SYMBOL        p
+  C:0637H         LINE#         220
+  C:063DH         LINE#         221
+  C:063DH         LINE#         222
+  C:0648H         LINE#         223
+  C:065BH         LINE#         224
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  15:34:36  PAGE 8
+
+
+  -------         ENDPROC       _GSTRING
+  -------         PROC          _TX
+  D:0007H         SYMBOL        ch
+  C:0741H         LINE#         226
+  C:0741H         LINE#         227
+  C:0741H         LINE#         228
+  C:0743H         LINE#         229
+  C:0746H         LINE#         230
+  C:0748H         LINE#         231
+  -------         ENDPROC       _TX
+  -------         PROC          FIRE_MSG
+  C:0284H         LINE#         232
+  C:0284H         LINE#         233
+  C:0284H         LINE#         234
+  C:0287H         LINE#         235
+  C:028CH         LINE#         236
+  C:0295H         LINE#         237
+  C:0298H         LINE#         238
+  C:0298H         LINE#         240
+  C:029BH         LINE#         241
+  C:029EH         LINE#         242
+  C:029EH         LINE#         243
+  C:02A1H         LINE#         245
+  C:02A6H         LINE#         246
+  C:02AFH         LINE#         247
+  C:02B4H         LINE#         248
+  C:02BDH         LINE#         250
+  C:02C6H         LINE#         251
+  C:02CBH         LINE#         252
+  C:02D4H         LINE#         253
+  C:02D6H         LINE#         254
+  C:02D9H         LINE#         256
+  C:02D9H         LINE#         257
+  C:02DCH         LINE#         259
+  C:02E5H         LINE#         260
+  C:02E7H         LINE#         261
+  C:02EAH         LINE#         262
+  C:02EAH         LINE#         264
+  C:02EDH         LINE#         265
+  C:02F6H         LINE#         266
+  C:02F9H         LINE#         268
+  C:02FEH         LINE#         269
+  C:0307H         LINE#         270
+  C:030CH         LINE#         271
+  C:0315H         LINE#         272
+  -------         ENDPROC       FIRE_MSG
+  -------         PROC          LPG_MSG
+  C:031CH         LINE#         275
+  C:031CH         LINE#         276
+  C:031CH         LINE#         277
+  C:031FH         LINE#         278
+  C:0324H         LINE#         279
+  C:032DH         LINE#         280
+  C:0330H         LINE#         281
+  C:0330H         LINE#         283
+  C:0333H         LINE#         284
+  C:0336H         LINE#         285
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  15:34:36  PAGE 9
+
+
+  C:0336H         LINE#         286
+  C:0339H         LINE#         288
+  C:033EH         LINE#         289
+  C:0347H         LINE#         290
+  C:034CH         LINE#         291
+  C:0355H         LINE#         293
+  C:035EH         LINE#         294
+  C:0363H         LINE#         295
+  C:036CH         LINE#         296
+  C:036EH         LINE#         297
+  C:0371H         LINE#         299
+  C:0371H         LINE#         300
+  C:0374H         LINE#         302
+  C:037DH         LINE#         303
+  C:037FH         LINE#         304
+  C:0382H         LINE#         305
+  C:0382H         LINE#         307
+  C:0385H         LINE#         308
+  C:038EH         LINE#         309
+  C:0391H         LINE#         311
+  C:0396H         LINE#         312
+  C:039FH         LINE#         313
+  C:03A4H         LINE#         314
+  C:03ADH         LINE#         315
+  -------         ENDPROC       LPG_MSG
+  -------         PROC          INTRUDER_MSG
+  C:03B4H         LINE#         318
+  C:03B4H         LINE#         319
+  C:03B4H         LINE#         320
+  C:03B7H         LINE#         321
+  C:03BCH         LINE#         322
+  C:03C5H         LINE#         323
+  C:03C8H         LINE#         324
+  C:03C8H         LINE#         326
+  C:03CBH         LINE#         327
+  C:03CEH         LINE#         328
+  C:03CEH         LINE#         329
+  C:03D1H         LINE#         331
+  C:03D6H         LINE#         332
+  C:03DFH         LINE#         333
+  C:03E4H         LINE#         334
+  C:03EDH         LINE#         336
+  C:03F6H         LINE#         337
+  C:03FBH         LINE#         338
+  C:0404H         LINE#         339
+  C:0406H         LINE#         340
+  C:0409H         LINE#         342
+  C:0409H         LINE#         343
+  C:040CH         LINE#         345
+  C:0415H         LINE#         346
+  C:0417H         LINE#         347
+  C:041AH         LINE#         348
+  C:041AH         LINE#         350
+  C:041DH         LINE#         351
+  C:0426H         LINE#         352
+  C:0429H         LINE#         354
+  C:042EH         LINE#         355
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  15:34:36  PAGE 10
+
+
+  C:0437H         LINE#         356
+  C:043CH         LINE#         357
+  C:0445H         LINE#         358
+  -------         ENDPROC       INTRUDER_MSG
+  C:0687H         SYMBOL        L?0060
+  C:0689H         SYMBOL        L?0061
+  C:068CH         SYMBOL        L?0062
+  -------         PROC          L?0059
+  -------         ENDPROC       L?0059
+  C:0687H         SYMBOL        L?0060
+  C:0689H         SYMBOL        L?0061
+  C:068CH         SYMBOL        L?0062
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        d
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:0690H         LINE#         364
+  C:0690H         LINE#         365
+  C:0690H         LINE#         367
+  C:069BH         LINE#         368
+  C:069BH         LINE#         369
+  C:069FH         LINE#         370
+  C:06A3H         LINE#         371
+  C:06AAH         LINE#         372
+  -------         ENDPROC       _DELAY
+  -------         PROC          _BUZZER
+  D:0004H         SYMBOL        b
+  C:06ABH         LINE#         377
+  C:06ADH         LINE#         378
+  C:06ADH         LINE#         379
+  C:06B3H         LINE#         380
+  C:06B3H         LINE#         381
+  C:06B5H         LINE#         382
+  C:06BCH         LINE#         383
+  C:06BEH         LINE#         384
+  C:06C5H         LINE#         385
+  C:06C8H         LINE#         386
+  -------         ENDPROC       _BUZZER
+  -------         ENDMOD        HOME_SECURITY
+
+  -------         MODULE        ?C?CLDPTR
+  C:01E0H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?SIDIV
+  C:01F9H         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:022FH         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?HOME_SECURITY
+
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  15:34:36  PAGE 11
+
+
+    SEGMENT: ?PR?_STRING?HOME_SECURITY
+    CALLER1: ?PR?EXT0?HOME_SECURITY
+    CALLER2: ?PR?EXT1?HOME_SECURITY
+
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_GSTRING?HOME_SECURITY
+    CALLER1: ?PR?EXT0?HOME_SECURITY
+    CALLER2: ?PR?EXT1?HOME_SECURITY
+
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?HOME_SECURITY
+    CALLER1: ?PR?EXT1?HOME_SECURITY
+    CALLER2: ?C_C51STARTUP
+
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_GSTRING?HOME_SECURITY
+    CALLER1: ?PR?EXT1?HOME_SECURITY
+    CALLER2: ?C_C51STARTUP
+
+Program Size: data=31.0 xdata=0 code=1865
+LINK/LOCATE RUN COMPLETE.  5 WARNING(S),  0 ERROR(S)

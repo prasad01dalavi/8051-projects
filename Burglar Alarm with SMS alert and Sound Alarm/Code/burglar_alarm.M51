@@ -1,0 +1,400 @@
+BL51 BANKED LINKER/LOCATER V6.11                                                        05/15/2016  22:21:44  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.11, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE burglar_alarm.obj TO burglar_alarm
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  burglar_alarm.obj (BURGLAR_ALARM)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  burglar_alarm (BURGLAR_ALARM)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0008H     UNIT         ?DT?_NUMBER?BURGLAR_ALARM
+            DATA    0010H     0006H     UNIT         _DATA_GROUP_
+            DATA    0016H     0001H     UNIT         ?DT?BURGLAR_ALARM
+            IDATA   0017H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     00AAH     UNIT         ?PR?INTRUDER_MSG?BURGLAR_ALARM
+            CODE    00B0H     00A4H     UNIT         ?C?LIB_CODE
+            CODE    0154H     00A3H     UNIT         ?CO?BURGLAR_ALARM
+            CODE    01F7H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0283H     0079H     UNIT         ?PR?_NUMBER?BURGLAR_ALARM
+            CODE    02FCH     0077H     UNIT         ?PR?EXT1?BURGLAR_ALARM
+            CODE    0373H     002BH     UNIT         ?PR?_STRING?BURGLAR_ALARM
+            CODE    039EH     0025H     UNIT         ?PR?_GSTRING?BURGLAR_ALARM
+            CODE    03C3H     0024H     UNIT         ?PR?_DELAY?BURGLAR_ALARM
+            CODE    03E7H     001EH     UNIT         ?PR?_BUZZER?BURGLAR_ALARM
+            CODE    0405H     0019H     UNIT         ?PR?LCD_INIT?BURGLAR_ALARM
+            CODE    041EH     0017H     UNIT         ?PR?MAIN?BURGLAR_ALARM
+            CODE    0435H     0010H     UNIT         ?PR?_CMD?BURGLAR_ALARM
+            CODE    0445H     0010H     UNIT         ?PR?_CHARACTER?BURGLAR_ALARM
+            CODE    0455H     000EH     UNIT         ?PR?UC_INIT?BURGLAR_ALARM
+            CODE    0463H     000CH     UNIT         ?PR?UART_INIT?BURGLAR_ALARM
+            CODE    046FH     0008H     UNIT         ?PR?_TX?BURGLAR_ALARM
+            CODE    0477H     0004H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   burglar_alarm (BURGLAR_ALARM)
+
+
+SEGMENT                                  DATA_GROUP 
+  +--> CALLED SEGMENT                  START    LENGTH
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  22:21:44  PAGE 2
+
+
+------------------------------------------------------
+?PR?EXT1?BURGLAR_ALARM                 -----    -----
+  +--> ?PR?_CMD?BURGLAR_ALARM
+  +--> ?CO?BURGLAR_ALARM
+  +--> ?PR?_STRING?BURGLAR_ALARM
+  +--> ?PR?_DELAY?BURGLAR_ALARM
+  +--> ?PR?_BUZZER?BURGLAR_ALARM
+  +--> ?PR?INTRUDER_MSG?BURGLAR_ALARM
+
+?PR?_CMD?BURGLAR_ALARM                 -----    -----
+  +--> ?PR?_DELAY?BURGLAR_ALARM
+
+?PR?_DELAY?BURGLAR_ALARM               -----    -----
+  +--> ?PR?_TX?BURGLAR_ALARM
+
+?PR?_STRING?BURGLAR_ALARM              0013H    0003H
+  +--> ?CO?BURGLAR_ALARM
+  +--> ?PR?_CHARACTER?BURGLAR_ALARM
+
+?PR?_CHARACTER?BURGLAR_ALARM           -----    -----
+  +--> ?PR?_DELAY?BURGLAR_ALARM
+
+?PR?_BUZZER?BURGLAR_ALARM              -----    -----
+  +--> ?PR?_DELAY?BURGLAR_ALARM
+
+?PR?INTRUDER_MSG?BURGLAR_ALARM         -----    -----
+  +--> ?PR?_BUZZER?BURGLAR_ALARM
+  +--> ?CO?BURGLAR_ALARM
+  +--> ?PR?_GSTRING?BURGLAR_ALARM
+  +--> ?PR?_DELAY?BURGLAR_ALARM
+  +--> ?PR?_TX?BURGLAR_ALARM
+  +--> ?PR?_CMD?BURGLAR_ALARM
+  +--> ?PR?_STRING?BURGLAR_ALARM
+
+?PR?_GSTRING?BURGLAR_ALARM             0010H    0003H
+  +--> ?PR?_TX?BURGLAR_ALARM
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                          -----    -----
+  +--> ?PR?MAIN?BURGLAR_ALARM
+  +--> ?C_INITSEG
+
+?PR?MAIN?BURGLAR_ALARM                 -----    -----
+  +--> ?PR?UC_INIT?BURGLAR_ALARM
+  +--> ?PR?LCD_INIT?BURGLAR_ALARM
+  +--> ?PR?UART_INIT?BURGLAR_ALARM
+  +--> ?CO?BURGLAR_ALARM
+  +--> ?PR?_STRING?BURGLAR_ALARM
+  +--> ?PR?_DELAY?BURGLAR_ALARM
+
+?PR?LCD_INIT?BURGLAR_ALARM             -----    -----
+  +--> ?PR?_CMD?BURGLAR_ALARM
+
+
+
+SYMBOL TABLE OF MODULE:  burglar_alarm (BURGLAR_ALARM)
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  22:21:44  PAGE 3
+
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        BURGLAR_ALARM
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  C:039EH         PUBLIC        _gstring
+  D:00B0H         PUBLIC        P3
+  C:02FCH         PUBLIC        ext1
+  B:00A8H.7       PUBLIC        EA
+  C:0283H         PUBLIC        _number
+  C:03CCH         PUBLIC        _delay
+  C:0379H         PUBLIC        _string
+  C:0006H         PUBLIC        intruder_msg
+  B:0098H.1       PUBLIC        TI
+  C:03E7H         PUBLIC        _buzzer
+  C:041EH         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  C:0445H         PUBLIC        _character
+  D:0098H         PUBLIC        SCON
+  C:0435H         PUBLIC        _cmd
+  D:0089H         PUBLIC        TMOD
+  C:0405H         PUBLIC        lcd_init
+  C:046FH         PUBLIC        _Tx
+  B:00A8H.0       PUBLIC        EX0
+  D:008DH         PUBLIC        TH1
+  B:00B0H.5       PUBLIC        buz
+  B:00B0H.4       PUBLIC        en
+  C:0463H         PUBLIC        uart_init
+  B:0088H.6       PUBLIC        TR1
+  B:00B0H.3       PUBLIC        rs
+  C:0455H         PUBLIC        uc_init
+  D:0016H         PUBLIC        t
+  -------         PROC          EXT1
+  C:02FCH         LINE#         28
+  C:0319H         LINE#         30
+  C:031EH         LINE#         31
+  C:0323H         LINE#         32
+  C:032CH         LINE#         33
+  C:032FH         LINE#         34
+  C:0334H         LINE#         35
+  C:0337H         LINE#         36
+  C:033CH         LINE#         37
+  C:0345H         LINE#         38
+  C:034AH         LINE#         40
+  C:034EH         LINE#         41
+  C:0351H         LINE#         43
+  C:0356H         LINE#         44
+  C:035BH         LINE#         45
+  C:035EH         LINE#         46
+  C:0363H         LINE#         47
+  C:036CH         LINE#         49
+  C:036CH         LINE#         50
+  -------         ENDPROC       EXT1
+  -------         PROC          MAIN
+  C:041EH         LINE#         54
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  22:21:44  PAGE 4
+
+
+  C:041EH         LINE#         55
+  C:041EH         LINE#         56
+  C:0421H         LINE#         57
+  C:0424H         LINE#         58
+  C:0427H         LINE#         60
+  C:0430H         LINE#         61
+  C:0433H         LINE#         63
+  -------         ENDPROC       MAIN
+  -------         PROC          UC_INIT
+  C:0455H         LINE#         67
+  C:0455H         LINE#         68
+  C:0455H         LINE#         69
+  C:0458H         LINE#         70
+  C:045AH         LINE#         71
+  C:045CH         LINE#         72
+  C:045EH         LINE#         74
+  C:0460H         LINE#         75
+  C:0462H         LINE#         76
+  -------         ENDPROC       UC_INIT
+  -------         PROC          LCD_INIT
+  C:0405H         LINE#         80
+  C:0405H         LINE#         81
+  C:0405H         LINE#         85
+  C:040AH         LINE#         87
+  C:040FH         LINE#         88
+  C:0414H         LINE#         91
+  C:0419H         LINE#         92
+  -------         ENDPROC       LCD_INIT
+  -------         PROC          _CMD
+  D:0007H         SYMBOL        ch
+  C:0435H         LINE#         95
+  C:0435H         LINE#         96
+  C:0435H         LINE#         97
+  C:0437H         LINE#         98
+  C:0439H         LINE#         99
+  C:043BH         LINE#         100
+  C:0442H         LINE#         101
+  C:0444H         LINE#         102
+  -------         ENDPROC       _CMD
+  -------         PROC          _CHARACTER
+  D:0007H         SYMBOL        ch
+  C:0445H         LINE#         104
+  C:0445H         LINE#         105
+  C:0445H         LINE#         106
+  C:0447H         LINE#         107
+  C:0449H         LINE#         108
+  C:044BH         LINE#         109
+  C:0452H         LINE#         110
+  C:0454H         LINE#         111
+  -------         ENDPROC       _CHARACTER
+  -------         PROC          L?0051
+  -------         ENDPROC       L?0051
+  -------         PROC          _STRING
+  D:0013H         SYMBOL        p
+  C:0379H         LINE#         113
+  C:037FH         LINE#         114
+  C:037FH         LINE#         115
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  22:21:44  PAGE 5
+
+
+  C:038AH         LINE#         116
+  C:039DH         LINE#         117
+  -------         ENDPROC       _STRING
+  -------         PROC          _NUMBER
+  D:0008H         SYMBOL        n
+  -------         DO            
+  D:000AH         SYMBOL        i
+  D:000BH         SYMBOL        arr
+  -------         ENDDO         
+  C:0283H         LINE#         119
+  C:0287H         LINE#         120
+  C:0287H         LINE#         121
+  C:028AH         LINE#         123
+  C:0293H         LINE#         124
+  C:0293H         LINE#         125
+  C:0298H         LINE#         126
+  C:02A3H         LINE#         127
+  C:02A3H         LINE#         128
+  C:02A9H         LINE#         129
+  C:02AEH         LINE#         130
+  C:02BBH         LINE#         131
+  C:02BBH         LINE#         132
+  C:02D1H         LINE#         133
+  C:02E0H         LINE#         134
+  C:02E2H         LINE#         135
+  C:02E4H         LINE#         137
+  C:02EDH         LINE#         138
+  C:02EDH         LINE#         139
+  C:02F7H         LINE#         140
+  C:02FBH         LINE#         141
+  -------         ENDPROC       _NUMBER
+  -------         PROC          UART_INIT
+  C:0463H         LINE#         145
+  C:0463H         LINE#         146
+  C:0463H         LINE#         147
+  C:0466H         LINE#         148
+  C:0469H         LINE#         149
+  C:046CH         LINE#         150
+  C:046EH         LINE#         151
+  -------         ENDPROC       UART_INIT
+  -------         PROC          _GSTRING
+  D:0010H         SYMBOL        p
+  C:039EH         LINE#         153
+  C:03A4H         LINE#         154
+  C:03A4H         LINE#         155
+  C:03AFH         LINE#         156
+  C:03C2H         LINE#         157
+  -------         ENDPROC       _GSTRING
+  -------         PROC          _TX
+  D:0007H         SYMBOL        ch
+  C:046FH         LINE#         159
+  C:046FH         LINE#         160
+  C:046FH         LINE#         161
+  C:0471H         LINE#         162
+  C:0474H         LINE#         163
+  C:0476H         LINE#         164
+  -------         ENDPROC       _TX
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  22:21:44  PAGE 6
+
+
+  -------         PROC          INTRUDER_MSG
+  C:0006H         LINE#         166
+  C:0006H         LINE#         167
+  C:0006H         LINE#         168
+  C:0009H         LINE#         169
+  C:000EH         LINE#         170
+  C:0017H         LINE#         171
+  C:001AH         LINE#         172
+  C:001FH         LINE#         174
+  C:0028H         LINE#         175
+  C:002BH         LINE#         176
+  C:002BH         LINE#         177
+  C:002EH         LINE#         179
+  C:0033H         LINE#         180
+  C:003CH         LINE#         181
+  C:0041H         LINE#         182
+  C:004AH         LINE#         184
+  C:0053H         LINE#         185
+  C:0058H         LINE#         186
+  C:0061H         LINE#         187
+  C:0063H         LINE#         188
+  C:0066H         LINE#         190
+  C:0066H         LINE#         191
+  C:0069H         LINE#         193
+  C:0072H         LINE#         194
+  C:0074H         LINE#         195
+  C:0077H         LINE#         196
+  C:007CH         LINE#         198
+  C:0081H         LINE#         199
+  C:008AH         LINE#         200
+  C:008DH         LINE#         202
+  C:0092H         LINE#         203
+  C:009BH         LINE#         204
+  C:00A0H         LINE#         205
+  C:00A9H         LINE#         206
+  -------         ENDPROC       INTRUDER_MSG
+  C:03C5H         SYMBOL        L?0049
+  C:03C8H         SYMBOL        L?0050
+  -------         PROC          L?0048
+  -------         ENDPROC       L?0048
+  C:03C5H         SYMBOL        L?0049
+  C:03C8H         SYMBOL        L?0050
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        d
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:03CCH         LINE#         211
+  C:03CCH         LINE#         212
+  C:03CCH         LINE#         214
+  C:03D7H         LINE#         215
+  C:03D7H         LINE#         216
+  C:03DBH         LINE#         217
+  C:03DFH         LINE#         218
+  C:03E6H         LINE#         219
+  -------         ENDPROC       _DELAY
+  -------         PROC          _BUZZER
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  22:21:44  PAGE 7
+
+
+  D:0004H         SYMBOL        b
+  C:03E7H         LINE#         224
+  C:03E9H         LINE#         225
+  C:03E9H         LINE#         226
+  C:03EFH         LINE#         227
+  C:03EFH         LINE#         228
+  C:03F1H         LINE#         229
+  C:03F8H         LINE#         230
+  C:03FAH         LINE#         231
+  C:0401H         LINE#         232
+  C:0404H         LINE#         233
+  -------         ENDPROC       _BUZZER
+  -------         ENDMOD        BURGLAR_ALARM
+
+  -------         MODULE        ?C?CLDPTR
+  C:00B0H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?SIDIV
+  C:00C9H         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:00FFH         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?BURGLAR_ALARM
+
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?BURGLAR_ALARM
+    CALLER1: ?PR?EXT1?BURGLAR_ALARM
+    CALLER2: ?C_C51STARTUP
+
+Program Size: data=24.0 xdata=0 code=1147
+LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)

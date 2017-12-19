@@ -1,0 +1,116 @@
+A51 MACRO ASSEMBLER  ARCG2                                                                11/12/2016 11:51:50 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN arcg2.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE arcg2.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2                                             
+                       3                                             
+  0090                 4                                             SMOTOR EQU P1                   
+  00A0                 5                                             REDLED1 BIT P2.0
+  00A1                 6                                             REDLED2 BIT P2.1
+  00A2                 7                                             GREENLED1 BIT P2.2
+  00A3                 8                                             GREENLED2 BIT P2.3
+                       9     
+0000                  10                                             ORG 0H
+0000 020200           11                                             LJMP MAIN          
+                      12                                                                       
+                      13                     
+0200                  14                                             ORG 200H                 
+                      15                                             
+0200 C2A0             16                             MAIN:   CLR REDLED1
+0202 C2A1             17                                             CLR REDLED2
+0204 C2A2             18                                             CLR GREENLED1
+0206 C2A3             19                                             CLR GREENLED2
+0208 759000           20                                             MOV SMOTOR,#00H   
+                      21                                             
+                      22                                             
+020B D2AF             23                                             SETB EA           
+020D D2A8             24                                             SETB EX0          
+020F D2AA             25                                             SETB EX1          
+0211 80FE             26                                             SJMP $     
+                      27     
+                      28     
+0213 759009           29       STEPPER_CLOCK:    MOV SMOTOR,#09H                 
+0216 5131             30                                             ACALL DELAY
+0218 5131             31                                             ACALL DELAY
+021A 75900C           32                                             MOV SMOTOR,#0CH
+021D 5131             33                                             ACALL DELAY
+021F 5131             34                                             ACALL DELAY
+0221 22               35                                             RET     
+                      36                                             
+0222 75900C           37     STEPPER_ANTICLOCK:  MOV SMOTOR,#0CH         
+0225 5131             38                                             ACALL DELAY
+0227 5131             39                                             ACALL DELAY
+0229 759009           40                                             MOV SMOTOR,#09H
+022C 5131             41                                             ACALL DELAY
+022E 5131             42                                             ACALL DELAY
+0230 22               43                                             RET     
+                      44                                             
+0231 7905             45                             DELAY:  MOV R1,#5
+0233 7A32             46                             AGAIN:  MOV R2,#50
+0235 DAFE             47                                             DJNZ R2,$                        
+0237 D9FA             48                                             DJNZ R1,AGAIN            
+0239 22               49                                             RET 
+                      50     
+                      51     
+                      52     
+                      53     
+0003                  54                                             ORG 0003H                
+                      55                                             
+0003 C2A2             56                                             CLR GREENLED1
+0005 C2A3             57                                             CLR GREENLED2
+                      58                                             
+A51 MACRO ASSEMBLER  ARCG2                                                                11/12/2016 11:51:50 PAGE     2
+
+0007 D2A0             59                                             SETB REDLED1
+0009 D2A1             60                                             SETB REDLED2
+                      61                                             
+000B 120213           62                                             LCALL STEPPER_CLOCK
+000E 32               63                                             RETI
+                      64                                             
+0013                  65                                             ORG 0013H         
+                      66                                             
+0013 C2A0             67                                             CLR REDLED1
+0015 C2A1             68                                             CLR REDLED2
+                      69                                             
+0017 D2A2             70                                             SETB GREENLED1
+0019 D2A3             71                                             SETB GREENLED2
+                      72                                             
+001B 120222           73                                             LCALL STEPPER_ANTICLOCK
+001E 32               74                                             RETI
+                      75     
+                      76                                             END
+A51 MACRO ASSEMBLER  ARCG2                                                                11/12/2016 11:51:50 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   0233H   A   
+DELAY. . . . . . .  C ADDR   0231H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+EX1. . . . . . . .  B ADDR   00A8H.2 A   
+GREENLED1. . . . .  B ADDR   00A0H.2 A   
+GREENLED2. . . . .  B ADDR   00A0H.3 A   
+MAIN . . . . . . .  C ADDR   0200H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+REDLED1. . . . . .  B ADDR   00A0H.0 A   
+REDLED2. . . . . .  B ADDR   00A0H.1 A   
+SMOTOR . . . . . .  D ADDR   0090H   A   
+STEPPER_ANTICLOCK.  C ADDR   0222H   A   
+STEPPER_CLOCK. . .  C ADDR   0213H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

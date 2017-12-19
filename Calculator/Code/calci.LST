@@ -1,0 +1,413 @@
+A51 MACRO ASSEMBLER  CALCI                                                                03/02/2016 17:52:46 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN calci.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE calci.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0030                 1      N1 EQU 30H ;#!Ram byte location holds first oeprand
+  0031                 2      N2 EQU 31H ;#!Ram byte locations holds second operand 
+  0032                 3      OP EQU 32H ;#!Ram byte location holds operation ascii code
+  0033                 4      R EQU 33H ;#!Ram byte location holds result
+  0034                 5      SIGN EQU 34H ;#!Ram byte location holds result's sign
+  0035                 6      TEMP EQU 35H ;#!Ram byte location holds temporary data
+  000A                 7      DIF BIT 0AH ;#!Digit input flag bit(0,1,2,3,4,5,6,7,8,9)
+  000B                 8      OIF BIT 0BH ;#!Operator input flag bit(+,-,*,/)
+  000C                 9      AIF BIT 0CH ;#!Assignment operator flag bit(=)
+0000                  10      ORG 0H ;#!Orginate at rom address 0000H
+0000 0130             11      AJMP MAIN ;#!Absoulte jump to main routine
+                      12      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+                      13      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+0030                  14      ORG 30H ;#!Orginate at rom adress 0030H
+0030 113C             15      MAIN: ACALL memoryInit ;#!CALL memory initialization subroutine
+0032 1151             16      ACALL lcdInit ;#!CALL lcd initialization subroutine
+0034 115E             17      ACALL readInput ;#!CALL read input subroutine
+0036 11A0             18      ACALL calculateResult ;#!CALL calculate result subroutine
+0038 11E7             19      ACAll printOutput ;#!CALL print output subroutine
+003A 0130             20      AJMP MAIN ;#!return and start the program once more
+                      21      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+                      22      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+003C                  23      memoryInit:
+003C E4               24      CLR A ;#!Clear ACC
+003D F530             25      MOV N1,A ;#!Clear first operand location in ram
+003F F531             26      MOV N2,A ;#!Clear second operand location in ram
+0041 F532             27      MOV OP,A ;#!Clear operation location in ram
+0043 F533             28      MOV R,A ;#!Clear result location in ram
+0045 F534             29      MOV SIGN,A ;#!Clear sign location in ram
+0047 F535             30      MOV TEMP,A ;#!Clear result location in ram
+0049 C3               31      CLR C ;#!Clear carry bit
+004A 920A             32      MOV DIF,C ;#!Clear digit flag bit
+004C 920B             33      MOV OIF,C ;#!Clear operator flag bit
+004E 920C             34      MOV AIF,C ;#!Clear assignment operator flag bit
+0050 22               35      RET ;#!return to MAIN routine
+                      36      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+0051                  37      lcdInit:
+0051 900300           38      MOV DPTR,#MYCOM ;#!Set DPTR to look-up table's address
+0054 E4               39      C1: CLR A ;#!Clear ACC
+0055 93               40      MOVC A,@A+DPTR ;#!Get code from look-up table and placing it into ACC
+0056 31D6             41      ACALL COMMWRT ;#!CALL LCD command write subroutine
+0058 A3               42      INC DPTR ;#!Increment DPTR <DPTR = DPTR + 1>
+0059 6002             43      JZ C2 ;#!Jump if ACC = ZERO to end of loop
+005B 80F7             44      SJMP C1 ;#!If not start the loop again
+005D 22               45      C2: RET ;#!return to MAIN routine
+                      46      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+005E                  47      readInput:
+005E 3156             48      ACALL readKey ;#!CALL keypad subroutine to read one number
+0060 312A             49      ACALL validateInput ;#!CALL subroutine to confirm of valid number
+0062 200B35           50      JB OIF,ERROR ;#!Jump to ERROR routine if OIF = 1
+0065 200C32           51      JB AIF,ERROR ;#!Jump to ERROR routine if AIF = 1
+0068 31E3             52      ACALL DATAWRT ;#!CALL subroutine so pass data to LCD
+A51 MACRO ASSEMBLER  CALCI                                                                03/02/2016 17:52:46 PAGE     2
+
+006A 540F             53      ANL A,#0FH ;#!Masking to convert number form ASCII to BCD
+006C F530             54      MOV N1,A ;#!Save number at RAM
+006E 3156             55      ACALL readKey ;#!CALL keypad subroutine to read operation(+,-,*,/)
+0070 312A             56      ACALL validateInput ;#!CALL subroutine to confirm of valid operation
+0072 200A25           57      JB DIF,ERROR ;#!Jump to ERROR routine if DIF = 1
+0075 200C22           58      JB AIF,ERROR ;#!Jump to ERROR routine if AIF = 1
+0078 31E3             59      ACALL DATAWRT ;#!CALL subroutine so pass data to LCD
+007A F532             60      MOV OP,A ;#!Save operation at RAM
+007C 3156             61      ACALL readKey ;#!CALL keypad subroutine to read one number
+007E 312A             62      ACALL validateInput ;#!CALL subroutine to confirm of valid number
+0080 200B17           63      JB OIF,ERROR ;#!Jump to ERROR routine if OIF = 1
+0083 200C14           64      JB AIF,ERROR ;#!Jump to ERROR routine if AIF = 1
+0086 31E3             65      ACALL DATAWRT ;#!CALL subroutine so pass data to LCD
+0088 540F             66      ANL A,#0FH ;#!Masking to convert number form ASCII to BCD
+                      67     
+008A F531             68      MOV N2,A ;#!Save number at RAM
+008C 3156             69      ACALL readKey ;#!CALL keypad subroutine to read assignemt operation (=)
+008E 312A             70      ACALL validateInput ;#!CALL subroutine to confirm of valid input
+0090 200A07           71      JB DIF,ERROR ;#!Jump to ERROR routine if OIF = 1
+0093 200B04           72      JB OIF,ERROR ;#!Jump to ERROR routine if OIF = 1
+0096 31E3             73      ACALL DATAWRT ;#!CALL subroutine so pass data to LCD
+0098 019F             74      AJMP NOERROR ;#!Jump to END of subroutine if NO ERROR
+009A 31C1             75      ERROR: ACALL ERRFUN ;#!CALL ERROR subroutine if input was not valid
+009C 020030           76      LJMP MAIN ;#!return if ERROR to start of program again
+009F 22               77      NOERROR:RET ;#!return if NO ERROR normally to MAIN
+                      78      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+00A0                  79      calculateResult:
+00A0 E530             80      MOV A,N1 ;#!Copy first number to ACC
+00A2 8531F0           81      MOV B,N2 ;#!Copy second number to B
+00A5 AF32             82      MOV R7,OP ;#!Copy operation to R7
+00A7 BF2B08           83      CJNE R7,#"+",NEXT11 ;#!Check firstly if the operation was "+", if not jump
+00AA 25F0             84      ADD A,B ;#!If so, Add the two operands
+00AC F533             85      MOV R,A ;#!Save result at RAM
+00AE 75342B           86      MOV SIGN,#"+" ;#!Set result sign to positive
+00B1 22               87      RET ;#!return to MAIN
+00B2 BF2D12           88      NEXT11: CJNE R7,#"-",NEXT22 ;#!Check secondly if the operation was "-", if not jump
+00B5 95F0             89      SUBB A,B ;#!If so, Sub the two operands
+00B7 4006             90      JC NIGATIV ;#!Check on carry for nigative result
+00B9 F533             91      MOV R,A ;#!Save result at RAM
+00BB 75342B           92      MOV SIGN,#"+" ;#!Set result sign to positive
+00BE 22               93      RET ;#!return to MAIN
+00BF F4               94      NIGATIV:CPL A ;#!Convert to 1's complement if negativ
+00C0 04               95      INC A ;#!Incremet to get 2's complement
+00C1 F533             96      MOV R,A ;#!Save result at RAM
+00C3 75342D           97      MOV SIGN,#"-" ;#!Set result sign to nigative
+00C6 22               98      RET ;#!return to MAIN
+00C7 BF2A07           99      NEXT22: CJNE R7,#"*",NEXT33 ;#!Check thirdly if the operation was "*", if not jump
+00CA A4              100      MUL AB ;#!If so, Multibly the oeprands
+00CB F533            101      MOV R,A ;#!Save result in RAM
+00CD 75342B          102      MOV SIGN,#"+" ;#!Set result sign to positive
+00D0 22              103      RET ;#!return to MAIN
+00D1 BF2F12          104      NEXT33: CJNE R7,#"/",NEXT44 ;#!Check finally if the operation was "/", if not jump
+00D4 85F035          105      MOV TEMP,B ;#!Copy to TEMP location
+00D7 84              106      DIV AB ;#!Carry out division to the two operands
+00D8 F533            107      MOV R,A ;#!Save the quotient in RAM
+00DA 740A            108      MOV A,#0AH ;#!Fill ACC with 10
+00DC A4              109      MUL AB ;#!Multibly reminder by 10
+00DD 8535F0          110      MOV B,TEMP ;#!Get the second number again
+00E0 84              111      DIV AB ;#!Divide again
+00E1 F535            112      MOV TEMP,A ;#!Save the result into RAM
+00E3 75342B          113      MOV SIGN,#"+" ;#!Set result sign to positive
+00E6 22              114      NEXT44: RET ;#!return to MAIN
+                     115      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+00E7                 116      printOutput:
+A51 MACRO ASSEMBLER  CALCI                                                                03/02/2016 17:52:46 PAGE     3
+
+00E7 AF35            117      MOV R7,TEMP ;#!Copy TEMP contents to R7
+00E9 BF0021          118      CJNE R7,#0,POINTED ;#!Check if the result was decimal point number
+00EC AE34            119      MOV R6,SIGN ;#!Copy SIGN contents to R6
+00EE BE2B2E          120      CJNE R6,#"+",SIGNED ;#!Check on sign if positive or negative
+00F1 E533            121      RETURN: MOV A,R ;#!If positive, Copy R contents to ACC
+00F3 75F00A          122      MOV B,#0AH ;#!Fill B register with 10
+00F6 84              123      DIV AB ;#!Divide result by 100
+00F7 600C            124      JZ LESSTEN ;#!jump if reminder equals 0 (result<10)
+00F9 4430            125      ORL A,#30H ;#!If not convert first digit from BIN to ASCII
+00FB 31E3            126      ACALL DATAWRT ;#!CALL subroutine, so pass data to LCD
+00FD E5F0            127      MOV A,B ;#!Get the second digit
+00FF 4430            128      ORL A,#30H ;#!Convert it from BIN to ASCII
+0101 31E3            129      ACALL DATAWRT ;#!CALL subroutine, so pass data to LCD
+0103 2125            130      AJMP DONE ;#!Done!!
+0105 E5F0            131      LESSTEN:MOV A,B ;#!If the result was one digit
+0107 4430            132      ORL A,#30H ;#!Convert from Bin to ASCII
+0109 31E3            133      ACALL DATAWRT ;#!CALL subroutine, so print data on LCD
+010B 2125            134      AJMP DONE ;#!Done!!
+010D E533            135      POINTED:MOV A,R ;#!For decimal point numbers
+010F 4430            136      ORL A,#30H ;#!Convert from Bin to ASCII
+0111 31E3            137      ACALL DATAWRT ;#!CALL subroutine, so print data on LCD
+0113 742E            138      MOV A,#"." ;#!MOV dot ascii code to ACC
+0115 31E3            139      ACALL DATAWRT ;#!CALL subroutine, so print data on LCD
+0117 E535            140      MOV A,TEMP ;#!Get the digit that after point
+0119 4430            141      ORL A,#30H ;#!Convert it from BIN to ASCII
+                     142     
+                     143     
+011B 31E3            144      ACALL DATAWRT ;#!CALL subroutine, so print data on LCD
+011D 2125            145      AJMP DONE ;#!Done!!
+011F 742D            146      SIGNED: MOV A,#"-" ;#!IF signed mov "-" ASCII to ACC
+0121 31E3            147      ACALL DATAWRT ;#!CALL subroutine, so print data on LCD
+0123 01F1            148      AJMP RETURN ;#!Return to carryout the remain process
+0125 31FE            149      DONE: ACALL LDELAY ;#!Give data some time on LCD
+0127 31FE            150      ACALL LDELAY ;#!More time again
+0129 22              151      RET ;#!return to MIAN routine
+                     152     ;------------------------------------------------------------------------------------------
+                             --------#!
+012A                 153      validateInput: ;#!Detemine and set flags for each kind of input
+012A B42B02          154      CJNE A,#"+", next1 ;#!Check if input is add operator,
+012D 214F            155      AJMP found ;#!Jump to found if input match with (+,-,*,/)
+012F B42D02          156      next1: CJNE A,#"-", next2 ;#!Check if input is sub operator,
+0132 214F            157      AJMP found ;#!Jump to found if input match with (+,-,*,/)
+0134 B42A02          158      next2: CJNE A,#"*", next3 ;#!Check if input is multiply operator
+0137 214F            159      AJMP found ;#!Jump to found if input match with (+,-,*,/)
+0139 B42F02          160      next3: CJNE A,#"/", next4 ;#!Check if input is add operator,
+013C 214F            161      AJMP found ;#!Jump to found if input match with (+,-,*,/)
+013E B43D07          162      next4: CJNE A,#"=", next5 ;#!Check if input is assignment operator
+0141 C20A            163      CLR DIF ;#!CLR digit input flag for non numbers
+0143 C20B            164      CLR OIF ;#!CLR operation input flag for non operation
+0145 D20C            165      SETB AIF ;#!SET assignment input flag for (=)
+0147 22              166      RET ;#!return to MAIN
+0148 D20A            167      next5: SETB DIF ;#!SET digit input flag for numbers
+014A C20B            168      CLR OIF ;#!CLR operation input flag for non operatio
+014C C20C            169      CLR AIF ;#!CLR assignment input flag if not (=)
+014E 22              170      RET ;#!return to MAIN
+014F C20A            171      found: CLR DIF ;#!CLR digit input flag for non numbers
+0151 D20B            172      SETB OIF ;#!SET operation input flag for any of operations
+0153 C20C            173      CLR AIF ;#!CLR assignment input flag if not (=)
+0155 22              174      RET ;#!return
+                     175      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+0156                 176      readKey:
+0156 7590FF          177      MOV P1,#0FFH ;#!Make P1 an input port
+0159 75B000          178      K1: MOV P3,#0 ;#!Ground all rows at once
+015C E590            179      MOV A,P1 ;#!Read all colums
+015E 540F            180      ANL A,#00001111B ;#!Masked unused bits
+A51 MACRO ASSEMBLER  CALCI                                                                03/02/2016 17:52:46 PAGE     4
+
+0160 B40FF6          181      CJNE A,#00001111B,K1 ;#!Till all keys release
+0163 1201F5          182      K2: LCALL SDELAY ;#!Call 20 msec delay
+0166 E590            183      MOV A,P1 ;#!See if any key is pressed
+0168 540F            184      ANL A,#00001111B ;#!Mask unused bits
+016A B40F02          185      CJNE A,#00001111B,OVER ;#!Key pressed, find row
+016D 80F4            186      SJMP K2 ;#!Check till key pressed
+016F 1201F5          187      OVER: LCALL SDELAY ;#!Wait 20 msec debounce time
+0172 E590            188      MOV A,P1 ;#!Check key closure
+0174 540F            189      ANL A,#00001111B ;#!Mask unused bits
+0176 B40F02          190      CJNE A,#00001111B,OVER1 ;#!Key pressed, find row
+0179 80E8            191      SJMP K2 ;#!If none, keep polling
+017B 75B0FE          192      OVER1: MOV P3,#11111110B ;#!Ground row 0
+017E E590            193      MOV A,P1 ;#!Read all columns
+0180 540F            194      ANL A,#00001111B ;#!Mask unused bits
+0182 B40F21          195      CJNE A,#00001111B,ROW_0 ;#!Key row 0, find col.
+0185 75B0FD          196      MOV P3,#11111101B ;#!Ground row 1
+0188 E590            197      MOV A,P1 ;#!Read all columns
+018A 540F            198      ANL A,#00001111B ;#!Mask unused bits
+018C B40F1C          199      CJNE A,#00001111B,ROW_1 ;#!Key row 1, find col.
+018F 75B0FB          200      MOV P3,#11111011B ;#!Ground row 2
+0192 E590            201      MOV A,P1 ;#!Read all columns
+0194 540F            202      ANL A,#00001111B ;#!Mask unused bits
+0196 B40F17          203      CJNE A,#00001111B,ROW_2 ;#!Key row 2, find col.
+0199 75B0F7          204      MOV P3,#11110111B ;#!Ground row 3
+019C E590            205      MOV A,P1 ;#!Read all columns
+019E 540F            206      ANL A,#00001111B ;#!Mask unused bits
+01A0 B40F12          207      CJNE A,#00001111B,ROW_3 ;#!Key row 3, find col.
+01A3 020163          208      LJMP K2 ;#!If none, false input, repeat
+01A6 900306          209      ROW_0: MOV DPTR,#KCODE0 ;#!Set DPTR=start of row 0
+01A9 800D            210      SJMP FIND ;#!Find col. Key belongs to
+01AB 90030A          211      ROW_1: MOV DPTR,#KCODE1 ;#!Set DPTR=start of row
+01AE 8008            212      SJMP FIND ;#!Find col. Key belongs to
+01B0 90030E          213      ROW_2: MOV DPTR,#KCODE2 ;#!Set DPTR=start of row 2
+01B3 8003            214      SJMP FIND ;#!Find col. Key belongs to
+01B5 900312          215      ROW_3: MOV DPTR,#KCODE3 ;#!Set DPTR=start of row 3
+01B8 13              216      FIND: RRC A ;#!See if any CY bit low
+01B9 5003            217      JNC MATCH ;#!If zero, get ASCII code
+                     218     
+                     219     
+01BB A3              220      INC DPTR ;#!Point to next col. addr
+01BC 80FA            221      SJMP FIND ;#!Keep searching
+01BE E4              222      MATCH: CLR A ;#!Set A=0 (match is found)
+01BF 93              223      MOVC A,@A+DPTR ;#!Get ASCII from table
+01C0 22              224      RET ;#!return
+                     225      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+01C1 31F0            226      ERRFUN: ACALL CLS ;#!CALL subroutine to clear screen
+01C3 900316          227      MOV DPTR,#ERRMSG ;#!Set DPTR to look-up table's address
+01C6 E4              228      E1: CLR A ;#!Clear ACC
+01C7 93              229      MOVC A,@A+DPTR ;#!Get code from look-up table and placing it into ACC
+01C8 31E3            230      ACALL DATAWRT ;#!CALL LCD command write subroutine
+01CA 31F5            231      ACALL SDELAY ;#!Give LCD some time
+01CC A3              232      INC DPTR ;#!Increment DPTR <DPTR = DPTR + 1>
+01CD 6002            233      JZ E2 ;#!Jump if ACC = ZERO to end of loop
+01CF 80F5            234      SJMP E1 ;#!If not start the loop again
+01D1 31FE            235      E2: ACALL LDELAY ;#!Give some time to msg on screen
+01D3 31F0            236      ACALL CLS ;#!CALL subroutine to clear screen again
+01D5 22              237      RET ;#!return
+                     238      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+01D6                 239      COMMWRT: ;#!Send command to LCD
+01D6 F5A0            240      MOV P2,A ;#!Copy reg A to P1
+01D8 C280            241      CLR P0.0 ;#!RS=0 for command
+01DA C281            242      CLR P0.1 ;#!R/W=0 for write
+01DC D282            243      SETB P0.2 ;#!E=1 for high pulse
+01DE 31F5            244      ACALL SDELAY ;#!Give LCD some time
+A51 MACRO ASSEMBLER  CALCI                                                                03/02/2016 17:52:46 PAGE     5
+
+01E0 C282            245      CLR P0.2 ;#!E=0 for H-to-L pulse
+01E2 22              246      RET ;#!return to caller
+                     247      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+01E3                 248      DATAWRT: ;#!Write data to LCD
+01E3 F5A0            249      MOV P2,A ;#!Copy reg A to port 1
+01E5 D280            250      SETB P0.0 ;#!RS=1 for data
+01E7 C281            251      CLR P0.1 ;#!R/W=0 for write
+01E9 D282            252      SETB P0.2 ;#!E=1 for high pulse
+01EB 31F5            253      ACALL SDELAY ;#!Give LCD some time
+01ED C282            254      CLR P0.2 ;#!E=0 for H-to-L pulse
+01EF 22              255      RET ;#!return to caller
+                     256      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+01F0                 257      CLS: ;#!CLear Screen subroutine
+01F0 7401            258      MOV A,#01H ;#!Fill ACC with the command code
+01F2 31D6            259      ACALL COMMWRT ;#!CALL subroutine to send code to lCD
+01F4 22              260      RET ;#!return to caller
+                     261      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+01F5                 262      SDELAY: ;#!Short Delay subroutine
+01F5 7832            263      MOV R0,#50 ;#!R0 = 50
+01F7 79FF            264      S11: MOV R1,#255 ;#!R1 = 255
+01F9 D9FE            265      S21: DJNZ R1,S21 ;#!stay here until R1 becomes ZERO
+01FB D8FA            266      DJNZ R0,S11 ;#!
+01FD 22              267      RET ;#!return to caller
+                     268      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+01FE                 269      LDELAY: ;#!Long Delay Subroutine
+01FE 7807            270      MOV R0,#7 ;#!R0 = 7
+0200 79BE            271      L33: MOV R1,#190 ;#!R1 = 190
+0202 7AFF            272      L22: MOV R2,#255 ;#!R2 = 255
+0204 DAFE            273      L11: DJNZ R2,L11 ;#!stay here until R2 becomes ZERO
+0206 D9FA            274      DJNZ R1,L22 ;#!
+0208 D8F6            275      DJNZ R0,L33 ;#!
+020A 22              276      RET ;#!return to caller
+                     277      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+                     278      ;-----------------------------------------------------------------------------------------
+                             ---------#!
+                     279      ;-------COMMANDS LOOK-UP TABLE FOR LCD INITIALIZATION
+0300                 280      ORG 300H
+0300 380F0106        281      MYCOM: DB 38H,0FH,01H,06H,80H,0
+0304 8000                    
+                     282      ;-------ASCII LOOK-UP TABLE FOR EACH ROW
+0306 3738392F        283      KCODE0: DB "7","8","9","/" ;#!ROW 0
+030A 3435362A        284      KCODE1: DB "4","5","6","*" ;#!ROW 1
+030E 3132332D        285      KCODE2: DB "1","2","3","-" ;#!ROW 2
+0312 00303D2B        286      KCODE3: DB 0,"0","=","+" ;#!ROW 3
+                     287      ;-------ERROR MASSAGE FOR ANY INVALID INPUT
+0316 4552524F        288      ERRMSG: DB "ERROR!!",0
+031A 52212100                
+                     289      END
+A51 MACRO ASSEMBLER  CALCI                                                                03/02/2016 17:52:46 PAGE     6
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AIF. . . . . . . .  B ADDR   0021H.4 A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+C1 . . . . . . . .  C ADDR   0054H   A   
+C2 . . . . . . . .  C ADDR   005DH   A   
+CALCULATERESULT. .  C ADDR   00A0H   A   
+CLS. . . . . . . .  C ADDR   01F0H   A   
+COMMWRT. . . . . .  C ADDR   01D6H   A   
+DATAWRT. . . . . .  C ADDR   01E3H   A   
+DIF. . . . . . . .  B ADDR   0021H.2 A   
+DONE . . . . . . .  C ADDR   0125H   A   
+E1 . . . . . . . .  C ADDR   01C6H   A   
+E2 . . . . . . . .  C ADDR   01D1H   A   
+ERRFUN . . . . . .  C ADDR   01C1H   A   
+ERRMSG . . . . . .  C ADDR   0316H   A   
+ERROR. . . . . . .  C ADDR   009AH   A   
+FIND . . . . . . .  C ADDR   01B8H   A   
+FOUND. . . . . . .  C ADDR   014FH   A   
+K1 . . . . . . . .  C ADDR   0159H   A   
+K2 . . . . . . . .  C ADDR   0163H   A   
+KCODE0 . . . . . .  C ADDR   0306H   A   
+KCODE1 . . . . . .  C ADDR   030AH   A   
+KCODE2 . . . . . .  C ADDR   030EH   A   
+KCODE3 . . . . . .  C ADDR   0312H   A   
+L11. . . . . . . .  C ADDR   0204H   A   
+L22. . . . . . . .  C ADDR   0202H   A   
+L33. . . . . . . .  C ADDR   0200H   A   
+LCDINIT. . . . . .  C ADDR   0051H   A   
+LDELAY . . . . . .  C ADDR   01FEH   A   
+LESSTEN. . . . . .  C ADDR   0105H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+MATCH. . . . . . .  C ADDR   01BEH   A   
+MEMORYINIT . . . .  C ADDR   003CH   A   
+MYCOM. . . . . . .  C ADDR   0300H   A   
+N1 . . . . . . . .  N NUMB   0030H   A   
+N2 . . . . . . . .  N NUMB   0031H   A   
+NEXT1. . . . . . .  C ADDR   012FH   A   
+NEXT11 . . . . . .  C ADDR   00B2H   A   
+NEXT2. . . . . . .  C ADDR   0134H   A   
+NEXT22 . . . . . .  C ADDR   00C7H   A   
+NEXT3. . . . . . .  C ADDR   0139H   A   
+NEXT33 . . . . . .  C ADDR   00D1H   A   
+NEXT4. . . . . . .  C ADDR   013EH   A   
+NEXT44 . . . . . .  C ADDR   00E6H   A   
+NEXT5. . . . . . .  C ADDR   0148H   A   
+NIGATIV. . . . . .  C ADDR   00BFH   A   
+NOERROR. . . . . .  C ADDR   009FH   A   
+OIF. . . . . . . .  B ADDR   0021H.3 A   
+OP . . . . . . . .  N NUMB   0032H   A   
+OVER . . . . . . .  C ADDR   016FH   A   
+OVER1. . . . . . .  C ADDR   017BH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+POINTED. . . . . .  C ADDR   010DH   A   
+PRINTOUTPUT. . . .  C ADDR   00E7H   A   
+R. . . . . . . . .  N NUMB   0033H   A   
+READINPUT. . . . .  C ADDR   005EH   A   
+READKEY. . . . . .  C ADDR   0156H   A   
+RETURN . . . . . .  C ADDR   00F1H   A   
+A51 MACRO ASSEMBLER  CALCI                                                                03/02/2016 17:52:46 PAGE     7
+
+ROW_0. . . . . . .  C ADDR   01A6H   A   
+ROW_1. . . . . . .  C ADDR   01ABH   A   
+ROW_2. . . . . . .  C ADDR   01B0H   A   
+ROW_3. . . . . . .  C ADDR   01B5H   A   
+S11. . . . . . . .  C ADDR   01F7H   A   
+S21. . . . . . . .  C ADDR   01F9H   A   
+SDELAY . . . . . .  C ADDR   01F5H   A   
+SIGN . . . . . . .  N NUMB   0034H   A   
+SIGNED . . . . . .  C ADDR   011FH   A   
+TEMP . . . . . . .  N NUMB   0035H   A   
+VALIDATEINPUT. . .  C ADDR   012AH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,387 @@
+BL51 BANKED LINKER/LOCATER V6.11                                                        06/06/2016  17:06:41  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.11, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE garbage_overflow_indicator.obj TO garbage_overflow_indicator
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  garbage_overflow_indicator.obj (GARBAGE_OVERFLOW_INDICATOR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  garbage_overflow_indicator (GARBAGE_OVERFLOW_INDICATOR)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0008H     UNIT         ?DT?_NUMBER?GARBAGE_OVERFLOW_INDICATOR
+            DATA    0010H     0003H     UNIT         _DATA_GROUP_
+            DATA    0013H     0001H     UNIT         ?DT?GARBAGE_OVERFLOW_INDICATOR
+            IDATA   0014H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     00A4H     UNIT         ?CO?GARBAGE_OVERFLOW_INDICATOR
+            CODE    00A7H     00A4H     UNIT         ?C?LIB_CODE
+            CODE    014BH     0099H     UNIT         ?PR?MAIN?GARBAGE_OVERFLOW_INDICATOR
+            CODE    01E4H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0270H     008BH     UNIT         ?PR?BIN_OVERFLOW_MSG?GARBAGE_OVERFLOW_INDICATOR
+            CODE    02FBH     0079H     UNIT         ?PR?_NUMBER?GARBAGE_OVERFLOW_INDICATOR
+            CODE    0374H     0025H     UNIT         ?PR?_STRING?GARBAGE_OVERFLOW_INDICATOR
+            CODE    0399H     0025H     UNIT         ?PR?_GSTRING?GARBAGE_OVERFLOW_INDICATOR
+            CODE    03BEH     0024H     UNIT         ?PR?_DELAY?GARBAGE_OVERFLOW_INDICATOR
+            CODE    03E2H     001EH     UNIT         ?PR?_BUZZER?GARBAGE_OVERFLOW_INDICATOR
+            CODE    0400H     0019H     UNIT         ?PR?LCD_INIT?GARBAGE_OVERFLOW_INDICATOR
+            CODE    0419H     0010H     UNIT         ?PR?_CMD?GARBAGE_OVERFLOW_INDICATOR
+            CODE    0429H     0010H     UNIT         ?PR?_CHARACTER?GARBAGE_OVERFLOW_INDICATOR
+            CODE    0439H     000EH     UNIT         ?PR?UC_INIT?GARBAGE_OVERFLOW_INDICATOR
+            CODE    0447H     000CH     UNIT         ?PR?UART_INIT?GARBAGE_OVERFLOW_INDICATOR
+            CODE    0453H     0008H     UNIT         ?PR?_TX?GARBAGE_OVERFLOW_INDICATOR
+            CODE    045BH     0004H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   garbage_overflow_indicator (GARBAGE_OVERFLOW_INDICATOR)
+
+
+SEGMENT                                            DATA_GROUP 
+  +--> CALLED SEGMENT                            START    LENGTH
+----------------------------------------------------------------
+?C_C51STARTUP                                    -----    -----
+BL51 BANKED LINKER/LOCATER V6.11                                                      06/06/2016  17:06:41  PAGE 2
+
+
+  +--> ?PR?MAIN?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?C_INITSEG
+
+?PR?MAIN?GARBAGE_OVERFLOW_INDICATOR              -----    -----
+  +--> ?PR?UC_INIT?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?PR?LCD_INIT?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?PR?UART_INIT?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?CO?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?PR?_STRING?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?PR?_CMD?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?PR?_DELAY?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?PR?BIN_OVERFLOW_MSG?GARBAGE_OVERFLOW...
+
+?PR?LCD_INIT?GARBAGE_OVERFLOW_INDICATOR          -----    -----
+  +--> ?PR?_CMD?GARBAGE_OVERFLOW_INDICATOR
+
+?PR?_CMD?GARBAGE_OVERFLOW_INDICATOR              -----    -----
+  +--> ?PR?_DELAY?GARBAGE_OVERFLOW_INDICATOR
+
+?PR?_DELAY?GARBAGE_OVERFLOW_INDICATOR            -----    -----
+  +--> ?PR?_TX?GARBAGE_OVERFLOW_INDICATOR
+
+?PR?_STRING?GARBAGE_OVERFLOW_INDICATOR           0010H    0003H
+  +--> ?PR?_CHARACTER?GARBAGE_OVERFLOW_INDIC...
+
+?PR?_CHARACTER?GARBAGE_OVERFLOW_INDIC...         -----    -----
+  +--> ?PR?_DELAY?GARBAGE_OVERFLOW_INDICATOR
+
+?PR?BIN_OVERFLOW_MSG?GARBAGE_OVERFLOW...         -----    -----
+  +--> ?PR?_BUZZER?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?CO?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?PR?_GSTRING?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?PR?_DELAY?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?PR?_TX?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?PR?_CMD?GARBAGE_OVERFLOW_INDICATOR
+  +--> ?PR?_STRING?GARBAGE_OVERFLOW_INDICATOR
+
+?PR?_BUZZER?GARBAGE_OVERFLOW_INDICATOR           -----    -----
+  +--> ?PR?_DELAY?GARBAGE_OVERFLOW_INDICATOR
+
+?PR?_GSTRING?GARBAGE_OVERFLOW_INDICATOR          0010H    0003H
+  +--> ?PR?_TX?GARBAGE_OVERFLOW_INDICATOR
+
+
+
+SYMBOL TABLE OF MODULE:  garbage_overflow_indicator (GARBAGE_OVERFLOW_INDICATOR)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        GARBAGE_OVERFLOW_INDICATOR
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:0399H         PUBLIC        _gstring
+  D:00B0H         PUBLIC        P3
+BL51 BANKED LINKER/LOCATER V6.11                                                      06/06/2016  17:06:41  PAGE 3
+
+
+  C:02FBH         PUBLIC        _number
+  B:0090H.1       PUBLIC        alarm
+  C:03C7H         PUBLIC        _delay
+  C:0374H         PUBLIC        _string
+  B:0098H.1       PUBLIC        TI
+  C:03E2H         PUBLIC        _buzzer
+  C:014BH         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  C:0429H         PUBLIC        _character
+  D:0098H         PUBLIC        SCON
+  C:0419H         PUBLIC        _cmd
+  D:0089H         PUBLIC        TMOD
+  B:0090H.0       PUBLIC        bin
+  C:0270H         PUBLIC        bin_overflow_msg
+  C:0400H         PUBLIC        lcd_init
+  C:0453H         PUBLIC        _Tx
+  D:008DH         PUBLIC        TH1
+  B:00B0H.5       PUBLIC        buz
+  B:0080H.1       PUBLIC        en
+  C:0447H         PUBLIC        uart_init
+  B:0088H.6       PUBLIC        TR1
+  B:0080H.0       PUBLIC        rs
+  C:0439H         PUBLIC        uc_init
+  D:0013H         PUBLIC        t
+  -------         PROC          MAIN
+  C:014BH         LINE#         29
+  C:014BH         LINE#         30
+  C:014BH         LINE#         31
+  C:014EH         LINE#         32
+  C:0151H         LINE#         33
+  C:0154H         LINE#         35
+  C:015DH         LINE#         36
+  C:0162H         LINE#         37
+  C:016BH         LINE#         38
+  C:016EH         LINE#         40
+  C:0173H         LINE#         41
+  C:0178H         LINE#         42
+  C:0181H         LINE#         43
+  C:0188H         LINE#         45
+  C:018DH         LINE#         46
+  C:0192H         LINE#         48
+  C:0192H         LINE#         49
+  C:0192H         LINE#         51
+  C:0195H         LINE#         52
+  C:0195H         LINE#         53
+  C:019AH         LINE#         54
+  C:01A3H         LINE#         55
+  C:01A6H         LINE#         56
+  C:01A8H         LINE#         58
+  C:01ABH         LINE#         59
+  C:01ABH         LINE#         60
+  C:01B2H         LINE#         61
+  C:01B5H         LINE#         62
+  C:01B5H         LINE#         63
+  C:01B7H         LINE#         64
+  C:01BCH         LINE#         65
+  C:01C1H         LINE#         66
+BL51 BANKED LINKER/LOCATER V6.11                                                      06/06/2016  17:06:41  PAGE 4
+
+
+  C:01CAH         LINE#         67
+  C:01CFH         LINE#         68
+  C:01D8H         LINE#         69
+  C:01DBH         LINE#         71
+  C:01DFH         LINE#         72
+  C:01E2H         LINE#         73
+  -------         ENDPROC       MAIN
+  -------         PROC          UC_INIT
+  C:0439H         LINE#         79
+  C:0439H         LINE#         80
+  C:0439H         LINE#         81
+  C:043CH         LINE#         82
+  C:043EH         LINE#         83
+  C:0440H         LINE#         84
+  C:0442H         LINE#         85
+  C:0444H         LINE#         86
+  C:0446H         LINE#         87
+  -------         ENDPROC       UC_INIT
+  -------         PROC          LCD_INIT
+  C:0400H         LINE#         91
+  C:0400H         LINE#         92
+  C:0400H         LINE#         96
+  C:0405H         LINE#         98
+  C:040AH         LINE#         99
+  C:040FH         LINE#         102
+  C:0414H         LINE#         103
+  -------         ENDPROC       LCD_INIT
+  -------         PROC          _CMD
+  D:0007H         SYMBOL        ch
+  C:0419H         LINE#         106
+  C:0419H         LINE#         107
+  C:0419H         LINE#         108
+  C:041BH         LINE#         109
+  C:041DH         LINE#         110
+  C:041FH         LINE#         111
+  C:0426H         LINE#         112
+  C:0428H         LINE#         113
+  -------         ENDPROC       _CMD
+  -------         PROC          _CHARACTER
+  D:0007H         SYMBOL        ch
+  C:0429H         LINE#         115
+  C:0429H         LINE#         116
+  C:0429H         LINE#         117
+  C:042BH         LINE#         118
+  C:042DH         LINE#         119
+  C:042FH         LINE#         120
+  C:0436H         LINE#         121
+  C:0438H         LINE#         122
+  -------         ENDPROC       _CHARACTER
+  -------         PROC          _STRING
+  D:0010H         SYMBOL        p
+  C:0374H         LINE#         124
+  C:037AH         LINE#         125
+  C:037AH         LINE#         126
+  C:0385H         LINE#         127
+  C:0398H         LINE#         128
+  -------         ENDPROC       _STRING
+BL51 BANKED LINKER/LOCATER V6.11                                                      06/06/2016  17:06:41  PAGE 5
+
+
+  -------         PROC          _NUMBER
+  D:0008H         SYMBOL        n
+  -------         DO            
+  D:000AH         SYMBOL        i
+  D:000BH         SYMBOL        arr
+  -------         ENDDO         
+  C:02FBH         LINE#         130
+  C:02FFH         LINE#         131
+  C:02FFH         LINE#         132
+  C:0302H         LINE#         134
+  C:030BH         LINE#         135
+  C:030BH         LINE#         136
+  C:0310H         LINE#         137
+  C:031BH         LINE#         138
+  C:031BH         LINE#         139
+  C:0321H         LINE#         140
+  C:0326H         LINE#         141
+  C:0333H         LINE#         142
+  C:0333H         LINE#         143
+  C:0349H         LINE#         144
+  C:0358H         LINE#         145
+  C:035AH         LINE#         146
+  C:035CH         LINE#         148
+  C:0365H         LINE#         149
+  C:0365H         LINE#         150
+  C:036FH         LINE#         151
+  C:0373H         LINE#         152
+  -------         ENDPROC       _NUMBER
+  -------         PROC          UART_INIT
+  C:0447H         LINE#         156
+  C:0447H         LINE#         157
+  C:0447H         LINE#         158
+  C:044AH         LINE#         159
+  C:044DH         LINE#         160
+  C:0450H         LINE#         161
+  C:0452H         LINE#         162
+  -------         ENDPROC       UART_INIT
+  -------         PROC          _GSTRING
+  D:0010H         SYMBOL        p
+  C:0399H         LINE#         164
+  C:039FH         LINE#         165
+  C:039FH         LINE#         166
+  C:03AAH         LINE#         167
+  C:03BDH         LINE#         168
+  -------         ENDPROC       _GSTRING
+  -------         PROC          _TX
+  D:0007H         SYMBOL        ch
+  C:0453H         LINE#         170
+  C:0453H         LINE#         171
+  C:0453H         LINE#         172
+  C:0455H         LINE#         173
+  C:0458H         LINE#         174
+  C:045AH         LINE#         175
+  -------         ENDPROC       _TX
+  -------         PROC          BIN_OVERFLOW_MSG
+  C:0270H         LINE#         177
+  C:0270H         LINE#         178
+BL51 BANKED LINKER/LOCATER V6.11                                                      06/06/2016  17:06:41  PAGE 6
+
+
+  C:0270H         LINE#         179
+  C:0273H         LINE#         180
+  C:0278H         LINE#         181
+  C:0281H         LINE#         182
+  C:0284H         LINE#         183
+  C:0289H         LINE#         185
+  C:0292H         LINE#         186
+  C:0295H         LINE#         187
+  C:0295H         LINE#         188
+  C:0298H         LINE#         190
+  C:029DH         LINE#         191
+  C:02A6H         LINE#         192
+  C:02ABH         LINE#         193
+  C:02B4H         LINE#         195
+  C:02BDH         LINE#         196
+  C:02C2H         LINE#         197
+  C:02CBH         LINE#         198
+  C:02CDH         LINE#         199
+  C:02D0H         LINE#         201
+  C:02D0H         LINE#         202
+  C:02D3H         LINE#         204
+  C:02DCH         LINE#         205
+  C:02DEH         LINE#         206
+  C:02E1H         LINE#         207
+  C:02E6H         LINE#         209
+  C:02EBH         LINE#         210
+  C:02F4H         LINE#         211
+  -------         ENDPROC       BIN_OVERFLOW_MSG
+  C:03C0H         SYMBOL        L?0051
+  C:03C3H         SYMBOL        L?0052
+  -------         PROC          L?0050
+  -------         ENDPROC       L?0050
+  C:03C0H         SYMBOL        L?0051
+  C:03C3H         SYMBOL        L?0052
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        d
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:03C7H         LINE#         216
+  C:03C7H         LINE#         217
+  C:03C7H         LINE#         219
+  C:03D2H         LINE#         220
+  C:03D2H         LINE#         221
+  C:03D6H         LINE#         222
+  C:03DAH         LINE#         223
+  C:03E1H         LINE#         224
+  -------         ENDPROC       _DELAY
+  -------         PROC          _BUZZER
+  D:0004H         SYMBOL        b
+  C:03E2H         LINE#         229
+  C:03E4H         LINE#         230
+  C:03E4H         LINE#         231
+  C:03EAH         LINE#         232
+  C:03EAH         LINE#         233
+  C:03ECH         LINE#         234
+  C:03F3H         LINE#         235
+BL51 BANKED LINKER/LOCATER V6.11                                                      06/06/2016  17:06:41  PAGE 7
+
+
+  C:03F5H         LINE#         236
+  C:03FCH         LINE#         237
+  C:03FFH         LINE#         238
+  -------         ENDPROC       _BUZZER
+  -------         ENDMOD        GARBAGE_OVERFLOW_INDICATOR
+
+  -------         MODULE        ?C?CLDPTR
+  C:00A7H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?SIDIV
+  C:00C0H         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:00F6H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GARBAGE_OVERFLOW_INDICATOR
+
+Program Size: data=21.0 xdata=0 code=1119
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

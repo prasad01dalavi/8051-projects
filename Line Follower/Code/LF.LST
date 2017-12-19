@@ -1,0 +1,116 @@
+C51 COMPILER V8.12   LF                                                                    03/02/2016 19:15:31 PAGE 1   
+
+
+C51 COMPILER V8.12, COMPILATION OF MODULE LF
+OBJECT MODULE PLACED IN LF.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE LF.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+*** WARNING C500 IN LINE 1 OF LF.C: LICENSE ERROR (R208: RENEW LICENSE ID CODE (LIC))
+
+   1          #include<reg51.h>
+   2          
+   3          //sensor outputs(input to the controller)
+   4          sbit s0=P1^0;
+   5          sbit s1=P1^1;
+   6          sbit s2=P1^2;
+   7          sbit s3=P1^3;
+   8          sbit s4=P1^4;
+   9          
+  10          //motor ic control (input) bits
+  11          sbit m1=P3^0;
+  12          sbit m2=P3^1;
+  13          sbit m3=P3^2;
+  14          sbit m4=P3^3;
+  15          
+  16          void main()
+  17          {
+  18   1              P1=0xff;                        //i/p port
+  19   1              P3=0x00;                        //o/p port
+  20   1      
+  21   1              for(;;)                    //forever loop
+  22   1              {
+  23   2              
+  24   2                      while((s0==1)&&(s1==1)&&(s2==0)&&(s3==1)&&(s4==1))         //straight
+  25   2                      {
+  26   3                              m1=1;
+  27   3                              m2=0;
+  28   3                              m3=1;
+  29   3                              m4=0;
+  30   3                      }       
+  31   2                      
+  32   2                      while((s0==1)&&(s1==1)&&(s2==0)&&(s3==0)&&(s4==1))         //slight right
+  33   2                      {
+  34   3                              m1=1;
+  35   3                              m2=0;
+  36   3                              m3=0;
+  37   3                              m4=0;
+  38   3                      }
+  39   2                      
+  40   2                      while((s0==1)&&(s1==1)&&(s2==0)&&(s3==0)&&(s4==0))        //immediate and 90 degree right
+  41   2                      {
+  42   3                              m1=1;
+  43   3                              m2=0;
+  44   3                              m3=0;
+  45   3                              m4=1;
+  46   3                      }
+  47   2                      
+  48   2                      while((s0==1)&&(s1==0)&&(s2==0)&&(s3==1)&&(s4==1))      //slight let
+  49   2                      {
+  50   3                              m1=0;
+  51   3                              m2=0;
+  52   3                              m3=1;
+  53   3                              m4=0;
+  54   3                      }
+C51 COMPILER V8.12   LF                                                                    03/02/2016 19:15:31 PAGE 2   
+
+  55   2      
+  56   2                      while((s0==0)&&(s1==0)&&(s2==0)&&(s3==1)&&(s4==1))         //immediate and 90 degree left
+  57   2                      {
+  58   3                              m1=0;
+  59   3                              m2=1;
+  60   3                              m3=1;
+  61   3                              m4=0;
+  62   3                      }
+  63   2      
+  64   2                      while((s0==0)&&(s1==0)&&(s2==0)&&(s3==0)&&(s4==1))        //rare case of very immediate left
+  65   2                      {
+  66   3                              m1=0;
+  67   3                              m2=1;
+  68   3                              m3=1;
+  69   3                              m4=0;
+  70   3                      }
+  71   2      
+  72   2                      while((s0==1)&&(s1==0)&&(s2==0)&&(s3==0)&&(s4==0))        //rare case of very immediate right
+  73   2                      {
+  74   3                              m1=1;
+  75   3                              m2=0;
+  76   3                              m3=0;
+  77   3                              m4=1;
+  78   3                      }
+  79   2      
+  80   2                      while((s0==0)&&(s1==0)&&(s2==0)&&(s3==0)&&(s4==0))       //take left or right (all sensor on line)
+  81   2                      {
+  82   3                              m1=1;
+  83   3                              m2=0;
+  84   3                              m3=1;
+  85   3                              m4=0;
+  86   3                      }
+  87   2                      
+  88   2              }
+  89   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    221    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

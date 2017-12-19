@@ -1,0 +1,129 @@
+BL51 BANKED LINKER/LOCATER V6.11                                                        07/11/2016  19:47:17  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.11, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE dice.obj TO dice
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  dice.obj (DICE)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  dice (DICE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0007H     UNIT         ?DT?DICE
+            IDATA   000FH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     0009H     UNIT         ?C_INITSEG
+                    000FH     0004H                  *** GAP ***
+            CODE    0013H     0003H     ABSOLUTE     
+            CODE    0016H     008CH     UNIT         ?C_C51STARTUP
+            CODE    00A2H     002BH     UNIT         ?PR?MAIN?DICE
+            CODE    00CDH     0020H     UNIT         ?PR?EX1?DICE
+            CODE    00EDH     0019H     UNIT         ?PR?_DELAY?DICE
+            CODE    0106H     0007H     UNIT         ?PR?EX0?DICE
+
+
+
+OVERLAY MAP OF MODULE:   dice (DICE)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?DICE
+  +--> ?C_INITSEG
+
+?PR?MAIN?DICE
+  +--> ?PR?_DELAY?DICE
+
+
+
+SYMBOL TABLE OF MODULE:  dice (DICE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+BL51 BANKED LINKER/LOCATER V6.11                                                      07/11/2016  19:47:17  PAGE 2
+
+
+  -------         MODULE        DICE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  C:0106H         PUBLIC        ex0
+  C:00CDH         PUBLIC        ex1
+  C:00EDH         PUBLIC        _delay
+  B:00B0H.2       PUBLIC        reset
+  C:00A2H         PUBLIC        main
+  B:00B0H.4       PUBLIC        start
+  D:0008H         PUBLIC        arr
+  B:00A8H.0       PUBLIC        EX0
+  B:00A8H.2       PUBLIC        EX1
+  D:000EH         PUBLIC        n
+  -------         PROC          EX0
+  C:0106H         LINE#         12
+  C:0106H         LINE#         14
+  C:0109H         LINE#         16
+  C:010CH         LINE#         17
+  -------         ENDPROC       EX0
+  -------         PROC          EX1
+  C:00CDH         LINE#         19
+  C:00D6H         LINE#         21
+  C:00DCH         LINE#         22
+  C:00E6H         LINE#         23
+  -------         ENDPROC       EX1
+  -------         PROC          MAIN
+  C:00A2H         LINE#         25
+  C:00A2H         LINE#         26
+  C:00A2H         LINE#         27
+  C:00A5H         LINE#         28
+  C:00A7H         LINE#         29
+  C:00A9H         LINE#         30
+  C:00ABH         LINE#         31
+  C:00ADH         LINE#         33
+  C:00B0H         LINE#         35
+  C:00B0H         LINE#         36
+  C:00B0H         LINE#         37
+  C:00B3H         LINE#         38
+  C:00B3H         LINE#         39
+  C:00BBH         LINE#         40
+  C:00C2H         LINE#         41
+  -------         ENDPROC       MAIN
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        d
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:00EDH         LINE#         45
+  C:00EDH         LINE#         46
+  C:00EDH         LINE#         48
+  C:00F6H         LINE#         49
+  C:00F6H         LINE#         50
+  C:00FAH         LINE#         51
+  C:00FEH         LINE#         52
+  C:0105H         LINE#         54
+BL51 BANKED LINKER/LOCATER V6.11                                                      07/11/2016  19:47:17  PAGE 3
+
+
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        DICE
+
+Program Size: data=16.0 xdata=0 code=265
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

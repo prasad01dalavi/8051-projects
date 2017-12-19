@@ -1,0 +1,271 @@
+C51 COMPILER V8.12   GARBAGE_OVERFLOW_INDICATOR                                            06/06/2016 17:06:41 PAGE 1   
+
+
+C51 COMPILER V8.12, COMPILATION OF MODULE GARBAGE_OVERFLOW_INDICATOR
+OBJECT MODULE PLACED IN garbage_overflow_indicator.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE garbage_overflow_indicator.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #define lcd P2
+   3          
+   4           //functions' declaration
+   5           void lcd_init();
+   6           void uc_init();
+   7           void character(unsigned char);
+   8           void cmd(unsigned char);
+   9           void string(unsigned char *);
+  10           void number(int);
+  11          
+  12           void uart_init();
+  13           void gstring(unsigned char *p);
+  14           void Tx(unsigned char ch);
+  15           void bin_overflow_msg();
+  16          
+  17           void delay(int); 
+  18           void buzzer(unsigned char b);
+  19          
+  20           sbit rs=P0^0;
+  21           sbit en=P0^1;
+  22          
+  23           sbit buz=P3^5;
+  24           sbit bin=P1^0;
+  25           sbit alarm=P1^1;
+  26          
+  27           unsigned char t=0;
+  28          
+  29          void main()
+  30          {
+  31   1              uc_init();
+  32   1              lcd_init();
+  33   1              uart_init();
+  34   1      
+  35   1              string("Garbage Overflow");
+  36   1              cmd(0xc0);
+  37   1              string("Indicator.");
+  38   1              delay(2000);
+  39   1      
+  40   1              cmd(0x01);
+  41   1              cmd(0x80);
+  42   1              string("System is Ready!");
+  43   1              delay(1000);
+  44   1      
+  45   1              cmd(0x01);
+  46   1              cmd(0x80);
+  47   1      
+  48   1              for(;;)
+  49   1              {
+  50   2      
+  51   2                  while(bin==1)
+  52   2                      {
+  53   3                              cmd(0x80);
+  54   3                              string("No Overflow !");
+  55   3                              delay(2000);
+C51 COMPILER V8.12   GARBAGE_OVERFLOW_INDICATOR                                            06/06/2016 17:06:41 PAGE 2   
+
+  56   3                      }
+  57   2              
+  58   2                      if(bin==0)
+  59   2                      {
+  60   3                              delay(5000);
+  61   3                              while(bin==0)
+  62   3                              {
+  63   4                                      alarm=1;
+  64   4                                      cmd(0x01);
+  65   4                                      cmd(0x80);
+  66   4                                      string("Bin Overflow");
+  67   4                                      cmd(0xc0);
+  68   4                                      string("Detected !");
+  69   4                                      delay(2000);
+  70   4      
+  71   4                                      if(t==0)
+  72   4                                      bin_overflow_msg();                     
+  73   4                              }
+  74   3                      }
+  75   2              }
+  76   1      }
+  77          
+  78          //---------------microcontroller initialzation-----------//
+  79          void uc_init()
+  80          {
+  81   1              lcd=0x00;
+  82   1              rs=0;
+  83   1              en=0;
+  84   1              buz=0;
+  85   1              bin=1;
+  86   1              alarm=0;        
+  87   1      }
+  88          //-----------------microcontroller has been initialized-----------//
+  89          
+  90          //--------------------------LCD Code-------------------//
+  91          void lcd_init()
+  92          {
+  93   1      //      cmd(0x20);
+  94   1      //      cmd(0x28);
+  95   1      //      cmd(0x30);
+  96   1              cmd(0x01);         //clear the screen c
+  97   1      
+  98   1              cmd(0x38);         //8-bit mode with 5*7 matrix
+  99   1              cmd(0x0c);         //display on with cursor =>(0ch=curson off; 0fh=cursor blinking; 0eh=curson on)
+ 100   1              
+ 101   1              
+ 102   1              cmd(0x06);         //shift cursor =>(06h right--> ; 04h <---left; default=right--->)
+ 103   1              cmd(0x80);         //position =>(80=1st row 1st position; c0=2nd row 1st position)
+ 104   1      }
+ 105          
+ 106          void cmd(unsigned char ch)
+ 107          {
+ 108   1              lcd=ch;
+ 109   1              rs=0;
+ 110   1              en=1;
+ 111   1              delay(2);
+ 112   1              en=0;
+ 113   1      }
+ 114          
+ 115          void character(unsigned char ch)
+ 116          {
+ 117   1              lcd=ch;
+C51 COMPILER V8.12   GARBAGE_OVERFLOW_INDICATOR                                            06/06/2016 17:06:41 PAGE 3   
+
+ 118   1              rs=1;
+ 119   1              en=1;
+ 120   1              delay(2);
+ 121   1              en=0;
+ 122   1      }
+ 123          
+ 124          void string(unsigned char *p)
+ 125          {
+ 126   1              while(*p)
+ 127   1              character(*p++);
+ 128   1      }
+ 129          
+ 130          void number(int n)
+ 131          {       
+ 132   1              unsigned char i=1,arr[5];
+ 133   1      
+ 134   1              if(n<0)
+ 135   1              {
+ 136   2                      character('-');           //signed representation for negative number
+ 137   2                      n=-n;                             //taking magnitude 
+ 138   2              }
+ 139   1              if(n==0)
+ 140   1                      character('0');
+ 141   1              while(n>0)
+ 142   1              {
+ 143   2                      arr[i]=(n%10)+48;
+ 144   2                      n=n/10;
+ 145   2                      i++;
+ 146   2              }
+ 147   1              
+ 148   1              for(--i;i>0;i--)                 //problem with >=; remedy=> initialize i=1 and stop at i>0
+ 149   1              {
+ 150   2              character(arr[i]);
+ 151   2              }
+ 152   1      }
+ 153          //-----------------------End of LCD Code------------------------// 
+ 154          
+ 155          //----------------------GSM Code-----------------------//
+ 156          void uart_init()
+ 157          {
+ 158   1              TMOD=0x20;
+ 159   1              TH1=0xFD;
+ 160   1              SCON=0x50;
+ 161   1              TR1=1;
+ 162   1      }
+ 163          
+ 164          void gstring(unsigned char *p)
+ 165          {
+ 166   1              while(*p)
+ 167   1              Tx(*p++);       
+ 168   1      }
+ 169          
+ 170          void Tx(unsigned char ch)
+ 171          {
+ 172   1              SBUF=ch;
+ 173   1              while(TI==0);
+ 174   1              TI=0;
+ 175   1      }
+ 176          
+ 177          void bin_overflow_msg()
+ 178          {
+ 179   1              t=1;
+C51 COMPILER V8.12   GARBAGE_OVERFLOW_INDICATOR                                            06/06/2016 17:06:41 PAGE 4   
+
+ 180   1              buzzer(2);                                                                              //to send the message once
+ 181   1              gstring("AT");
+ 182   1              delay(2000);
+ 183   1              Tx(0x0d);
+ 184   1              
+ 185   1              gstring("AT+CMGF=1");                                           //Configuring as text mode i.e.
+ 186   1              delay(2000);                                                            //if '0'=>PDU and if '1'=>text mode 
+ 187   1              Tx(0x0d);                                                                       //0x0d or 13d =>Enter i.e. Enter key
+ 188   1              delay(2000);
+ 189   1      
+ 190   1              cmd(0x01);
+ 191   1              string("Sending");
+ 192   1              cmd(0xc0);
+ 193   1              string("Message...");
+ 194   1              
+ 195   1              gstring("AT+CMGS=");                                    //'s' for sending message
+ 196   1              Tx('"');
+ 197   1              gstring("8007817602");                  
+ 198   1              Tx('"');
+ 199   1              delay(2000);
+ 200   1      
+ 201   1              Tx(0x0d);
+ 202   1              delay(2000);
+ 203   1              
+ 204   1              gstring("Bin Overflow !");
+ 205   1              Tx(0x1a);                                                                               //To send the message
+ 206   1              delay(2000);
+ 207   1              Tx(0x0d);
+ 208   1              
+ 209   1              cmd(0x01);
+ 210   1              string("Message Sent!");
+ 211   1              delay(2000);
+ 212   1      }
+ 213          //--------------------End of GSM Code------------------//
+ 214          
+ 215          //--------------delay function-------------------------//
+ 216          void delay(int d)
+ 217          {
+ 218   1              unsigned char i;
+ 219   1              for(;d>0;d--)
+ 220   1              {
+ 221   2                      for(i=250;i>0;i--);             //500usec
+ 222   2                      for(i=250;i>0;i--);             //500usec
+ 223   2              }
+ 224   1      }
+ 225          //-----------------End  of delay function---------------------//
+ 226          
+ 227          
+ 228          //------------------------alarm system-----------------------//
+ 229          void buzzer(unsigned char b)
+ 230          {
+ 231   1              for(;b>0;b--)
+ 232   1              {
+ 233   2                      buz=1;
+ 234   2                      delay(500);
+ 235   2                      buz=0;
+ 236   2                      delay(500);
+ 237   2              }
+ 238   1      }
+ 239          //---------------End of alarm system-------------------//
+ 240          
+
+C51 COMPILER V8.12   GARBAGE_OVERFLOW_INDICATOR                                            06/06/2016 17:06:41 PAGE 5   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    644    ----
+   CONSTANT SIZE    =    164    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1      14
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

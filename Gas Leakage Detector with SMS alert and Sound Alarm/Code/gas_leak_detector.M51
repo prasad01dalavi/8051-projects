@@ -1,0 +1,399 @@
+BL51 BANKED LINKER/LOCATER V6.11                                                        05/15/2016  21:10:44  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.11, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE gas_leak_detector.obj TO gas_leak_detector
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  gas_leak_detector.obj (GAS_LEAK_DETECTOR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  gas_leak_detector (GAS_LEAK_DETECTOR)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0008H     UNIT         ?DT?_NUMBER?GAS_LEAK_DETECTOR
+            DATA    0010H     0006H     UNIT         _DATA_GROUP_
+            DATA    0016H     0001H     UNIT         ?DT?GAS_LEAK_DETECTOR
+            IDATA   0017H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     00AAH     UNIT         ?PR?LPG_MSG?GAS_LEAK_DETECTOR
+            CODE    00B0H     00A8H     UNIT         ?CO?GAS_LEAK_DETECTOR
+            CODE    0158H     00A4H     UNIT         ?C?LIB_CODE
+            CODE    01FCH     008CH     UNIT         ?C_C51STARTUP
+            CODE    0288H     0079H     UNIT         ?PR?_NUMBER?GAS_LEAK_DETECTOR
+            CODE    0301H     0066H     UNIT         ?PR?EXT0?GAS_LEAK_DETECTOR
+            CODE    0367H     002BH     UNIT         ?PR?_STRING?GAS_LEAK_DETECTOR
+            CODE    0392H     0025H     UNIT         ?PR?MAIN?GAS_LEAK_DETECTOR
+            CODE    03B7H     0025H     UNIT         ?PR?_GSTRING?GAS_LEAK_DETECTOR
+            CODE    03DCH     0024H     UNIT         ?PR?_DELAY?GAS_LEAK_DETECTOR
+            CODE    0400H     001EH     UNIT         ?PR?_BUZZER?GAS_LEAK_DETECTOR
+            CODE    041EH     0019H     UNIT         ?PR?LCD_INIT?GAS_LEAK_DETECTOR
+            CODE    0437H     0010H     UNIT         ?PR?_CMD?GAS_LEAK_DETECTOR
+            CODE    0447H     0010H     UNIT         ?PR?_CHARACTER?GAS_LEAK_DETECTOR
+            CODE    0457H     000EH     UNIT         ?PR?UC_INIT?GAS_LEAK_DETECTOR
+            CODE    0465H     000CH     UNIT         ?PR?UART_INIT?GAS_LEAK_DETECTOR
+            CODE    0471H     0008H     UNIT         ?PR?_TX?GAS_LEAK_DETECTOR
+            CODE    0479H     0004H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   gas_leak_detector (GAS_LEAK_DETECTOR)
+
+
+SEGMENT                                    DATA_GROUP 
+  +--> CALLED SEGMENT                    START    LENGTH
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  21:10:44  PAGE 2
+
+
+--------------------------------------------------------
+?PR?EXT0?GAS_LEAK_DETECTOR               -----    -----
+  +--> ?PR?_CMD?GAS_LEAK_DETECTOR
+  +--> ?PR?_STRING?GAS_LEAK_DETECTOR
+  +--> ?CO?GAS_LEAK_DETECTOR
+  +--> ?PR?_BUZZER?GAS_LEAK_DETECTOR
+  +--> ?PR?LPG_MSG?GAS_LEAK_DETECTOR
+
+?PR?_CMD?GAS_LEAK_DETECTOR               -----    -----
+  +--> ?PR?_DELAY?GAS_LEAK_DETECTOR
+
+?PR?_DELAY?GAS_LEAK_DETECTOR             -----    -----
+  +--> ?PR?_TX?GAS_LEAK_DETECTOR
+
+?PR?_STRING?GAS_LEAK_DETECTOR            0013H    0003H
+  +--> ?CO?GAS_LEAK_DETECTOR
+  +--> ?PR?_CHARACTER?GAS_LEAK_DETECTOR
+
+?PR?_CHARACTER?GAS_LEAK_DETECTOR         -----    -----
+  +--> ?PR?_DELAY?GAS_LEAK_DETECTOR
+
+?PR?_BUZZER?GAS_LEAK_DETECTOR            -----    -----
+  +--> ?PR?_DELAY?GAS_LEAK_DETECTOR
+
+?PR?LPG_MSG?GAS_LEAK_DETECTOR            -----    -----
+  +--> ?PR?_BUZZER?GAS_LEAK_DETECTOR
+  +--> ?CO?GAS_LEAK_DETECTOR
+  +--> ?PR?_GSTRING?GAS_LEAK_DETECTOR
+  +--> ?PR?_DELAY?GAS_LEAK_DETECTOR
+  +--> ?PR?_TX?GAS_LEAK_DETECTOR
+  +--> ?PR?_CMD?GAS_LEAK_DETECTOR
+  +--> ?PR?_STRING?GAS_LEAK_DETECTOR
+
+?PR?_GSTRING?GAS_LEAK_DETECTOR           0010H    0003H
+  +--> ?PR?_TX?GAS_LEAK_DETECTOR
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                            -----    -----
+  +--> ?PR?MAIN?GAS_LEAK_DETECTOR
+  +--> ?C_INITSEG
+
+?PR?MAIN?GAS_LEAK_DETECTOR               -----    -----
+  +--> ?PR?UC_INIT?GAS_LEAK_DETECTOR
+  +--> ?PR?LCD_INIT?GAS_LEAK_DETECTOR
+  +--> ?PR?UART_INIT?GAS_LEAK_DETECTOR
+  +--> ?CO?GAS_LEAK_DETECTOR
+  +--> ?PR?_STRING?GAS_LEAK_DETECTOR
+  +--> ?PR?_CMD?GAS_LEAK_DETECTOR
+  +--> ?PR?_DELAY?GAS_LEAK_DETECTOR
+
+?PR?LCD_INIT?GAS_LEAK_DETECTOR           -----    -----
+  +--> ?PR?_CMD?GAS_LEAK_DETECTOR
+
+
+
+SYMBOL TABLE OF MODULE:  gas_leak_detector (GAS_LEAK_DETECTOR)
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  21:10:44  PAGE 3
+
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        GAS_LEAK_DETECTOR
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  C:0301H         PUBLIC        ext0
+  C:03B7H         PUBLIC        _gstring
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  C:0288H         PUBLIC        _number
+  C:03E5H         PUBLIC        _delay
+  C:036DH         PUBLIC        _string
+  B:0098H.1       PUBLIC        TI
+  C:0400H         PUBLIC        _buzzer
+  C:0392H         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  C:0447H         PUBLIC        _character
+  D:0098H         PUBLIC        SCON
+  C:0437H         PUBLIC        _cmd
+  D:0089H         PUBLIC        TMOD
+  C:041EH         PUBLIC        lcd_init
+  C:0471H         PUBLIC        _Tx
+  B:00A8H.0       PUBLIC        EX0
+  D:008DH         PUBLIC        TH1
+  B:00B0H.5       PUBLIC        buz
+  B:00B0H.4       PUBLIC        en
+  C:0465H         PUBLIC        uart_init
+  B:0088H.6       PUBLIC        TR1
+  B:00B0H.3       PUBLIC        rs
+  C:0006H         PUBLIC        lpg_msg
+  C:0457H         PUBLIC        uc_init
+  D:0016H         PUBLIC        s
+  -------         PROC          EXT0
+  C:0301H         LINE#         28
+  C:031EH         LINE#         30
+  C:0323H         LINE#         31
+  C:0328H         LINE#         32
+  C:032BH         LINE#         33
+  C:0330H         LINE#         34
+  C:0339H         LINE#         35
+  C:033EH         LINE#         37
+  C:0342H         LINE#         38
+  C:0345H         LINE#         40
+  C:034AH         LINE#         41
+  C:034FH         LINE#         42
+  C:0352H         LINE#         43
+  C:0357H         LINE#         44
+  C:0360H         LINE#         46
+  C:0360H         LINE#         47
+  -------         ENDPROC       EXT0
+  -------         PROC          MAIN
+  C:0392H         LINE#         51
+  C:0392H         LINE#         52
+  C:0392H         LINE#         53
+  C:0395H         LINE#         54
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  21:10:44  PAGE 4
+
+
+  C:0398H         LINE#         55
+  C:039BH         LINE#         56
+  C:03A4H         LINE#         57
+  C:03A9H         LINE#         58
+  C:03B2H         LINE#         59
+  C:03B5H         LINE#         60
+  -------         ENDPROC       MAIN
+  -------         PROC          UC_INIT
+  C:0457H         LINE#         64
+  C:0457H         LINE#         65
+  C:0457H         LINE#         66
+  C:045AH         LINE#         67
+  C:045CH         LINE#         68
+  C:045EH         LINE#         69
+  C:0460H         LINE#         71
+  C:0462H         LINE#         72
+  C:0464H         LINE#         73
+  -------         ENDPROC       UC_INIT
+  -------         PROC          LCD_INIT
+  C:041EH         LINE#         77
+  C:041EH         LINE#         78
+  C:041EH         LINE#         82
+  C:0423H         LINE#         84
+  C:0428H         LINE#         85
+  C:042DH         LINE#         88
+  C:0432H         LINE#         89
+  -------         ENDPROC       LCD_INIT
+  -------         PROC          _CMD
+  D:0007H         SYMBOL        ch
+  C:0437H         LINE#         92
+  C:0437H         LINE#         93
+  C:0437H         LINE#         94
+  C:0439H         LINE#         95
+  C:043BH         LINE#         96
+  C:043DH         LINE#         97
+  C:0444H         LINE#         98
+  C:0446H         LINE#         99
+  -------         ENDPROC       _CMD
+  -------         PROC          _CHARACTER
+  D:0007H         SYMBOL        ch
+  C:0447H         LINE#         101
+  C:0447H         LINE#         102
+  C:0447H         LINE#         103
+  C:0449H         LINE#         104
+  C:044BH         LINE#         105
+  C:044DH         LINE#         106
+  C:0454H         LINE#         107
+  C:0456H         LINE#         108
+  -------         ENDPROC       _CHARACTER
+  -------         PROC          L?0051
+  -------         ENDPROC       L?0051
+  -------         PROC          _STRING
+  D:0013H         SYMBOL        p
+  C:036DH         LINE#         110
+  C:0373H         LINE#         111
+  C:0373H         LINE#         112
+  C:037EH         LINE#         113
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  21:10:44  PAGE 5
+
+
+  C:0391H         LINE#         114
+  -------         ENDPROC       _STRING
+  -------         PROC          _NUMBER
+  D:0008H         SYMBOL        n
+  -------         DO            
+  D:000AH         SYMBOL        i
+  D:000BH         SYMBOL        arr
+  -------         ENDDO         
+  C:0288H         LINE#         116
+  C:028CH         LINE#         117
+  C:028CH         LINE#         118
+  C:028FH         LINE#         120
+  C:0298H         LINE#         121
+  C:0298H         LINE#         122
+  C:029DH         LINE#         123
+  C:02A8H         LINE#         124
+  C:02A8H         LINE#         125
+  C:02AEH         LINE#         126
+  C:02B3H         LINE#         127
+  C:02C0H         LINE#         128
+  C:02C0H         LINE#         129
+  C:02D6H         LINE#         130
+  C:02E5H         LINE#         131
+  C:02E7H         LINE#         132
+  C:02E9H         LINE#         134
+  C:02F2H         LINE#         135
+  C:02F2H         LINE#         136
+  C:02FCH         LINE#         137
+  C:0300H         LINE#         138
+  -------         ENDPROC       _NUMBER
+  -------         PROC          UART_INIT
+  C:0465H         LINE#         142
+  C:0465H         LINE#         143
+  C:0465H         LINE#         144
+  C:0468H         LINE#         145
+  C:046BH         LINE#         146
+  C:046EH         LINE#         147
+  C:0470H         LINE#         148
+  -------         ENDPROC       UART_INIT
+  -------         PROC          _GSTRING
+  D:0010H         SYMBOL        p
+  C:03B7H         LINE#         150
+  C:03BDH         LINE#         151
+  C:03BDH         LINE#         152
+  C:03C8H         LINE#         153
+  C:03DBH         LINE#         154
+  -------         ENDPROC       _GSTRING
+  -------         PROC          _TX
+  D:0007H         SYMBOL        ch
+  C:0471H         LINE#         156
+  C:0471H         LINE#         157
+  C:0471H         LINE#         158
+  C:0473H         LINE#         159
+  C:0476H         LINE#         160
+  C:0478H         LINE#         161
+  -------         ENDPROC       _TX
+  -------         PROC          LPG_MSG
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  21:10:44  PAGE 6
+
+
+  C:0006H         LINE#         163
+  C:0006H         LINE#         164
+  C:0006H         LINE#         165
+  C:0009H         LINE#         166
+  C:000EH         LINE#         167
+  C:0017H         LINE#         168
+  C:001AH         LINE#         169
+  C:001FH         LINE#         171
+  C:0028H         LINE#         172
+  C:002BH         LINE#         173
+  C:002BH         LINE#         174
+  C:002EH         LINE#         176
+  C:0033H         LINE#         177
+  C:003CH         LINE#         178
+  C:0041H         LINE#         179
+  C:004AH         LINE#         181
+  C:0053H         LINE#         182
+  C:0058H         LINE#         183
+  C:0061H         LINE#         184
+  C:0063H         LINE#         185
+  C:0066H         LINE#         187
+  C:0066H         LINE#         188
+  C:0069H         LINE#         190
+  C:0072H         LINE#         191
+  C:0074H         LINE#         192
+  C:0077H         LINE#         193
+  C:007CH         LINE#         195
+  C:0081H         LINE#         196
+  C:008AH         LINE#         197
+  C:008DH         LINE#         199
+  C:0092H         LINE#         200
+  C:009BH         LINE#         201
+  C:00A0H         LINE#         202
+  C:00A9H         LINE#         203
+  -------         ENDPROC       LPG_MSG
+  C:03DEH         SYMBOL        L?0049
+  C:03E1H         SYMBOL        L?0050
+  -------         PROC          L?0048
+  -------         ENDPROC       L?0048
+  C:03DEH         SYMBOL        L?0049
+  C:03E1H         SYMBOL        L?0050
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        d
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:03E5H         LINE#         208
+  C:03E5H         LINE#         209
+  C:03E5H         LINE#         211
+  C:03F0H         LINE#         212
+  C:03F0H         LINE#         213
+  C:03F4H         LINE#         214
+  C:03F8H         LINE#         215
+  C:03FFH         LINE#         216
+  -------         ENDPROC       _DELAY
+  -------         PROC          _BUZZER
+  D:0004H         SYMBOL        b
+BL51 BANKED LINKER/LOCATER V6.11                                                      05/15/2016  21:10:44  PAGE 7
+
+
+  C:0400H         LINE#         221
+  C:0402H         LINE#         222
+  C:0402H         LINE#         223
+  C:0408H         LINE#         224
+  C:0408H         LINE#         225
+  C:040AH         LINE#         226
+  C:0411H         LINE#         227
+  C:0413H         LINE#         228
+  C:041AH         LINE#         229
+  C:041DH         LINE#         230
+  -------         ENDPROC       _BUZZER
+  -------         ENDMOD        GAS_LEAK_DETECTOR
+
+  -------         MODULE        ?C?CLDPTR
+  C:0158H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?SIDIV
+  C:0171H         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:01A7H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+
+Program Size: data=24.0 xdata=0 code=1149
+LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)

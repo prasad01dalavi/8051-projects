@@ -1,0 +1,88 @@
+C51 COMPILER V8.12   AUTOMATIC_WIPER                                                       06/08/2016 17:05:55 PAGE 1   
+
+
+C51 COMPILER V8.12, COMPILATION OF MODULE AUTOMATIC_WIPER
+OBJECT MODULE PLACED IN automatic_wiper.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE automatic_wiper.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #define smotor P2
+   3          void wiper();
+   4          void delay(unsigned int d);
+   5          
+   6          sbit rain_sensor=P1^0;
+   7          
+   8          
+   9          
+  10          void main()
+  11          {
+  12   1              rain_sensor=1;          //making as input port
+  13   1              smotor=0x00;
+  14   1      
+  15   1              for(;;)
+  16   1              {
+  17   2                      while(rain_sensor==1);   //wait till the rain is not present
+  18   2                      wiper();                                //run the motor
+  19   2              }
+  20   1      }
+  21          
+  22          void wiper()
+  23          {
+  24   1              for(;;)
+  25   1              {
+  26   2                      smotor=0x09;
+  27   2                      delay(1000);
+  28   2                      smotor=0x0c;
+  29   2                      delay(1000);
+  30   2                      smotor=0x06;
+  31   2                      delay(1000);
+  32   2                      smotor=0x03;
+  33   2              //      delay(1000);
+  34   2              //      smotor=0x09;
+  35   2              //      delay(1000);
+  36   2              
+  37   2              //      smotor=0x03;
+  38   2              //      delay(1000);
+  39   2                      smotor=0x06;
+  40   2                      delay(1000);
+  41   2                      smotor=0x0c;
+  42   2                      delay(1000);
+  43   2                      smotor=0x09;
+  44   2                      delay(1000);
+  45   2              }                  
+  46   1      
+  47   1      }
+  48          
+  49          
+  50          void delay(unsigned int d)
+  51          {
+  52   1              unsigned char i;
+  53   1              for(;d>0;d--)
+  54   1              {
+  55   2               for(i=255;i>0;i--);
+C51 COMPILER V8.12   AUTOMATIC_WIPER                                                       06/08/2016 17:05:55 PAGE 2   
+
+  56   2               for(i=255;i>0;i--);
+  57   2              }
+  58   1      
+  59   1      }
+  60          
+  61          
+  62           
+  63          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     80    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

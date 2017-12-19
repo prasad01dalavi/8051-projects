@@ -1,0 +1,426 @@
+C51 COMPILER V8.12   HOME_SECURITY                                                         05/15/2016 15:34:35 PAGE 1   
+
+
+C51 COMPILER V8.12, COMPILATION OF MODULE HOME_SECURITY
+OBJECT MODULE PLACED IN home_security.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE home_security.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1           #include<reg51.h>
+   2           #define lcd P2
+   3          
+   4           //functions' declaration
+   5           void lcd_init();
+   6           void uc_init();
+   7           void character(unsigned char);
+   8           void cmd(unsigned char);
+   9           void string(unsigned char *);
+  10           void number(int);
+  11          
+  12           void uart_init();
+  13           void gstring(unsigned char *p);
+  14           void Tx(unsigned char ch);
+  15           void fire_msg();
+  16           void intruder_msg();
+  17           void lpg_msg();
+  18          
+  19           void delay(int); 
+  20           void buzzer(unsigned char b);
+  21          
+  22          
+  23           unsigned char read();
+  24          
+  25           sbit rs=P0^0;
+  26           sbit en=P0^1;
+  27          
+  28           sbit wr=P3^5;
+  29           sbit intr=P3^6;
+  30           sbit rd=P3^7;
+  31          
+  32           sbit buz=P0^2;
+  33          
+  34           unsigned char v,f=0,s=0,t=0,m=3;
+  35          
+  36          //-------------------ISR--------------------//
+  37           void ext0() interrupt 0
+  38           {
+  39   1                      cmd(0x01);
+  40   1                      cmd(0x80);
+  41   1                      string("Danger!!!");
+  42   1                      cmd(0xc0);
+  43   1                      string("LPG Gas Leakage");
+  44   1                      buzzer(2);
+  45   1                      if(s==0)
+  46   1                      lpg_msg();       
+  47   1       }
+  48           
+  49           void ext1() interrupt 2
+  50           {      
+  51   1               cmd(0x01);
+  52   1               cmd(0x80);
+  53   1               string("Be alert!");
+  54   1               delay(2000);
+  55   1               cmd(0x80);
+C51 COMPILER V8.12   HOME_SECURITY                                                         05/15/2016 15:34:35 PAGE 2   
+
+  56   1               string("Intruder at");
+  57   1               cmd(0xc0);
+  58   1               string("The Gate!");
+  59   1               buzzer(2);
+  60   1      
+  61   1               if(t==0)
+  62   1               intruder_msg();
+  63   1       }
+  64           //-------------------ISR End-----------------------//
+  65                                                                                                                     
+  66          void main()
+  67          {
+  68   1              uc_init();
+  69   1              lcd_init();
+  70   1              uart_init();
+  71   1              cmd(0x01);
+  72   1              string(" Home Security  ");
+  73   1              delay(2000);
+  74   1              cmd(0x01);
+  75   1              while(1)
+  76   1              {
+  77   2                      v=read();                                       //check for the fire
+  78   2                      while(v<40 && s==0 && t==0)
+  79   2                      {
+  80   3                              cmd(0x80);
+  81   3                              string(" Home is Safe");                 
+  82   3                      }
+  83   2      
+  84   2                      if(v>40)
+  85   2                      {
+  86   3                              cmd(0x01);
+  87   3                              string("Home is not Safe");
+  88   3                              cmd(0xc0);
+  89   3                              string("Fire Detected");
+  90   3      
+  91   3                              if(f==0)
+  92   3                              fire_msg();
+  93   3                              delay(2000);
+  94   3                      } 
+  95   2      
+  96   2                      if(s==1)
+  97   2                      {
+  98   3                              cmd(0x01);
+  99   3                              string("Home is not Safe");
+ 100   3                              cmd(0xc0);
+ 101   3                              string("LPG Gas Leakage !");
+ 102   3                              delay(2000);
+ 103   3                      }
+ 104   2                      
+ 105   2                      if(t==1)
+ 106   2                      {
+ 107   3                              cmd(0x01);
+ 108   3                              string("Home is not Safe");
+ 109   3                              cmd(0xc0);
+ 110   3                              string("Intruder Outside");
+ 111   3                              delay(2000);
+ 112   3                      }                       
+ 113   2          }
+ 114   1      }
+ 115          
+ 116          //---------------microcontroller initialzation-----------//
+ 117          void uc_init()
+C51 COMPILER V8.12   HOME_SECURITY                                                         05/15/2016 15:34:35 PAGE 3   
+
+ 118          {
+ 119   1              lcd=0x00;
+ 120   1              rs=0;
+ 121   1              en=0;
+ 122   1              buz=0;
+ 123   1      //configuring interrupts
+ 124   1              EA=1;
+ 125   1              EX0=1;
+ 126   1              EX1=1;
+ 127   1      }
+ 128          
+ 129          //--------------------------LCD Code-------------------//
+ 130          void lcd_init()
+ 131          {
+ 132   1      //      cmd(0x20);
+ 133   1      //      cmd(0x28);
+ 134   1      //      cmd(0x30);
+ 135   1              cmd(0x01);         //clear the screen c
+ 136   1      
+ 137   1              cmd(0x38);         //8-bit mode with 5*7 matrix
+ 138   1              cmd(0x0c);         //display on with cursor =>(0ch=curson off; 0fh=cursor blinking; 0eh=curson on)
+ 139   1              
+ 140   1              
+ 141   1              cmd(0x06);         //shift cursor =>(06h right--> ; 04h <---left; default=right--->)
+ 142   1              cmd(0x80);         //position =>(80=1st row 1st position; c0=2nd row 1st position)
+ 143   1      }
+ 144          
+ 145          void cmd(unsigned char ch)
+ 146          {
+ 147   1              lcd=ch;
+ 148   1              rs=0;
+ 149   1              en=1;
+ 150   1              delay(2);
+ 151   1              en=0;
+ 152   1      }
+ 153          
+ 154          void character(unsigned char ch)
+ 155          {
+ 156   1              lcd=ch;
+ 157   1              rs=1;
+ 158   1              en=1;
+ 159   1              delay(2);
+ 160   1              en=0;
+ 161   1      }
+ 162          
+ 163          void string(unsigned char *p)
+ 164          {
+ 165   1              while(*p)
+ 166   1              character(*p++);
+ 167   1      }
+ 168          
+ 169          void number(int n)
+ 170          {       
+ 171   1              unsigned char i=1,arr[5];
+ 172   1      
+ 173   1              if(n<0)
+ 174   1              {
+ 175   2                      character('-');           //signed representation for negative number
+ 176   2                      n=-n;                             //taking magnitude 
+ 177   2              }
+ 178   1              if(n==0)
+ 179   1                      character('0');
+C51 COMPILER V8.12   HOME_SECURITY                                                         05/15/2016 15:34:35 PAGE 4   
+
+ 180   1              while(n>0)
+ 181   1              {
+ 182   2                      arr[i]=(n%10)+48;
+ 183   2                      n=n/10;
+ 184   2                      i++;
+ 185   2              }
+ 186   1              
+ 187   1              for(--i;i>0;i--)                 //problem with >=; remedy=> initialize i=1 and stop at i>0
+ 188   1              {
+ 189   2              character(arr[i]);
+ 190   2              }
+ 191   1      }
+ 192          //-----------------------End of LCD Code------------------------// 
+ 193          
+ 194          //----------------------ADC 0804 Code-------------------------//
+ 195          unsigned char read()
+ 196          {
+ 197   1              unsigned char value;
+ 198   1              wr=0;
+ 199   1              rd=1;
+ 200   1              delay(2);
+ 201   1              wr=1;                      //Low to High Pulse to start conversion
+ 202   1              while(intr==1);    //wait till the conversion is done
+ 203   1              rd=0;                      //take (or read) the data by making rd=0
+ 204   1              delay(2);
+ 205   1              value=P1;                  
+ 206   1              return value;
+ 207   1      
+ 208   1      }
+ 209          //---------------End of ADC 0804 Code-----------------------//
+ 210          
+ 211          //----------------------GSM Code-----------------------//
+ 212          void uart_init()
+ 213          {
+ 214   1              TMOD=0x20;
+ 215   1              TH1=0xFD;
+ 216   1              SCON=0x50;
+ 217   1              TR1=1;
+ 218   1      }
+ 219          
+ 220          void gstring(unsigned char *p)
+ 221          {
+ 222   1              while(*p)
+ 223   1              Tx(*p++);       
+ 224   1      }
+ 225          
+ 226          void Tx(unsigned char ch)
+ 227          {
+ 228   1              SBUF=ch;
+ 229   1              while(TI==0);
+ 230   1              TI=0;
+ 231   1      }
+ 232          void fire_msg()
+ 233          {
+ 234   1              f=1;
+ 235   1              buzzer(2);                                                                              //to send the message once
+ 236   1              gstring("AT");
+ 237   1              delay(2000);
+ 238   1              Tx(0x0d);
+ 239   1              
+ 240   1              gstring("AT+CMGF=1");                                           //Configuring as text mode i.e.
+ 241   1              delay(2000);                                                            //if '0'=>PDU and if '1'=>text mode 
+C51 COMPILER V8.12   HOME_SECURITY                                                         05/15/2016 15:34:35 PAGE 5   
+
+ 242   1              Tx(0x0d);                                                                       //0x0d or 13d =>Enter i.e. Enter key
+ 243   1              delay(2000);
+ 244   1      
+ 245   1              cmd(0x01);
+ 246   1              string("Sending");
+ 247   1              cmd(0xc0);
+ 248   1              string("Message...");
+ 249   1              
+ 250   1              gstring("AT+CMGS=");                                    //'s' for sending message
+ 251   1              Tx('"');
+ 252   1              gstring("8007817602");                  
+ 253   1              Tx('"');
+ 254   1              delay(2000);
+ 255   1      
+ 256   1              Tx(0x0d);
+ 257   1              delay(2000);
+ 258   1              
+ 259   1              gstring("Fire in your Home");
+ 260   1              Tx(0x1a);                                                                               //To send the message
+ 261   1              delay(2000);
+ 262   1              Tx(0x0d);
+ 263   1              
+ 264   1              cmd(0x01);
+ 265   1              string("Message Sent!");
+ 266   1              delay(2000);
+ 267   1      
+ 268   1              cmd(0x01);
+ 269   1              string("Message has been");
+ 270   1              cmd(0xc0);
+ 271   1              string("Sent to Owner");
+ 272   1              delay(2000);
+ 273   1      }
+ 274          
+ 275          void lpg_msg()
+ 276          {
+ 277   1              s=1;
+ 278   1              buzzer(2);                                                                              //to send the message once
+ 279   1              gstring("AT");
+ 280   1              delay(2000);
+ 281   1              Tx(0x0d);
+ 282   1              
+ 283   1              gstring("AT+CMGF=1");                                           //Configuring as text mode i.e.
+ 284   1              delay(2000);                                                            //if '0'=>PDU and if '1'=>text mode 
+ 285   1              Tx(0x0d);                                                                       //0x0d or 13d =>Enter i.e. Enter key
+ 286   1              delay(2000);
+ 287   1      
+ 288   1              cmd(0x01);
+ 289   1              string("Sending");
+ 290   1              cmd(0xc0);
+ 291   1              string("Message...");
+ 292   1              
+ 293   1              gstring("AT+CMGS=");                                    //'s' for sending message
+ 294   1              Tx('"');
+ 295   1              gstring("8007817602");                  
+ 296   1              Tx('"');
+ 297   1              delay(2000);
+ 298   1      
+ 299   1              Tx(0x0d);
+ 300   1              delay(2000);
+ 301   1              
+ 302   1              gstring("LPG GAS Leakage !");
+ 303   1              Tx(0x1a);                                                                               //To send the message
+C51 COMPILER V8.12   HOME_SECURITY                                                         05/15/2016 15:34:35 PAGE 6   
+
+ 304   1              delay(2000);
+ 305   1              Tx(0x0d);
+ 306   1              
+ 307   1              cmd(0x01);
+ 308   1              string("Message Sent!");
+ 309   1              delay(2000);
+ 310   1      
+ 311   1              cmd(0x01);
+ 312   1              string("Message has been");
+ 313   1              cmd(0xc0);
+ 314   1              string("Sent to Owner");
+ 315   1              delay(2000);
+ 316   1      }
+ 317          
+ 318          void intruder_msg()
+ 319          {
+ 320   1              t=1;
+ 321   1              buzzer(2);                                                                              //to send the message once
+ 322   1              gstring("AT");
+ 323   1              delay(2000);
+ 324   1              Tx(0x0d);
+ 325   1              
+ 326   1              gstring("AT+CMGF=1");                                           //Configuring as text mode i.e.
+ 327   1              delay(2000);                                                            //if '0'=>PDU and if '1'=>text mode 
+ 328   1              Tx(0x0d);                                                                       //0x0d or 13d =>Enter i.e. Enter key
+ 329   1              delay(2000);
+ 330   1      
+ 331   1              cmd(0x01);
+ 332   1              string("Sending");
+ 333   1              cmd(0xc0);
+ 334   1              string("Message...");
+ 335   1              
+ 336   1              gstring("AT+CMGS=");                                    //'s' for sending message
+ 337   1              Tx('"');
+ 338   1              gstring("8007817602");                  
+ 339   1              Tx('"');
+ 340   1              delay(2000);
+ 341   1      
+ 342   1              Tx(0x0d);
+ 343   1              delay(2000);
+ 344   1              
+ 345   1              gstring("Intruder Outside");
+ 346   1              Tx(0x1a);                                                                               //To send the message
+ 347   1              delay(2000);
+ 348   1              Tx(0x0d);
+ 349   1              
+ 350   1              cmd(0x01);
+ 351   1              string("Message Sent!");
+ 352   1              delay(2000);
+ 353   1      
+ 354   1              cmd(0x01);
+ 355   1              string("Message has been");
+ 356   1              cmd(0xc0);
+ 357   1              string("Sent to Owner");
+ 358   1              delay(2000);
+ 359   1      }
+ 360          
+ 361          //--------------------End of GSM Code------------------//
+ 362          
+ 363          //--------------delay function-------------------------//
+ 364          void delay(int d)
+ 365          {
+C51 COMPILER V8.12   HOME_SECURITY                                                         05/15/2016 15:34:35 PAGE 7   
+
+ 366   1              unsigned char i;
+ 367   1              for(;d>0;d--)
+ 368   1              {
+ 369   2                      for(i=250;i>0;i--);             //500usec
+ 370   2                      for(i=250;i>0;i--);             //500usec
+ 371   2              }
+ 372   1      }
+ 373          //-----------------End  of delay function---------------------//
+ 374          
+ 375          
+ 376          //------------------------alarm system-----------------------//
+ 377          void buzzer(unsigned char b)
+ 378          {
+ 379   1              for(;b>0;b--)
+ 380   1              {
+ 381   2                      buz=1;
+ 382   2                      delay(500);
+ 383   2                      buz=0;
+ 384   2                      delay(500);
+ 385   2              }
+ 386   1      }
+ 387          //---------------End of alarm system-------------------//
+ 388          
+ 389          
+ 390          
+ 391          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1251    ----
+   CONSTANT SIZE    =    288    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5      14
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,269 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Prasad\Desktop\Code\gas_leak_detector.uv2
+Project File Date:  05/15/2016
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+GAS_LEAK_DETECTOR.C(33): error C202: 's': undefined identifier
+GAS_LEAK_DETECTOR.C(42): error C141: syntax error near 'cmd'
+GAS_LEAK_DETECTOR.C(148): error C202: 's': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+GAS_LEAK_DETECTOR.C(44): error C141: syntax error near 'cmd'
+Target not created
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+GAS_LEAK_DETECTOR.C(44): error C141: syntax error near 'cmd'
+Target not created
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?UART_INIT?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1002
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?UART_INIT?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1009
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?UART_INIT?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1009
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?UART_INIT?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1009
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?UART_INIT?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1009
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?UART_INIT?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1009
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?UART_INIT?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1009
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?UART_INIT?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1139
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?UART_INIT?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1139
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1142
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1142
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1122
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1122
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1149
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1149
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1149
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1149
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1149
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling gas_leak_detector.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?GAS_LEAK_DETECTOR
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?GAS_LEAK_DETECTOR
+    CALLER1: ?PR?EXT0?GAS_LEAK_DETECTOR
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1149
+creating hex file from "gas_leak_detector"...
+"gas_leak_detector" - 0 Error(s), 2 Warning(s).

@@ -1,0 +1,153 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Prasad\Desktop\Code\burglar_alarm.uv2
+Project File Date:  05/15/2016
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling burglar_alarm.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?BURGLAR_ALARM
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?BURGLAR_ALARM
+    CALLER1: ?PR?EXT0?BURGLAR_ALARM
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1149
+creating hex file from "burglar_alarm"...
+"burglar_alarm" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling burglar_alarm.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?BURGLAR_ALARM
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?BURGLAR_ALARM
+    CALLER1: ?PR?EXT0?BURGLAR_ALARM
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1149
+creating hex file from "burglar_alarm"...
+"burglar_alarm" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling burglar_alarm.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?BURGLAR_ALARM
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?BURGLAR_ALARM
+    CALLER1: ?PR?EXT1?BURGLAR_ALARM
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1162
+creating hex file from "burglar_alarm"...
+"burglar_alarm" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling burglar_alarm.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?BURGLAR_ALARM
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?BURGLAR_ALARM
+    CALLER1: ?PR?EXT1?BURGLAR_ALARM
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1162
+creating hex file from "burglar_alarm"...
+"burglar_alarm" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling burglar_alarm.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?BURGLAR_ALARM
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?BURGLAR_ALARM
+    CALLER1: ?PR?EXT1?BURGLAR_ALARM
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1142
+creating hex file from "burglar_alarm"...
+"burglar_alarm" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling burglar_alarm.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?BURGLAR_ALARM
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?BURGLAR_ALARM
+    CALLER1: ?PR?EXT1?BURGLAR_ALARM
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1142
+creating hex file from "burglar_alarm"...
+"burglar_alarm" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling burglar_alarm.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?BURGLAR_ALARM
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?BURGLAR_ALARM
+    CALLER1: ?PR?EXT1?BURGLAR_ALARM
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1120
+creating hex file from "burglar_alarm"...
+"burglar_alarm" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling burglar_alarm.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?BURGLAR_ALARM
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?BURGLAR_ALARM
+    CALLER1: ?PR?EXT1?BURGLAR_ALARM
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1120
+creating hex file from "burglar_alarm"...
+"burglar_alarm" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling burglar_alarm.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?BURGLAR_ALARM
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?BURGLAR_ALARM
+    CALLER1: ?PR?EXT1?BURGLAR_ALARM
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1142
+creating hex file from "burglar_alarm"...
+"burglar_alarm" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling burglar_alarm.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?BURGLAR_ALARM
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?BURGLAR_ALARM
+    CALLER1: ?PR?EXT1?BURGLAR_ALARM
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1142
+creating hex file from "burglar_alarm"...
+"burglar_alarm" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling burglar_alarm.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?BURGLAR_ALARM
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?BURGLAR_ALARM
+    CALLER1: ?PR?EXT1?BURGLAR_ALARM
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1147
+creating hex file from "burglar_alarm"...
+"burglar_alarm" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling burglar_alarm.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NUMBER?BURGLAR_ALARM
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_STRING?BURGLAR_ALARM
+    CALLER1: ?PR?EXT1?BURGLAR_ALARM
+    CALLER2: ?C_C51STARTUP
+Program Size: data=24.0 xdata=0 code=1147
+creating hex file from "burglar_alarm"...
+"burglar_alarm" - 0 Error(s), 2 Warning(s).
