@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        03/04/2018  16:24:25  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        03/12/2018  09:37:31  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -12,9 +12,7 @@ INPUT MODULES INCLUDED:
   garage_door.obj (GARAGE_DOOR)
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDPTR)
-  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?SIDIV)
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
-  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?UIDIV)
 
 
 LINK MAP OF MODULE:  garage_door (GARAGE_DOOR)
@@ -25,27 +23,25 @@ LINK MAP OF MODULE:  garage_door (GARAGE_DOOR)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            DATA    0008H     000DH     UNIT         ?DT?GARAGE_DOOR
-            DATA    0015H     0008H     UNIT         ?DT?_NUMBER?GARAGE_DOOR
-            DATA    001DH     0003H     UNIT         _DATA_GROUP_
-            IDATA   0020H     0001H     UNIT         ?STACK
+            DATA    0008H     0011H     UNIT         ?DT?GARAGE_DOOR
+            DATA    0019H     0003H     UNIT         _DATA_GROUP_
+            IDATA   001CH     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
-            CODE    0003H     00FCH     UNIT         ?PR?CHECK_AND_OPEN?GARAGE_DOOR
-            CODE    00FFH     00FBH     UNIT         ?PR?CHECK_AND_CLOSE?GARAGE_DOOR
-            CODE    01FAH     00A4H     UNIT         ?C?LIB_CODE
-            CODE    029EH     0097H     UNIT         ?CO?GARAGE_DOOR
-            CODE    0335H     008CH     UNIT         ?C_C51STARTUP
-            CODE    03C1H     0079H     UNIT         ?PR?_NUMBER?GARAGE_DOOR
-            CODE    043AH     004AH     UNIT         ?PR?MAIN?GARAGE_DOOR
-            CODE    0484H     002BH     UNIT         ?PR?_STRING?GARAGE_DOOR
-            CODE    04AFH     0021H     UNIT         ?PR?_DELAY?GARAGE_DOOR
-            CODE    04D0H     0019H     UNIT         ?PR?LCD_INIT?GARAGE_DOOR
-            CODE    04E9H     0010H     UNIT         ?PR?_CMD?GARAGE_DOOR
-            CODE    04F9H     000AH     UNIT         ?PR?_CHARACTER?GARAGE_DOOR
-            CODE    0503H     0008H     UNIT         ?PR?CONTROLLER_INIT?GARAGE_DOOR
-            CODE    050BH     0008H     UNIT         ?C_INITSEG
+            CODE    0003H     0110H     UNIT         ?PR?CHECK_AND_OPEN?GARAGE_DOOR
+            CODE    0113H     010FH     UNIT         ?PR?CHECK_AND_CLOSE?GARAGE_DOOR
+            CODE    0222H     0097H     UNIT         ?CO?GARAGE_DOOR
+            CODE    02B9H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0345H     003CH     UNIT         ?PR?MAIN?GARAGE_DOOR
+            CODE    0381H     002BH     UNIT         ?PR?_STRING?GARAGE_DOOR
+            CODE    03ACH     001FH     UNIT         ?PR?_DELAY?GARAGE_DOOR
+            CODE    03CBH     0019H     UNIT         ?PR?LCD_INIT?GARAGE_DOOR
+            CODE    03E4H     0019H     UNIT         ?C?LIB_CODE
+            CODE    03FDH     0016H     UNIT         ?PR?_CMD?GARAGE_DOOR
+            CODE    0413H     0010H     UNIT         ?PR?_CHARACTER?GARAGE_DOOR
+            CODE    0423H     000FH     UNIT         ?PR?CONTROLLER_INIT?GARAGE_DOOR
+            CODE    0432H     0008H     UNIT         ?C_INITSEG
 
 
 
@@ -59,13 +55,13 @@ SEGMENT                                   DATA_GROUP
   +--> ?PR?MAIN?GARAGE_DOOR
   +--> ?C_INITSEG
 
-BL51 BANKED LINKER/LOCATER V6.22                                                      03/04/2018  16:24:25  PAGE 2
-
-
 ?PR?MAIN?GARAGE_DOOR                    -----    -----
   +--> ?PR?CONTROLLER_INIT?GARAGE_DOOR
   +--> ?PR?LCD_INIT?GARAGE_DOOR
   +--> ?CO?GARAGE_DOOR
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/12/2018  09:37:31  PAGE 2
+
+
   +--> ?PR?_STRING?GARAGE_DOOR
   +--> ?PR?_CMD?GARAGE_DOOR
   +--> ?PR?_DELAY?GARAGE_DOOR
@@ -78,7 +74,7 @@ SEGMENT                                   DATA_GROUP
 ?PR?_CMD?GARAGE_DOOR                    -----    -----
   +--> ?PR?_DELAY?GARAGE_DOOR
 
-?PR?_STRING?GARAGE_DOOR                 001DH    0003H
+?PR?_STRING?GARAGE_DOOR                 0019H    0003H
   +--> ?CO?GARAGE_DOOR
   +--> ?PR?_CHARACTER?GARAGE_DOOR
 
@@ -111,246 +107,213 @@ SYMBOL TABLE OF MODULE:  garage_door (GARAGE_DOOR)
   D:00B0H         PUBLIC        P3
   B:0090H.0       PUBLIC        in1
   B:0090H.1       PUBLIC        in2
-  C:03C1H         PUBLIC        _number
-  C:00FFH         PUBLIC        check_and_close
-  C:04B5H         PUBLIC        _delay
-  C:048AH         PUBLIC        _string
+  C:0113H         PUBLIC        check_and_close
+  C:03B0H         PUBLIC        _delay
+  C:0387H         PUBLIC        _string
   D:0008H         PUBLIC        flag
   D:000AH         PUBLIC        password_digit1
   D:000CH         PUBLIC        password_digit2
   D:000EH         PUBLIC        password_digit3
-BL51 BANKED LINKER/LOCATER V6.22                                                      03/04/2018  16:24:25  PAGE 3
-
-
   D:0010H         PUBLIC        password_digit4
-  C:043AH         PUBLIC        main
+  C:0345H         PUBLIC        main
   C:0003H         PUBLIC        check_and_open
-  C:04F9H         PUBLIC        _character
-  C:04EFH         PUBLIC        _cmd
-  C:04D0H         PUBLIC        lcd_init
+  C:0413H         PUBLIC        _character
+  C:0403H         PUBLIC        _cmd
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/12/2018  09:37:31  PAGE 3
+
+
+  D:0012H         PUBLIC        end_hash
+  C:03CBH         PUBLIC        lcd_init
   B:0090H.7       PUBLIC        en
-  C:0503H         PUBLIC        controller_init
-  D:0012H         PUBLIC        d
+  D:0014H         PUBLIC        end_star
+  C:0423H         PUBLIC        controller_init
+  D:0016H         PUBLIC        d
   B:0090H.6       PUBLIC        rs
-  D:0014H         PUBLIC        m
+  D:0018H         PUBLIC        m
   -------         PROC          MAIN
-  C:043AH         LINE#         28
-  C:043AH         LINE#         29
-  C:043AH         LINE#         30
-  C:043DH         LINE#         31
-  C:0440H         LINE#         32
-  C:0449H         LINE#         33
-  C:044EH         LINE#         34
-  C:0457H         LINE#         35
-  C:045EH         LINE#         36
-  C:0462H         LINE#         37
-  C:0465H         LINE#         38
-  C:046CH         LINE#         40
-  C:046CH         LINE#         41
-  C:046CH         LINE#         42
-  C:0474H         LINE#         43
-  C:0474H         LINE#         45
-  C:0477H         LINE#         46
-  C:0477H         LINE#         48
-  C:047FH         LINE#         49
-  C:047FH         LINE#         51
-  C:0482H         LINE#         52
-  C:0482H         LINE#         53
+  C:0345H         LINE#         26
+  C:0345H         LINE#         27
+  C:0345H         LINE#         28
+  C:0348H         LINE#         29
+  C:034BH         LINE#         30
+  C:0354H         LINE#         31
+  C:0359H         LINE#         32
+  C:0362H         LINE#         33
+  C:0369H         LINE#         35
+  C:0369H         LINE#         36
+  C:0369H         LINE#         37
+  C:0371H         LINE#         38
+  C:0371H         LINE#         39
+  C:0374H         LINE#         40
+  C:0374H         LINE#         42
+  C:037CH         LINE#         43
+  C:037CH         LINE#         44
+  C:037FH         LINE#         45
+  C:037FH         LINE#         46
   -------         ENDPROC       MAIN
   -------         PROC          CHECK_AND_OPEN
-  C:0003H         LINE#         56
-  C:0003H         LINE#         57
-  C:0003H         LINE#         58
-  C:000BH         LINE#         60
-  C:0014H         LINE#         61
-  C:001CH         LINE#         63
-  C:0025H         LINE#         64
-  C:002DH         LINE#         66
-  C:0036H         LINE#         67
-  C:003EH         LINE#         69
-  C:0047H         LINE#         70
-  C:004FH         LINE#         72
-  C:0075H         LINE#         73
-  C:0075H         LINE#         74
-  C:007AH         LINE#         75
-  C:007FH         LINE#         76
-  C:0088H         LINE#         77
-  C:008DH         LINE#         78
-  C:0090H         LINE#         79
-  C:0094H         LINE#         80
-  C:009BH         LINE#         81
-BL51 BANKED LINKER/LOCATER V6.22                                                      03/04/2018  16:24:25  PAGE 4
+  C:0003H         LINE#         49
+  C:0003H         LINE#         50
+  C:0003H         LINE#         51
+  C:000BH         LINE#         53
+  C:0014H         LINE#         54
+  C:001CH         LINE#         56
+  C:0025H         LINE#         57
+  C:002DH         LINE#         59
+  C:0036H         LINE#         60
+  C:003EH         LINE#         62
+  C:0047H         LINE#         63
+  C:004FH         LINE#         65
+  C:0058H         LINE#         67
+  C:0086H         LINE#         68
+  C:0086H         LINE#         69
+  C:008BH         LINE#         70
+  C:0090H         LINE#         71
+  C:0099H         LINE#         72
+  C:009EH         LINE#         73
+  C:00A1H         LINE#         74
+  C:00A5H         LINE#         75
+  C:00A8H         LINE#         76
+  C:00A8H         LINE#         77
+  C:00ABH         LINE#         78
+  C:00B4H         LINE#         79
+  C:00B7H         LINE#         80
+  C:00BDH         LINE#         81
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/12/2018  09:37:31  PAGE 4
 
 
-  C:009BH         LINE#         82
-  C:009EH         LINE#         83
-  C:00A7H         LINE#         84
-  C:00ADH         LINE#         85
-  C:00AEH         LINE#         86
-  C:00D6H         LINE#         87
-  C:00D6H         LINE#         88
-  C:00DBH         LINE#         89
-  C:00E0H         LINE#         90
-  C:00E9H         LINE#         91
-  C:00EEH         LINE#         92
-  C:00F7H         LINE#         93
-  C:00FEH         LINE#         94
-  C:00FEH         LINE#         96
+  C:00BEH         LINE#         82
+  C:00EEH         LINE#         83
+  C:00EEH         LINE#         84
+  C:00F3H         LINE#         85
+  C:00F8H         LINE#         86
+  C:0101H         LINE#         87
+  C:0106H         LINE#         88
+  C:010FH         LINE#         89
+  C:0112H         LINE#         90
+  C:0112H         LINE#         91
   -------         ENDPROC       CHECK_AND_OPEN
   -------         PROC          CHECK_AND_CLOSE
-  C:00FFH         LINE#         98
-  C:00FFH         LINE#         99
-  C:00FFH         LINE#         100
-  C:0107H         LINE#         102
-  C:0110H         LINE#         103
-  C:0118H         LINE#         105
-  C:0121H         LINE#         106
-  C:0129H         LINE#         108
-  C:0132H         LINE#         109
-  C:013AH         LINE#         111
-  C:0143H         LINE#         112
-  C:014BH         LINE#         114
-  C:0173H         LINE#         115
-  C:0173H         LINE#         116
-  C:0178H         LINE#         117
-  C:017DH         LINE#         118
-  C:0186H         LINE#         119
-  C:018BH         LINE#         120
-  C:018EH         LINE#         121
-  C:0192H         LINE#         122
-  C:0199H         LINE#         123
-  C:0199H         LINE#         124
-  C:019CH         LINE#         125
-  C:01A5H         LINE#         126
-  C:01AAH         LINE#         127
-  C:01ABH         LINE#         128
-  C:01D1H         LINE#         129
-  C:01D1H         LINE#         130
-  C:01D6H         LINE#         131
-  C:01DBH         LINE#         132
-  C:01E4H         LINE#         133
-  C:01E9H         LINE#         134
-  C:01F2H         LINE#         135
-  C:01F9H         LINE#         136
-  C:01F9H         LINE#         137
+  C:0113H         LINE#         93
+  C:0113H         LINE#         94
+  C:0113H         LINE#         95
+  C:011BH         LINE#         97
+  C:0124H         LINE#         98
+  C:012CH         LINE#         100
+  C:0135H         LINE#         101
+  C:013DH         LINE#         103
+  C:0146H         LINE#         104
+  C:014EH         LINE#         106
+  C:0157H         LINE#         107
+  C:015FH         LINE#         109
+  C:0168H         LINE#         111
+  C:0198H         LINE#         112
+  C:0198H         LINE#         113
+  C:019DH         LINE#         114
+  C:01A2H         LINE#         115
+  C:01ABH         LINE#         116
+  C:01B0H         LINE#         117
+  C:01B3H         LINE#         118
+  C:01B7H         LINE#         119
+  C:01BAH         LINE#         120
+  C:01BAH         LINE#         121
+  C:01BDH         LINE#         122
+  C:01C6H         LINE#         123
+  C:01C9H         LINE#         124
+  C:01CEH         LINE#         125
+  C:01CFH         LINE#         126
+  C:01FDH         LINE#         127
+  C:01FDH         LINE#         128
+  C:0202H         LINE#         129
+  C:0207H         LINE#         130
+  C:0210H         LINE#         131
+  C:0215H         LINE#         132
+  C:021EH         LINE#         133
+  C:0221H         LINE#         134
+  C:0221H         LINE#         135
   -------         ENDPROC       CHECK_AND_CLOSE
   -------         PROC          CONTROLLER_INIT
-  C:0503H         LINE#         140
-  C:0503H         LINE#         141
-  C:0503H         LINE#         143
-  C:0506H         LINE#         144
-BL51 BANKED LINKER/LOCATER V6.22                                                      03/04/2018  16:24:25  PAGE 5
+  C:0423H         LINE#         138
+  C:0423H         LINE#         139
+  C:0423H         LINE#         140
+  C:0426H         LINE#         141
+  C:0428H         LINE#         142
+  C:042AH         LINE#         143
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/12/2018  09:37:31  PAGE 5
 
 
-  C:0508H         LINE#         145
-  C:050AH         LINE#         146
+  C:042EH         LINE#         144
+  C:0431H         LINE#         145
   -------         ENDPROC       CONTROLLER_INIT
   -------         PROC          LCD_INIT
-  C:04D0H         LINE#         149
-  C:04D0H         LINE#         150
-  C:04D0H         LINE#         151
-  C:04D5H         LINE#         152
-  C:04DAH         LINE#         153
-  C:04DFH         LINE#         154
-  C:04E4H         LINE#         155
+  C:03CBH         LINE#         148
+  C:03CBH         LINE#         149
+  C:03CBH         LINE#         150
+  C:03D0H         LINE#         151
+  C:03D5H         LINE#         152
+  C:03DAH         LINE#         153
+  C:03DFH         LINE#         154
   -------         ENDPROC       LCD_INIT
-  -------         PROC          L?0062
-  -------         ENDPROC       L?0062
+  -------         PROC          L?0056
+  -------         ENDPROC       L?0056
   -------         PROC          _CMD
   D:0007H         SYMBOL        ch
-  C:04EFH         LINE#         158
-  C:04EFH         LINE#         159
-  C:04EFH         LINE#         160
-  C:04F1H         LINE#         161
-  C:04F3H         LINE#         162
-  C:04F3H         LINE#         163
-  C:04F6H         LINE#         164
-  C:04F8H         LINE#         165
+  C:0403H         LINE#         157
+  C:0403H         LINE#         158
+  C:0403H         LINE#         159
+  C:0405H         LINE#         160
+  C:0407H         LINE#         161
+  C:0409H         LINE#         162
+  C:0410H         LINE#         163
+  C:0412H         LINE#         164
   -------         ENDPROC       _CMD
   -------         PROC          _CHARACTER
   D:0007H         SYMBOL        ch
-  C:04F9H         LINE#         167
-  C:04F9H         LINE#         168
-  C:04F9H         LINE#         169
-  C:04FBH         LINE#         170
-  C:04FDH         LINE#         171
-  C:04FDH         LINE#         172
-  C:0500H         LINE#         173
-  C:0502H         LINE#         174
+  C:0413H         LINE#         166
+  C:0413H         LINE#         167
+  C:0413H         LINE#         168
+  C:0415H         LINE#         169
+  C:0417H         LINE#         170
+  C:0419H         LINE#         171
+  C:0420H         LINE#         172
+  C:0422H         LINE#         173
   -------         ENDPROC       _CHARACTER
-  -------         PROC          L?0061
-  -------         ENDPROC       L?0061
+  -------         PROC          L?0055
+  -------         ENDPROC       L?0055
   -------         PROC          _STRING
-  D:001DH         SYMBOL        p
-  C:048AH         LINE#         176
-  C:0490H         LINE#         177
-  C:0490H         LINE#         178
-  C:049BH         LINE#         179
-  C:04AEH         LINE#         180
+  D:0019H         SYMBOL        p
+  C:0387H         LINE#         175
+  C:038DH         LINE#         176
+  C:038DH         LINE#         177
+  C:0398H         LINE#         178
+  C:03ABH         LINE#         179
   -------         ENDPROC       _STRING
-  -------         PROC          _NUMBER
-  D:0015H         SYMBOL        n
-  -------         DO            
-  D:0017H         SYMBOL        i
-  D:0018H         SYMBOL        arr
-  -------         ENDDO         
-  C:03C1H         LINE#         182
-  C:03C5H         LINE#         183
-  C:03C5H         LINE#         184
-  C:03C8H         LINE#         186
-  C:03D1H         LINE#         187
-BL51 BANKED LINKER/LOCATER V6.22                                                      03/04/2018  16:24:25  PAGE 6
-
-
-  C:03D1H         LINE#         188
-  C:03D6H         LINE#         189
-  C:03E1H         LINE#         190
-  C:03E1H         LINE#         191
-  C:03E7H         LINE#         192
-  C:03ECH         LINE#         193
-  C:03F9H         LINE#         194
-  C:03F9H         LINE#         195
-  C:040FH         LINE#         196
-  C:041EH         LINE#         197
-  C:0420H         LINE#         198
-  C:0422H         LINE#         200
-  C:042BH         LINE#         201
-  C:042BH         LINE#         202
-  C:0435H         LINE#         203
-  C:0439H         LINE#         204
-  -------         ENDPROC       _NUMBER
-  -------         PROC          L?0063
-  -------         ENDPROC       L?0063
+  C:03ACH         SYMBOL        L?0054
+  -------         PROC          L?0053
+  -------         ENDPROC       L?0053
+  C:03ACH         SYMBOL        L?0054
   -------         PROC          _DELAY
   D:0006H         SYMBOL        d
   -------         DO            
   D:0005H         SYMBOL        i
   -------         ENDDO         
-  C:04B5H         LINE#         207
-  C:04B5H         LINE#         208
-  C:04B5H         LINE#         210
-  C:04C0H         LINE#         211
-  C:04C0H         LINE#         212
-  C:04C4H         LINE#         213
-  C:04C8H         LINE#         214
-  C:04CFH         LINE#         215
+  C:03B0H         LINE#         182
+  C:03B0H         LINE#         183
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/12/2018  09:37:31  PAGE 6
+
+
+  C:03B0H         LINE#         185
+  C:03BBH         LINE#         186
+  C:03BBH         LINE#         187
+  C:03BFH         LINE#         188
+  C:03C3H         LINE#         189
+  C:03CAH         LINE#         190
   -------         ENDPROC       _DELAY
   -------         ENDMOD        GARAGE_DOOR
 
   -------         MODULE        ?C?CLDPTR
-  C:01FAH         PUBLIC        ?C?CLDPTR
+  C:03E4H         PUBLIC        ?C?CLDPTR
   -------         ENDMOD        ?C?CLDPTR
 
-  -------         MODULE        ?C?SIDIV
-  C:0213H         PUBLIC        ?C?SIDIV
-  -------         ENDMOD        ?C?SIDIV
-
-  -------         MODULE        ?C?UIDIV
-  C:0249H         PUBLIC        ?C?UIDIV
-  -------         ENDMOD        ?C?UIDIV
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_NUMBER?GARAGE_DOOR
-
-Program Size: data=33.0 xdata=0 code=1299
-LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)
+Program Size: data=29.0 xdata=0 code=1082
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

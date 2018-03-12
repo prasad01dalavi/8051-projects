@@ -200,7 +200,7 @@ void display(int a)
 	  case 13:{
 		  		 cmd(0x01);
 				   string("*");
-			     q3=1; q2=0; q1=1; q0=0;
+			     q3=1; q2=0; q1=1; q0=1;
 		   		 break;
 			  }
 	  case 14:{
@@ -212,7 +212,7 @@ void display(int a)
 	  case 15:{
 		  		 cmd(0x01);
 				   string("#");
-			     q3=1; q2=0; q1=1; q0=1;
+			     q3=1; q2=1; q1=0; q0=0;
 		   		 break;
 			  }		
 	}
